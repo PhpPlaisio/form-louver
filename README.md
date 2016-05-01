@@ -22,7 +22,7 @@
 <a href="https://www.versioneye.com/user/projects/5725d284ba37ce0031fc2227"><img src="https://www.versioneye.com/user/projects/5725d284ba37ce0031fc2227/badge.svg?style=flat" alt="Dependency Status"/></a>
 </td>
 <td>
-<a href="https://scrutinizer-ci.com/g/SetBased/php-abc-form-louver/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-form-louver/badges/quality-sform-louver.png?b=master" alt="Scrutinizer Code Quality"/></a><br/>
+<a href="https://scrutinizer-ci.com/g/SetBased/php-abc-form-louver/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-form-louver/badges/quality-form-louver.png?b=master" alt="Scrutinizer Code Quality"/></a><br/>
 </td>
 </tr>
 </tbody>
