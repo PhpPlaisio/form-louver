@@ -1,0 +1,30 @@
+{
+  "name": "setbased/abc-form-louver",
+  "description": "ABC-Framework: Louver controls",
+  "keywords": [
+    "Framework",
+    "Form",
+    "Louver"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require-dev": {
+    "phing/phing": "*",
+    "phpunit/phpunit": ">=4.0.0"
+  },
+  "require": {
+    "php": ">=5.4.0",
+    "setbased/exception": "1.*",
+    "setbased/abc-form-raw": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "SetBased\\Abc\\Form\\": "src/"
+    }
+  },
+  "config": {
+    "bin-dir": "bin"
+  }
+}
