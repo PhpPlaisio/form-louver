@@ -8,17 +8,15 @@
   ],
   "type": "library",
   "license": "MIT",
-  "minimum-stability": "dev",
-  "prefer-stable": true,
   "require-dev": {
-    "phing/phing": "*",
-    "phpunit/phpunit": ">=4.0.0"
+    "phing/phing": "2.*",
+    "phpunit/phpunit": "4.* || 5.*"
   },
   "require": {
     "php": ">=5.4.0",
     "setbased/exception": "1.*",
-    "setbased/abc-form-raw": "*",
-    "setbased/abc-table-overview": "*"
+    "setbased/abc-form-raw": "dev-master",
+    "setbased/abc-table-overview": "dev-master"
   },
   "autoload": {
     "psr-4": {
