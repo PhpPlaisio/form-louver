@@ -14,7 +14,7 @@ class LouverControl extends ComplexControl
   /**
    * The data on which the table row form controls must be created.
    *
-   * @var array[]
+   * @var \array[]
    */
   protected $data;
 
@@ -107,6 +107,17 @@ class LouverControl extends ComplexControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Gets the data for which this table form control must be generated.
+   *
+   * @return \array[]
+   */
+  public function getData()
+  {
+    return $this->data;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * {@inheritdoc}
    */
   public function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
@@ -149,7 +160,7 @@ class LouverControl extends ComplexControl
   /**
    * Sets the data for which this table form control must be generated.
    *
-   * @param array[] $data
+   * @param \array[] $data
    */
   public function setData($data)
   {
