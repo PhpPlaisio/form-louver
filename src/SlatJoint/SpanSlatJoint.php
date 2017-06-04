@@ -18,7 +18,8 @@ class SpanSlatJoint extends SlatJoint
    */
   public function __construct($headerText)
   {
-    $this->dataType   = 'control-span';
+    parent::__construct('control-span');
+
     $this->headerText = $headerText;
   }
 

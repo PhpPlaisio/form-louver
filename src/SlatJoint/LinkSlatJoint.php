@@ -18,7 +18,8 @@ class LinkSlatJoint extends SlatJoint
    */
   public function __construct($headerText)
   {
-    $this->dataType   = 'control-link';
+    parent::__construct('control-link');
+
     $this->headerText = $headerText;
   }
 

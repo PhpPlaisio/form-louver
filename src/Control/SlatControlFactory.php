@@ -111,7 +111,7 @@ abstract class SlatControlFactory
     $ret = '';
     foreach ($this->slatJoints as $factory)
     {
-      $ret .= $factory->getHtmlColumn();
+      $ret .= $factory->getHtmlCol();
     }
 
     $ret .= '<col/>';

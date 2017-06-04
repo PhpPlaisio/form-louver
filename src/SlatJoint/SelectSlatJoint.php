@@ -18,7 +18,8 @@ class SelectSlatJoint extends SlatJoint
    */
   public function __construct($headerText)
   {
-    $this->dataType   = 'control-select';
+    parent::__construct('control-select');
+
     $this->headerText = $headerText;
   }
 

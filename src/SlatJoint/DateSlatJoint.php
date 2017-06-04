@@ -18,7 +18,8 @@ class DateSlatJoint extends SlatJoint
    */
   public function __construct($headerText)
   {
-    $this->dataType   = 'control-text';
+    parent::__construct('control-text');
+
     $this->headerText = $headerText;
   }
 

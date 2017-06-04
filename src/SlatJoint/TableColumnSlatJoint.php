@@ -24,7 +24,8 @@ class TableColumnSlatJoint extends SlatJoint
    */
   public function __construct($tableColumn)
   {
-    $this->dataType    = $tableColumn->getDataType();
+    parent::__construct($tableColumn->getDataType());
+
     $this->tableColumn = $tableColumn;
   }
 
@@ -57,9 +58,9 @@ class TableColumnSlatJoint extends SlatJoint
   /**
    * {@inheritdoc}
    */
-  public function getHtmlColumn()
+  public function getHtmlCol()
   {
-    return $this->tableColumn->getHtmlColumn();
+    return $this->tableColumn->getHtmlCol();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

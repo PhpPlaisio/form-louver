@@ -18,7 +18,8 @@ class FileSlatJoint extends SlatJoint
    */
   public function __construct($headerText)
   {
-    $this->dataType   = 'control-file';
+    parent::__construct('control-file');
+
     $this->headerText = $headerText;
   }
 

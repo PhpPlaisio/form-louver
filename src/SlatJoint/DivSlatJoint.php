@@ -18,7 +18,8 @@ class DivSlatJoint extends SlatJoint
    */
   public function __construct($headerText)
   {
-    $this->dataType   = 'control-div';
+    parent::__construct('control-div');
+
     $this->headerText = $headerText;
   }
 

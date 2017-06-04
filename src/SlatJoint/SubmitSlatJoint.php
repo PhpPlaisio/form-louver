@@ -18,7 +18,8 @@ class SubmitSlatJoint extends SlatJoint
    */
   public function __construct($headerText)
   {
-    $this->dataType   = 'control-reset';
+    parent::__construct('control-reset');
+
     $this->headerText = $headerText;
   }
 
