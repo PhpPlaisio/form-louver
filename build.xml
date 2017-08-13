@@ -1,4 +1,4 @@
-<project name="Abc" default="build" basedir=".">
+<project name="ABC-Framework" default="build" basedir=".">
     <property name="BUILD_DIR" value="./build"/>
 
     <!-- Run composer update and executes various other updates -->
