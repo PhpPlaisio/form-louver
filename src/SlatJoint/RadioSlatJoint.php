@@ -1,10 +1,9 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\SlatJoint;
 
 use SetBased\Abc\Form\Control\RadioControl;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Slat joint for table columns witch table cells with a input:radio form control.
  */

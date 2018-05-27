@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\SlatJoint;
 
 use SetBased\Abc\Form\Control\CheckboxesControl;
@@ -9,7 +9,6 @@ use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\SimpleControl;
 use SetBased\Abc\Table\TableColumn\BaseTableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Abstract parent class for slat joints.
  */

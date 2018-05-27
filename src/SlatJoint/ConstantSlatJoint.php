@@ -1,10 +1,9 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\SlatJoint;
 
 use SetBased\Abc\Form\Control\ConstantControl;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Slat joint for table columns witch table cells with a constant form controls.
  */

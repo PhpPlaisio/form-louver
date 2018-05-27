@@ -1,10 +1,9 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Helper\Html;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * A pseudo form control for generating (pseudo) form controls in a table format.
  */
@@ -122,13 +121,13 @@ class LouverControl extends ComplexControl
    */
   public function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
-    $submit_name = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
     if (!empty($this->templateData))
     {
       $children       = $this->controls;
       $this->controls = [];
-      foreach ($submittedValue[$submit_name] as $key => $row)
+      foreach ($submittedValue[$submitName] as $key => $row)
       {
         if (is_numeric($key) && $key<0)
         {

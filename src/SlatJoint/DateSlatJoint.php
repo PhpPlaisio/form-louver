@@ -1,10 +1,9 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Form\SlatJoint;
 
 use SetBased\Abc\Form\Control\DateControl;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Slat joint for table columns with table cells with a input:text form control for dates.
  */
