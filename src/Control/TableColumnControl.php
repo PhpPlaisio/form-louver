@@ -24,7 +24,7 @@ class TableColumnControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function generate()
   {
@@ -33,7 +33,7 @@ class TableColumnControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function getHtmlTableCell()
   {
@@ -75,7 +75,7 @@ class TableColumnControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   protected function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {

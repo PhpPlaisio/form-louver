@@ -17,7 +17,7 @@ class SlatControl extends ComplexControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function generate()
   {

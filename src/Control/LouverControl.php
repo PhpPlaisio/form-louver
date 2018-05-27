@@ -117,7 +117,7 @@ class LouverControl extends ComplexControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
   {
