@@ -119,7 +119,7 @@ class LouverControl extends ComplexControl
   /**
    * @inheritdoc
    */
-  public function loadSubmittedValuesBase(&$submittedValue, &$whiteListValue, &$changedInputs)
+  public function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
@@ -127,7 +127,7 @@ class LouverControl extends ComplexControl
     {
       $children       = $this->controls;
       $this->controls = [];
-      foreach ($submittedValue[$submitName] as $key => $row)
+      foreach ($submittedValues[$submitName] as $key => $row)
       {
         if (is_numeric($key) && $key<0)
         {
@@ -140,7 +140,7 @@ class LouverControl extends ComplexControl
       $this->controls = array_merge($this->controls, $children);
     }
 
-    parent::loadSubmittedValuesBase($submittedValue, $whiteListValue, $changedInputs);
+    parent::loadSubmittedValuesBase($submittedValues, $whiteListValues, $changedInputs);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
