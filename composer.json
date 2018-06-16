@@ -9,11 +9,11 @@
   "type": "library",
   "license": "MIT",
   "require": {
-    "php": ">=7.0.0",
+    "php": ">=7.1.0",
     "setbased/exception": "^1.0.0",
-    "setbased/abc-form-raw": "^0.9.11",
-    "setbased/abc-html": "^1.0.0",
-    "setbased/abc-table-overview": "^0.10.1"
+    "setbased/abc-form-raw": "^0.9.20",
+    "setbased/abc-html": "^2.0.1",
+    "setbased/abc-table-overview": "^0.10.7"
   },
   "require-dev": {
     "phing/phing": "^2.0.0"
