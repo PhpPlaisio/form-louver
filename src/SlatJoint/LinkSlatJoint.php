@@ -2,6 +2,7 @@
 
 namespace SetBased\Abc\Form\SlatJoint;
 
+use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\LinkControl;
 
 /**
@@ -28,9 +29,9 @@ class LinkSlatJoint extends SlatJoint
    *
    * @param string $name The local name of the link form control.
    *
-   * @return LinkControl
+   * @return Control
    */
-  public function createControl($name)
+  public function createControl(string $name): Control
   {
     return new LinkControl($name);
   }

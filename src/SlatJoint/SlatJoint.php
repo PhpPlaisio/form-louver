@@ -2,11 +2,7 @@
 
 namespace SetBased\Abc\Form\SlatJoint;
 
-use SetBased\Abc\Form\Control\CheckboxesControl;
-use SetBased\Abc\Form\Control\ComplexControl;
-use SetBased\Abc\Form\Control\RadiosControl;
-use SetBased\Abc\Form\Control\SelectControl;
-use SetBased\Abc\Form\Control\SimpleControl;
+use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Table\TableColumn\BaseTableColumn;
 
 /**
@@ -16,11 +12,13 @@ abstract class SlatJoint extends BaseTableColumn
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Creates a control for a table cell.
+   *
    * @param string $name The name of the form control in the table cell.
    *
-   * @return ComplexControl|SimpleControl|SelectControl|CheckboxesControl|RadiosControl
+   * @return Control
    */
-  abstract public function createControl($name);
+  abstract public function createControl(string $name): Control;
 
   //--------------------------------------------------------------------------------------------------------------------
 }

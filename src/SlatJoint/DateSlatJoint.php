@@ -2,6 +2,7 @@
 
 namespace SetBased\Abc\Form\SlatJoint;
 
+use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\DateControl;
 
 /**
@@ -28,9 +29,9 @@ class DateSlatJoint extends SlatJoint
    *
    * @param string $name The local name of the date form control.
    *
-   * @return DateControl
+   * @return Control
    */
-  public function createControl($name)
+  public function createControl(string $name): Control
   {
     return new DateControl($name);
   }

@@ -2,6 +2,7 @@
 
 namespace SetBased\Abc\Form\SlatJoint;
 
+use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\TextAreaControl;
 
 /**
@@ -28,9 +29,9 @@ class TextAreaSlatJoint extends SlatJoint
    *
    * @param string $name The local name of the textarea form control.
    *
-   * @return TextAreaControl
+   * @return Control
    */
-  public function createControl($name)
+  public function createControl(string $name): Control
   {
     return new TextAreaControl($name);
   }

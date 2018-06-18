@@ -2,6 +2,7 @@
 
 namespace SetBased\Abc\Form\SlatJoint;
 
+use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\TextControl;
 
 /**
@@ -28,9 +29,9 @@ class TextSlatJoint extends SlatJoint
    *
    * @param string $name The local name of the text form control.
    *
-   * @return TextControl
+   * @return Control
    */
-  public function createControl($name)
+  public function createControl(string $name): Control
   {
     return new TextControl($name);
   }

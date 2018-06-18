@@ -2,6 +2,7 @@
 
 namespace SetBased\Abc\Form\SlatJoint;
 
+use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\RadiosControl;
 
 /**
@@ -28,9 +29,9 @@ class RadiosSlatJoint extends SlatJoint
    *
    * @param string $name The local name of the radios form control.
    *
-   * @return RadiosControl
+   * @return Control
    */
-  public function createControl($name)
+  public function createControl(string $name): Control
   {
     return new RadiosControl($name);
   }

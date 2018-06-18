@@ -3,6 +3,7 @@
 namespace SetBased\Abc\Form\SlatJoint;
 
 use SetBased\Abc\Form\Control\ButtonControl;
+use SetBased\Abc\Form\Control\Control;
 
 /**
  * Slat joint for table columns witch table cells with a button form control.
@@ -28,9 +29,9 @@ class ButtonSlatJoint extends SlatJoint
    *
    * @param string $name The local name of the button form control.
    *
-   * @return ButtonControl
+   * @return Control
    */
-  public function createControl($name)
+  public function createControl(string $name): Control
   {
     return new ButtonControl($name);
   }
@@ -41,7 +42,7 @@ class ButtonSlatJoint extends SlatJoint
    *
    * @return string
    */
-  public function getHtmlColumnFilter()
+  public function getHtmlColumnFilter(): string
   {
     return '';
   }

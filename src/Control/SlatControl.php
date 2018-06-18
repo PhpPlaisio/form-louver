@@ -19,7 +19,7 @@ class SlatControl extends ComplexControl
   /**
    * @inheritdoc
    */
-  public function generate()
+  public function generate(): string
   {
     // Create start tag of table row.
     $ret = Html::generateTag('tr', $this->attributes);
@@ -47,14 +47,9 @@ class SlatControl extends ComplexControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Executes a validators on the child form controls of this form complex control. If  and only if all child form
-   * controls are valid the validators of this complex control are executed.
-   *
-   * @param array $invalidFormControls A nested array of invalid form controls.
-   *
-   * @return bool True if and only if all form controls are valid.
+   * @inheritdoc
    */
-  public function validateBase(&$invalidFormControls)
+  public function validateBase(array &$invalidFormControls): bool
   {
     $valid = true;
 
@@ -110,7 +105,7 @@ class SlatControl extends ComplexControl
    *
    * @return string
    */
-  protected function generateErrorCell()
+  protected function generateErrorCell(): string
   {
     $ret = '';
 

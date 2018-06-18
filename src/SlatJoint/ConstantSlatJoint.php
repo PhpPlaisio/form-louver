@@ -3,6 +3,7 @@
 namespace SetBased\Abc\Form\SlatJoint;
 
 use SetBased\Abc\Form\Control\ConstantControl;
+use SetBased\Abc\Form\Control\Control;
 
 /**
  * Slat joint for table columns witch table cells with a constant form controls.
@@ -15,9 +16,9 @@ class ConstantSlatJoint extends SlatJoint
    *
    * @param string $name The local name of the constant form control.
    *
-   * @return ConstantControl
+   * @return Control
    */
-  public function createControl($name)
+  public function createControl(string $name): Control
   {
     return new ConstantControl($name);
   }
@@ -28,7 +29,7 @@ class ConstantSlatJoint extends SlatJoint
    *
    * @return int Always 0
    */
-  public function getColSpan()
+  public function getColSpan(): int
   {
     return 0;
   }
@@ -39,7 +40,7 @@ class ConstantSlatJoint extends SlatJoint
    *
    * @return string Always empty.
    */
-  public function getHtmlColumn()
+  public function getHtmlColumn(): string
   {
     return '';
   }
@@ -50,7 +51,7 @@ class ConstantSlatJoint extends SlatJoint
    *
    * @return string Empty string
    */
-  public function getHtmlColumnFilter()
+  public function getHtmlColumnFilter(): string
   {
     return '';
   }
@@ -61,7 +62,7 @@ class ConstantSlatJoint extends SlatJoint
    *
    * @return string Empty string
    */
-  public function getHtmlColumnHeader()
+  public function getHtmlColumnHeader(): string
   {
     return '';
   }

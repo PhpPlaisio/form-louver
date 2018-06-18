@@ -2,6 +2,7 @@
 
 namespace SetBased\Abc\Form\SlatJoint;
 
+use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\PasswordControl;
 
 /**
@@ -28,9 +29,9 @@ class PasswordSlatJoint extends SlatJoint
    *
    * @param string $name The local name of the password form control.
    *
-   * @return PasswordControl
+   * @return Control
    */
-  public function createControl($name)
+  public function createControl(string $name): Control
   {
     return new PasswordControl($name);
   }
@@ -41,7 +42,7 @@ class PasswordSlatJoint extends SlatJoint
    *
    * @return string
    */
-  public function getHtmlColumnFilter()
+  public function getHtmlColumnFilter(): string
   {
     return '<td></td>';
   }

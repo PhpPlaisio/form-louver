@@ -3,6 +3,7 @@
 namespace SetBased\Abc\Form\SlatJoint;
 
 use SetBased\Abc\Form\Control\ComplexControl;
+use SetBased\Abc\Form\Control\Control;
 
 /**
  * Slat joint for table columns witch table cells with a complex form control.
@@ -28,9 +29,9 @@ class ComplexSlatJoint extends SlatJoint
    *
    * @param string $name The local name of the complex form control.
    *
-   * @return ComplexControl
+   * @return Control
    */
-  public function createControl($name)
+  public function createControl(string $name): Control
   {
     return new ComplexControl($name);
   }

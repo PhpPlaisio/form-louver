@@ -2,6 +2,7 @@
 
 namespace SetBased\Abc\Form\SlatJoint;
 
+use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\SpanControl;
 
 /**
@@ -28,9 +29,9 @@ class SpanSlatJoint extends SlatJoint
    *
    * @param string $name The local name of the span form control.
    *
-   * @return SpanControl
+   * @return Control
    */
-  public function createControl($name)
+  public function createControl(string $name): Control
   {
     return new SpanControl($name);
   }

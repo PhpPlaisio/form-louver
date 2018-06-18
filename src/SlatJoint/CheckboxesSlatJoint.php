@@ -3,6 +3,7 @@
 namespace SetBased\Abc\Form\SlatJoint;
 
 use SetBased\Abc\Form\Control\CheckboxesControl;
+use SetBased\Abc\Form\Control\Control;
 
 /**
  * Slat joint for table columns witch table cells with a checkboxes form control.
@@ -28,9 +29,9 @@ class CheckboxesSlatJoint extends SlatJoint
    *
    * @param string $name The local name of the checkboxes form control.
    *
-   * @return CheckboxesControl
+   * @return Control
    */
-  public function createControl($name)
+  public function createControl(string $name): Control
   {
     return new CheckboxesControl($name);
   }

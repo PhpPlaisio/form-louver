@@ -41,7 +41,7 @@ abstract class SlatControlFactory
    *
    * @return SlatJoint
    */
-  public function addSlatJoint($slatJointName, $slatJoint)
+  public function addSlatJoint(string $slatJointName, SlatJoint $slatJoint): SlatJoint
   {
     $this->slatJoints[$slatJointName] = $slatJoint;
 
@@ -54,17 +54,19 @@ abstract class SlatControlFactory
   /**
    * Creates a form control using a slat joint and returns the created form control.
    *
-   * @param ComplexControl $parentControl    The parent form control for the created form control.
-   * @param string         $slatJointName    The name of the slat joint.
-   * @param string|null    $controlName      The name of the created form control. If null the form control will have
-   *                                         the same name as the slat joint. Use '' for an empty name (should only be
-   *                                         used if the created form control is a complex form control).
+   * @param ComplexControl $parentControl The parent form control for the created form control.
+   * @param string         $slatJointName The name of the slat joint.
+   * @param string|null    $controlName   The name of the created form control. If null the form control will have
+   *                                      the same name as the slat joint. Use '' for an empty name (should only be
+   *                                      used if the created form control is a complex form control).
    *
-   * @return ComplexControl|SimpleControl|SelectControl|CheckboxesControl|RadiosControl
+   * @return Control
    */
-  public function createFormControl($parentControl, $slatJointName, $controlName = null)
+  public function createFormControl(ComplexControl $parentControl,
+                                    string $slatJointName,
+                                    ?string $controlName = null): Control
   {
-    $control = $this->slatJoints[$slatJointName]->createControl(isset($controlName) ? $controlName : $slatJointName);
+    $control = $this->slatJoints[$slatJointName]->createControl($controlName ?? $slatJointName);
     $parentControl->addFormControl($control);
 
     return $control;
@@ -79,13 +81,13 @@ abstract class SlatControlFactory
    *
    * @return SlatControl
    */
-  abstract public function createRow($louverControl, $data);
+  abstract public function createRow(LouverControl $louverControl, array $data): SlatControl;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Disables filtering.
    */
-  public function disableFilter()
+  public function disableFilter(): void
   {
     $this->filter = false;
   }
@@ -94,7 +96,7 @@ abstract class SlatControlFactory
   /**
    * Enables filtering.
    */
-  public function enableFilter()
+  public function enableFilter(): void
   {
     $this->filter = true;
   }
@@ -105,7 +107,7 @@ abstract class SlatControlFactory
    *
    * @return string
    */
-  public function getColumnGroup()
+  public function getColumnGroup(): string
   {
     $ret = '';
     foreach ($this->slatJoints as $factory)
@@ -124,7 +126,7 @@ abstract class SlatControlFactory
    *
    * @return string
    */
-  public function getHtmlHeader()
+  public function getHtmlHeader(): string
   {
     $ret = '<tr class="header">';
     foreach ($this->slatJoints as $factory)
@@ -154,7 +156,7 @@ abstract class SlatControlFactory
    *
    * @return int
    */
-  public function getNumberOfColumns()
+  public function getNumberOfColumns(): int
   {
     return $this->numberOfColumns;
   }
@@ -168,7 +170,7 @@ abstract class SlatControlFactory
    * @return int
    * @throws LogicException
    */
-  public function getOrdinal($slatJointName)
+  public function getOrdinal(string $slatJointName): int
   {
     $ordinal = 0;
     $key     = null;

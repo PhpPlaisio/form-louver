@@ -2,6 +2,7 @@
 
 namespace SetBased\Abc\Form\SlatJoint;
 
+use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\SubmitControl;
 
 /**
@@ -28,9 +29,9 @@ class SubmitSlatJoint extends SlatJoint
    *
    * @param string $name The local name of the submit form control.
    *
-   * @return SubmitControl
+   * @return Control
    */
-  public function createControl($name)
+  public function createControl(string $name): Control
   {
     return new SubmitControl($name);
   }
@@ -41,7 +42,7 @@ class SubmitSlatJoint extends SlatJoint
    *
    * @return string
    */
-  public function getHtmlColumnFilter()
+  public function getHtmlColumnFilter(): string
   {
     return '<td></td>';
   }

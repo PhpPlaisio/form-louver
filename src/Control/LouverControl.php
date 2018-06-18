@@ -15,12 +15,12 @@ class LouverControl extends ComplexControl
    *
    * @var array[]
    */
-  protected $data;
+  protected $data = [];
 
   /**
    * Form control for the footer of the table.
    *
-   * @var control
+   * @var control|null
    */
   protected $footerControl;
 
@@ -34,14 +34,14 @@ class LouverControl extends ComplexControl
   /**
    * The data for initializing teh template row(s).
    *
-   * @var array
+   * @var array|null
    */
   private $templateData;
 
   /**
    * The key of the key in the template row.
    *
-   * @var string
+   * @var string|null
    */
   private $templateKey;
 
@@ -51,7 +51,7 @@ class LouverControl extends ComplexControl
    *
    * @return string
    */
-  public function generate()
+  public function generate(): string
   {
     if (!empty($this->templateData))
     {
@@ -110,7 +110,7 @@ class LouverControl extends ComplexControl
    *
    * @return array[]
    */
-  public function getData()
+  public function getData(): array
   {
     return $this->data;
   }
@@ -119,7 +119,9 @@ class LouverControl extends ComplexControl
   /**
    * @inheritdoc
    */
-  public function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
+  public function loadSubmittedValuesBase(array $submittedValues,
+                                          array &$whiteListValues,
+                                          array &$changedInputs): void
   {
     $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
 
@@ -147,7 +149,7 @@ class LouverControl extends ComplexControl
   /**
    * Populates this table form control with table row form controls (based on the data set with setData).
    */
-  public function populate()
+  public function populate(): void
   {
     foreach ($this->data as $data)
     {
@@ -161,7 +163,7 @@ class LouverControl extends ComplexControl
    *
    * @param array[] $data
    */
-  public function setData($data)
+  public function setData(array $data): void
   {
     $this->data = $data;
   }
@@ -172,9 +174,10 @@ class LouverControl extends ComplexControl
    *
    * @param Control $control
    */
-  public function setFooterControl($control)
+  public function setFooterControl(Control $control): void
   {
-    $this->footerControl = $this->addFormControl($control);
+    $this->footerControl = $control;
+    $this->addFormControl($control);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -183,7 +186,7 @@ class LouverControl extends ComplexControl
    *
    * @param SlatControlFactory $rowFactory
    */
-  public function setRowFactory($rowFactory)
+  public function setRowFactory(SlatControlFactory $rowFactory): void
   {
     $this->rowFactory = $rowFactory;
   }
@@ -192,10 +195,10 @@ class LouverControl extends ComplexControl
   /**
    * Sets the template data and key of the key for dynamically adding additional rows to form.
    *
-   * @param array  $data The date for initializing template row(s).
+   * @param array  $data The data for initializing template row(s).
    * @param string $key  The key of the key in the template row.
    */
-  public function setTemplate($data, $key)
+  public function setTemplate(array $data, string $key): void
   {
     $this->templateData = $data;
     $this->templateKey  = $key;
@@ -206,7 +209,7 @@ class LouverControl extends ComplexControl
    *
    * @return string
    */
-  protected function getHtmlBody()
+  protected function getHtmlBody(): string
   {
     $ret = '';
     $i   = 0;
@@ -233,7 +236,7 @@ class LouverControl extends ComplexControl
    *
    * @return string
    */
-  protected function getHtmlHeader()
+  protected function getHtmlHeader(): string
   {
     return $this->rowFactory->getHtmlHeader();
   }

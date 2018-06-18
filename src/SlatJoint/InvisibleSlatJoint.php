@@ -2,6 +2,7 @@
 
 namespace SetBased\Abc\Form\SlatJoint;
 
+use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\InvisibleControl;
 
 /**
@@ -15,9 +16,9 @@ class InvisibleSlatJoint extends SlatJoint
    *
    * @param string $name The local name of the invisible form control.
    *
-   * @return InvisibleControl
+   * @return Control
    */
-  public function createControl($name)
+  public function createControl(string $name): Control
   {
     return new InvisibleControl($name);
   }
@@ -28,7 +29,7 @@ class InvisibleSlatJoint extends SlatJoint
    *
    * @return int Always 0
    */
-  public function getColSpan()
+  public function getColSpan(): int
   {
     return 0;
   }
@@ -39,7 +40,7 @@ class InvisibleSlatJoint extends SlatJoint
    *
    * @return string Always empty.
    */
-  public function getHtmlColumn()
+  public function getHtmlColumn(): string
   {
     return '';
   }
@@ -50,7 +51,7 @@ class InvisibleSlatJoint extends SlatJoint
    *
    * @return string Empty string
    */
-  public function getHtmlColumnFilter()
+  public function getHtmlColumnFilter(): string
   {
     return '';
   }
@@ -61,7 +62,7 @@ class InvisibleSlatJoint extends SlatJoint
    *
    * @return string Empty string
    */
-  public function getHtmlColumnHeader()
+  public function getHtmlColumnHeader(): string
   {
     return '';
   }

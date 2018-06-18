@@ -2,10 +2,10 @@
 
 namespace SetBased\Abc\Form\SlatJoint;
 
+use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\TableColumnControl;
 use SetBased\Abc\Table\TableColumn\TableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
 class TableColumnSlatJoint extends SlatJoint
 {
   //--------------------------------------------------------------------------------------------------------------------
@@ -20,9 +20,9 @@ class TableColumnSlatJoint extends SlatJoint
   /**
    * Object constructor.
    *
-   * @param TableColumn $tableColumn
+   * @param TableColumn $tableColumn The table column.
    */
-  public function __construct($tableColumn)
+  public function __construct(TableColumn $tableColumn)
   {
     parent::__construct($tableColumn->getDataType());
 
@@ -35,9 +35,9 @@ class TableColumnSlatJoint extends SlatJoint
    *
    * @param string $name The local name of the button form control.
    *
-   * @return TableColumnControl
+   * @return Control
    */
-  public function createControl($name)
+  public function createControl(string $name): Control
   {
     $control = new TableColumnControl($name);
     $control->setTableColumn($this->tableColumn);
@@ -49,7 +49,7 @@ class TableColumnSlatJoint extends SlatJoint
   /**
    * @inheritdoc
    */
-  public function getColSpan()
+  public function getColSpan(): int
   {
     return $this->tableColumn->getColSpan();
   }
@@ -58,7 +58,7 @@ class TableColumnSlatJoint extends SlatJoint
   /**
    * @inheritdoc
    */
-  public function getHtmlCol()
+  public function getHtmlCol(): string
   {
     return $this->tableColumn->getHtmlCol();
   }
@@ -67,7 +67,7 @@ class TableColumnSlatJoint extends SlatJoint
   /**
    * @inheritdoc
    */
-  public function getHtmlColumnFilter()
+  public function getHtmlColumnFilter(): string
   {
     return $this->tableColumn->getHtmlColumnFilter();
   }
@@ -76,7 +76,7 @@ class TableColumnSlatJoint extends SlatJoint
   /**
    * @inheritdoc
    */
-  public function getHtmlColumnHeader()
+  public function getHtmlColumnHeader(): string
   {
     return $this->tableColumn->getHtmlColumnHeader();
   }

@@ -26,16 +26,16 @@ class TableColumnControl extends Control
   /**
    * @inheritdoc
    */
-  public function generate()
+  public function generate(): string
   {
-    return null;
+    return '';
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
    */
-  public function getHtmlTableCell()
+  public function getHtmlTableCell(): string
   {
     return $this->tableColumn->getHtmlCell($this->row);
   }
@@ -57,7 +57,7 @@ class TableColumnControl extends Control
    *
    * @param TableColumn $tableColumn
    */
-  public function setTableColumn($tableColumn)
+  public function setTableColumn(TableColumn $tableColumn)
   {
     $this->tableColumn = $tableColumn;
   }
@@ -68,7 +68,7 @@ class TableColumnControl extends Control
    *
    * @param array $row
    */
-  public function setValue($row)
+  public function setValue(array $row): void
   {
     $this->row = $row;
   }
@@ -77,7 +77,9 @@ class TableColumnControl extends Control
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase($submittedValues, &$whiteListValues, &$changedInputs)
+  protected function loadSubmittedValuesBase(array $submittedValues,
+                                             array &$whiteListValues,
+                                             array &$changedInputs): void
   {
     // Nothing to do.
   }
@@ -88,9 +90,18 @@ class TableColumnControl extends Control
    *
    * @return bool
    */
-  protected function validateBase(&$invalidFormControls)
+  protected function validateBase(array &$invalidFormControls): bool
   {
     return true;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritdoc
+   */
+  public function setValuesBase(array $values): void
+  {
+    // Nothing to do.
   }
 
   //--------------------------------------------------------------------------------------------------------------------

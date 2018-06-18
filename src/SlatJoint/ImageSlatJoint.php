@@ -2,6 +2,7 @@
 
 namespace SetBased\Abc\Form\SlatJoint;
 
+use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\ImageControl;
 
 /**
@@ -28,9 +29,9 @@ class ImageSlatJoint extends SlatJoint
    *
    * @param string $name The local name of the image form control.
    *
-   * @return ImageControl
+   * @return Control
    */
-  public function createControl($name)
+  public function createControl(string $name): Control
   {
     return new ImageControl($name);
   }
@@ -41,7 +42,7 @@ class ImageSlatJoint extends SlatJoint
    *
    * @return string
    */
-  public function getHtmlColumnFilter()
+  public function getHtmlColumnFilter(): string
   {
     return '<td></td>';
   }

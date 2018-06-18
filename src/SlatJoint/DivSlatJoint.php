@@ -2,6 +2,7 @@
 
 namespace SetBased\Abc\Form\SlatJoint;
 
+use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\DivControl;
 
 /**
@@ -28,9 +29,9 @@ class DivSlatJoint extends SlatJoint
    *
    * @param string $name The local name of the div form control.
    *
-   * @return DivControl
+   * @return Control
    */
-  public function createControl($name)
+  public function createControl(string $name): Control
   {
     return new DivControl($name);
   }
