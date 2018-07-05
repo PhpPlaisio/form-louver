@@ -26,7 +26,7 @@ class TableColumnControl extends Control
   /**
    * @inheritdoc
    */
-  public function generate(): string
+  public function getHtml(): string
   {
     return '';
   }

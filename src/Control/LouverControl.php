@@ -47,11 +47,22 @@ class LouverControl extends ComplexControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Gets the data for which this table form control must be generated.
+   *
+   * @return array[]
+   */
+  public function getData(): array
+  {
+    return $this->data;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns the HTML code of displaying the form controls of this complex form control in a table.
    *
    * @return string
    */
-  public function generate(): string
+  public function getHtml(): string
   {
     if (!empty($this->templateData))
     {
@@ -85,7 +96,7 @@ class LouverControl extends ComplexControl
       $ret .= '<tfoot>';
       $ret .= '<tr>';
       $ret .= '<td colspan="'.$this->rowFactory->getNumberOfColumns().'">';
-      $ret .= $this->footerControl->generate();
+      $ret .= $this->footerControl->getHtml();
       $ret .= '</td>';
       $ret .= '<td class="error"></td>';
       $ret .= '</tr>';
@@ -102,17 +113,6 @@ class LouverControl extends ComplexControl
     $ret .= $this->postfix;
 
     return $ret;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Gets the data for which this table form control must be generated.
-   *
-   * @return array[]
-   */
-  public function getData(): array
-  {
-    return $this->data;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -221,7 +221,7 @@ class LouverControl extends ComplexControl
         $control->addClass(($i % 2==0) ? 'even' : 'odd');
 
         // Generate the table row.
-        $ret .= $control->generate();
+        $ret .= $control->getHtml();
 
         $i++;
       }
