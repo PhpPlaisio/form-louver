@@ -95,7 +95,7 @@ class LouverControl extends ComplexControl
     {
       $ret .= '<tfoot>';
       $ret .= '<tr>';
-      $ret .= '<td colspan="'.$this->rowFactory->getNumberOfColumns().'">';
+      $ret .= Html::generateTag('td', ['colspan' => $this->rowFactory->getNumberOfColumns()]);
       $ret .= $this->footerControl->getHtml();
       $ret .= '</td>';
       $ret .= '<td class="error"></td>';

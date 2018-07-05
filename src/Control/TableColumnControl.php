@@ -57,7 +57,7 @@ class TableColumnControl extends Control
    *
    * @param TableColumn $tableColumn
    */
-  public function setTableColumn(TableColumn $tableColumn)
+  public function setTableColumn(TableColumn $tableColumn): void
   {
     $this->tableColumn = $tableColumn;
   }
