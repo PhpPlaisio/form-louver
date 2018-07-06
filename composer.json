@@ -11,9 +11,9 @@
   "require": {
     "php": ">=7.1.0",
     "setbased/exception": "^1.0.0",
-    "setbased/abc-form-raw": "^0.9.23",
+    "setbased/abc-form-raw": "*",
     "setbased/abc-html": "^2.0.1",
-    "setbased/abc-table-overview": "^0.10.7"
+    "setbased/abc-table-overview": "*"
   },
   "require-dev": {
     "phing/phing": "^2.0.0"
