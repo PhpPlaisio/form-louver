@@ -84,7 +84,7 @@ class LouverControl extends ComplexControl
 
     // Generate HTML code for the column classes.
     $ret .= '<colgroup>';
-    $ret .= $this->rowFactory->getColumnGroup();
+    $ret .= $this->rowFactory->getHtmlColumnGroup();
     $ret .= '</colgroup>';
 
     $ret .= '<thead>';

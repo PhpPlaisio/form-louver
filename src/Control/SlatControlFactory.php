@@ -107,7 +107,7 @@ abstract class SlatControlFactory
    *
    * @return string
    */
-  public function getColumnGroup(): string
+  public function getHtmlColumnGroup(): string
   {
     $ret = '';
     foreach ($this->slatJoints as $factory)

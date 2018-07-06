@@ -77,6 +77,15 @@ class TableColumnControl extends Control
   /**
    * @inheritdoc
    */
+  public function setValuesBase(?array $values): void
+  {
+    // Nothing to do.
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritdoc
+   */
   protected function loadSubmittedValuesBase(array $submittedValues,
                                              array &$whiteListValues,
                                              array &$changedInputs): void
@@ -93,15 +102,6 @@ class TableColumnControl extends Control
   protected function validateBase(array &$invalidFormControls): bool
   {
     return true;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritdoc
-   */
-  public function setValuesBase(?array $values): void
-  {
-    // Nothing to do.
   }
 
   //--------------------------------------------------------------------------------------------------------------------

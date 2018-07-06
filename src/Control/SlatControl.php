@@ -19,7 +19,7 @@ class SlatControl extends ComplexControl
   /**
    * @inheritdoc
    */
-  public function generate(): string
+  public function getHtml(): string
   {
     // Create start tag of table row.
     $ret = Html::generateTag('tr', $this->attributes);
@@ -105,7 +105,7 @@ class SlatControl extends ComplexControl
    *
    * @return string
    */
-  protected function generateErrorCell(): string
+  protected function getHtmlErrorCell(): string
   {
     $ret = '';
 
