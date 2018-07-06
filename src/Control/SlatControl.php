@@ -31,7 +31,7 @@ class SlatControl extends ComplexControl
     }
 
     // Create table cell with error message, if any.
-    $ret .= $this->generateErrorCell();
+    $ret .= $this->getHtmlErrorCell();
 
     // Create end tag of table row.
     $ret .= '</tr>';
