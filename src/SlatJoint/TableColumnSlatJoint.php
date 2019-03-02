@@ -25,6 +25,8 @@ class TableColumnSlatJoint extends SlatJoint
   public function __construct(TableColumn $tableColumn)
   {
     parent::__construct($tableColumn->getDataType(), $tableColumn->getHeaderText());
+
+    $this->tableColumn = $tableColumn;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
