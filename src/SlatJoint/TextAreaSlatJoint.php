@@ -18,9 +18,7 @@ class TextAreaSlatJoint extends SlatJoint
    */
   public function __construct($headerText)
   {
-    parent::__construct('control-text-area');
-
-    $this->headerText = $headerText;
+    parent::__construct('control-text-area', $headerText);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
