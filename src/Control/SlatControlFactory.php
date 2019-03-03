@@ -3,6 +3,8 @@
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Form\SlatJoint\SlatJoint;
+use SetBased\Abc\Helper\Html;
+use SetBased\Abc\Table\OverviewTable;
 use SetBased\Exception\LogicException;
 
 /**
@@ -128,7 +130,7 @@ abstract class SlatControlFactory
    */
   public function getHtmlHeader(): string
   {
-    $ret = '<tr class="header">';
+    $ret = Html::generateTag('tr', ['class' => [OverviewTable::$class, 'header']]);
     foreach ($this->slatJoints as $factory)
     {
       $ret .= $factory->getHtmlColumnHeader();
@@ -138,7 +140,7 @@ abstract class SlatControlFactory
 
     if ($this->filter)
     {
-      $ret .= '<tr class="filter">';
+      $ret .= Html::generateTag('tr', ['class' => [OverviewTable::$class, 'filter']]);
       foreach ($this->slatJoints as $factory)
       {
         $ret .= $factory->getHtmlColumnFilter();

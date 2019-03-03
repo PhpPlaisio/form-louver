@@ -12,7 +12,7 @@
     "php": ">=7.1.0",
     "setbased/exception": "^1.0.0",
     "setbased/abc-form": "*",
-    "setbased/abc-html": "^2.0.1",
+    "setbased/abc-html": "^2.1.0",
     "setbased/abc-table-overview": "*"
   },
   "require-dev": {

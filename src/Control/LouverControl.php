@@ -3,6 +3,7 @@
 namespace SetBased\Abc\Form\Control;
 
 use SetBased\Abc\Helper\Html;
+use SetBased\Abc\Table\OverviewTable;
 
 /**
  * A pseudo form control for generating (pseudo) form controls in a table format.
@@ -32,7 +33,7 @@ class LouverControl extends ComplexControl
   protected $rowFactory;
 
   /**
-   * The data for initializing teh template row(s).
+   * The data for initializing the template row(s).
    *
    * @var array|null
    */
@@ -64,6 +65,8 @@ class LouverControl extends ComplexControl
    */
   public function getHtml(): string
   {
+    $this->prepareOverviewTable();
+
     if (!empty($this->templateData))
     {
       $this->setAttrData('slat-name', $this->submitName);
@@ -79,21 +82,20 @@ class LouverControl extends ComplexControl
 
     $ret = $this->prefix;
 
-    $ret .= Html::generateTag('div', $this->attributes);
-    $ret .= '<table>';
+    $ret .= Html::generateTag('table', $this->attributes);
 
     // Generate HTML code for the column classes.
     $ret .= '<colgroup>';
     $ret .= $this->rowFactory->getHtmlColumnGroup();
     $ret .= '</colgroup>';
 
-    $ret .= '<thead>';
+    $ret .= Html::generateTag('thead', ['class' => OverviewTable::$class]);
     $ret .= $this->getHtmlHeader();
     $ret .= '</thead>';
 
     if ($this->footerControl)
     {
-      $ret .= '<tfoot>';
+      $ret .= Html::generateTag('tfoot', ['class' => OverviewTable::$class]);
       $ret .= '<tr>';
       $ret .= Html::generateTag('td', ['colspan' => $this->rowFactory->getNumberOfColumns()]);
       $ret .= $this->footerControl->getHtml();
@@ -103,12 +105,11 @@ class LouverControl extends ComplexControl
       $ret .= '</tfoot>';
     }
 
-    $ret .= '<tbody>';
+    $ret .= Html::generateTag('tbody', ['class' => OverviewTable::$class]);
     $ret .= $this->getHtmlBody();
     $ret .= '</tbody>';
 
     $ret .= '</table>';
-    $ret .= '</div>';
 
     $ret .= $this->postfix;
 
@@ -239,6 +240,20 @@ class LouverControl extends ComplexControl
   protected function getHtmlHeader(): string
   {
     return $this->rowFactory->getHtmlHeader();
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Prepares the Overview table part for generation HTML code.
+   */
+  private function prepareOverviewTable(): void
+  {
+    $this->addClass(OverviewTable::$class);
+
+    if (OverviewTable::$responsiveMediaQuery!==null && $this->getAttribute('id')===null)
+    {
+      $this->setAttrId(Html::getAutoId());
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
