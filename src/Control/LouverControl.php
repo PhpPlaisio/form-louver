@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Control;
 
@@ -113,6 +114,8 @@ class LouverControl extends ComplexControl
 
     $ret .= $this->postfix;
 
+    $this->rowFactory->generateResponsiveCss($this->getAttribute('id'));
+
     return $ret;
   }
 
@@ -204,6 +207,7 @@ class LouverControl extends ComplexControl
     $this->templateData = $data;
     $this->templateKey  = $key;
   }
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the inner HTML code of the tbody element of this table form control.
@@ -229,7 +233,6 @@ class LouverControl extends ComplexControl
 
     return $ret;
   }
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the inner HTML code of the thead element (e.g. column headers and filters) of this table form control.

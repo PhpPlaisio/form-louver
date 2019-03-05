@@ -1,8 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace SetBased\Abc\Form\Control;
 
+use SetBased\Abc\Abc;
 use SetBased\Abc\Form\SlatJoint\SlatJoint;
+use SetBased\Abc\Helper\Css;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Table\OverviewTable;
 use SetBased\Exception\LogicException;
@@ -105,6 +108,35 @@ abstract class SlatControlFactory
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Generates CSS for responsive tables.
+   *
+   * @param string $id The ID of the table.
+   */
+  public function generateResponsiveCss(string $id): void
+  {
+    if (OverviewTable::$responsiveMediaQuery===null) return;
+
+    Abc::$assets->cssAppendLine(OverviewTable::$responsiveMediaQuery);
+    Abc::$assets->cssAppendLine('{');
+    $format = '#%s tr.%s > td:nth-of-type(%d):before {content: %s;}';
+    $index  = 1;
+    foreach ($this->slatJoints as $factory)
+    {
+      $text = $factory->getHeaderText();
+      for ($i = 0; $i<$factory->getColSpan(); $i++)
+      {
+        Abc::$assets->cssAppendLine(sprintf($format, $id, OverviewTable::$class, $index + $i, Css::txt2CssString($text)));
+        $index++;
+      }
+    }
+
+    Abc::$assets->cssAppendLine(sprintf($format, $id, OverviewTable::$class, $index + $i, Css::txt2CssString('error')));
+
+    Abc::$assets->cssAppendLine('}');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns the inner HTML code of the colgroup element of the table form control.
    *
    * @return string
@@ -135,7 +167,7 @@ abstract class SlatControlFactory
     {
       $ret .= $factory->getHtmlColumnHeader();
     }
-    $ret .= '<td class="error"></td>';
+    $ret .= '<th class="error"></th>';
     $ret .= '</tr>';
 
     if ($this->filter)
@@ -145,7 +177,7 @@ abstract class SlatControlFactory
       {
         $ret .= $factory->getHtmlColumnFilter();
       }
-      $ret .= '<td class="error"></td>';
+      $ret .= '<th class="error"></th>';
       $ret .= '</tr>';
     }
 
@@ -170,6 +202,7 @@ abstract class SlatControlFactory
    * @param string $slatJointName The name of the slat joint.
    *
    * @return int
+   *
    * @throws LogicException
    */
   public function getOrdinal(string $slatJointName): int
