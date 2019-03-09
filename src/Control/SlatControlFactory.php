@@ -125,12 +125,12 @@ abstract class SlatControlFactory
       $text = $factory->getHeaderText();
       for ($i = 0; $i<$factory->getColSpan(); $i++)
       {
-        Abc::$assets->cssAppendLine(sprintf($format, $id, OverviewTable::$class, $index + $i, Css::txt2CssString($text)));
+        Abc::$assets->cssAppendLine(sprintf($format, $id, OverviewTable::$class, $index, Css::txt2CssString($text)));
         $index++;
       }
     }
 
-    Abc::$assets->cssAppendLine(sprintf($format, $id, OverviewTable::$class, $index + $i, Css::txt2CssString('error')));
+    Abc::$assets->cssAppendLine(sprintf($format, $id, OverviewTable::$class, $index, Css::txt2CssString('error')));
 
     Abc::$assets->cssAppendLine('}');
   }
