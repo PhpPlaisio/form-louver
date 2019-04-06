@@ -12,6 +12,15 @@ class ConstantSlatJoint extends SlatJoint
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Object constructor.
+   */
+  public function __construct()
+  {
+    parent::__construct('none', null);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Creates and returns a constant form control.
    *
    * @param string $name The local name of the constant form control.
