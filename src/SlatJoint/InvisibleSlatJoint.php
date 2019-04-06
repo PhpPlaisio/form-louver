@@ -12,6 +12,15 @@ class InvisibleSlatJoint extends SlatJoint
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Object constructor.
+   */
+  public function __construct()
+  {
+    parent::__construct('none', null);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Creates and returns a invisible form control.
    *
    * @param string $name The local name of the invisible form control.
