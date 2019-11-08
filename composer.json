@@ -9,7 +9,7 @@
   "license": "MIT",
   "require": {
     "php": ">=7.1.0",
-    "setbased/exception": "^1.0.0",
+    "setbased/exception": "^2.0.0",
     "setbased/abc-form": "^0.11.0",
     "setbased/abc-html": "^2.1.0",
     "setbased/abc-table-overview": "^0.11.0"
