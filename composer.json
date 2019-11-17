@@ -1,8 +1,8 @@
 {
-  "name": "setbased/abc-form-louver",
-  "description": "ABC-Framework: Louver controls",
+  "name": "plaisio/form-louver",
+  "description": "PhpPlaisio: Louver controls",
   "keywords": [
-    "ABC-Framework",
+    "PhpPlaisio",
     "Form",
     "Louver"
   ],
@@ -10,16 +10,16 @@
   "require": {
     "php": ">=7.1.0",
     "setbased/exception": "^2.0.0",
-    "setbased/abc-form": "^0.11.0",
-    "setbased/abc-html": "^2.1.0",
-    "setbased/abc-table-overview": "^0.11.0"
+    "plaisio/form": "^0.11.0",
+    "plaisio/helper-html": "^1.0.0",
+    "plaisio/table-overview": "^1.0.0"
   },
   "require-dev": {
     "phing/phing": "^2.0.0"
   },
   "autoload": {
     "psr-4": {
-      "SetBased\\Abc\\Form\\": "src/"
+      "Plaisio\\Form\\": "src/"
     }
   },
   "config": {

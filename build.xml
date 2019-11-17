@@ -1,4 +1,4 @@
-<project name="ABC-Framework" default="build" basedir=".">
+<project name="PhpPlaisio" default="build" basedir=".">
     <property name="BUILD_DIR" value="./build"/>
 
     <!-- Run composer update and executes various other updates -->
@@ -6,21 +6,9 @@
         <exec command="composer update" checkreturn="true" passthru="true"/>
     </target>
 
-    <!-- Runs ApiGen -->
-    <target name="apigen">
-        <exec command="apigen generate --todo --tree --source src --destination doc" passthru="true"
-              checkreturn="true"/>
-    </target>
-
     <!-- Runs all unit tests -->
     <target name="unit">
         <exec command="bin/phpunit --bootstrap=test/bootstrap.php test" passthru="true" checkreturn="true"/>
-    </target>
-
-    <!-- Runs PHP code sniffer -->
-    <target name="phpcs">
-        <exec command="bin/phpcs --standard=vendor/setbased/php-coding-standards/ruleset.xml lib/" passthru="true"
-              checkreturn="true"/>
     </target>
 
     <target name="build">

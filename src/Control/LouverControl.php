@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Control;
+namespace Plaisio\Form\Control;
 
-use SetBased\Abc\Helper\Html;
-use SetBased\Abc\Table\OverviewTable;
+use Plaisio\Helper\Html;
+use Plaisio\Table\OverviewTable;
 
 /**
  * A pseudo form control for generating (pseudo) form controls in a table format.
@@ -22,7 +22,7 @@ class LouverControl extends ComplexControl
   /**
    * Form control for the footer of the table.
    *
-   * @var control|null
+   * @var Control|null
    */
   protected $footerControl;
 

@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Control;
+namespace Plaisio\Form\Control;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\Form\SlatJoint\SlatJoint;
-use SetBased\Abc\Helper\Css;
-use SetBased\Abc\Helper\Html;
-use SetBased\Abc\Table\OverviewTable;
+use Plaisio\Form\SlatJoint\SlatJoint;
+use Plaisio\Helper\Css;
+use Plaisio\Helper\Html;
+use Plaisio\Kernel\Nub;
+use Plaisio\Table\OverviewTable;
 use SetBased\Exception\LogicException;
 
 /**
@@ -116,8 +116,8 @@ abstract class SlatControlFactory
   {
     if (OverviewTable::$responsiveMediaQuery===null) return;
 
-    Abc::$assets->cssAppendLine(OverviewTable::$responsiveMediaQuery);
-    Abc::$assets->cssAppendLine('{');
+    Nub::$assets->cssAppendLine(OverviewTable::$responsiveMediaQuery);
+    Nub::$assets->cssAppendLine('{');
     $format = '#%s tr.%s > td:nth-of-type(%d):before {content: %s;}';
     $index  = 1;
     foreach ($this->slatJoints as $factory)
@@ -125,14 +125,14 @@ abstract class SlatControlFactory
       $text = $factory->getHeaderText();
       for ($i = 0; $i<$factory->getColSpan(); $i++)
       {
-        Abc::$assets->cssAppendLine(sprintf($format, $id, OverviewTable::$class, $index, Css::txt2CssString($text)));
+        Nub::$assets->cssAppendLine(sprintf($format, $id, OverviewTable::$class, $index, Css::txt2CssString($text)));
         $index++;
       }
     }
 
-    Abc::$assets->cssAppendLine(sprintf($format, $id, OverviewTable::$class, $index, Css::txt2CssString('error')));
+    Nub::$assets->cssAppendLine(sprintf($format, $id, OverviewTable::$class, $index, Css::txt2CssString('error')));
 
-    Abc::$assets->cssAppendLine('}');
+    Nub::$assets->cssAppendLine('}');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Form\SlatJoint;
+namespace Plaisio\Form\SlatJoint;
 
-use SetBased\Abc\Form\Control\Control;
-use SetBased\Abc\Form\Control\RadioControl;
+use Plaisio\Form\Control\Control;
+use Plaisio\Form\Control\RadioControl;
 
 /**
  * Slat joint for table columns witch table cells with a input:radio form control.

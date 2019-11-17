@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Control;
+namespace Plaisio\Form\Control;
 
-use SetBased\Abc\Table\TableColumn\TableColumn;
+use Plaisio\Table\TableColumn\TableColumn;
 
 /**
  * Class SpanControl

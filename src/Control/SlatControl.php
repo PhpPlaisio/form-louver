@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Form\Control;
+namespace Plaisio\Form\Control;
 
-use SetBased\Abc\Helper\Html;
+use Plaisio\Helper\Html;
 
 /**
  * A pseudo form control for generating table rows in a Louver control.

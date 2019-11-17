@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Form\SlatJoint;
+namespace Plaisio\Form\SlatJoint;
 
-use SetBased\Abc\Form\Control\Control;
-use SetBased\Abc\Form\Control\ImageControl;
+use Plaisio\Form\Control\Control;
+use Plaisio\Form\Control\ImageControl;
 
 /**
  * Slat joint for table columns witch table cells with a input:image form control.

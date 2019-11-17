@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Form\SlatJoint;
+namespace Plaisio\Form\SlatJoint;
 
-use SetBased\Abc\Form\Control\ButtonControl;
-use SetBased\Abc\Form\Control\Control;
+use Plaisio\Form\Control\ButtonControl;
+use Plaisio\Form\Control\Control;
 
 /**
  * Slat joint for table columns witch table cells with a button form control.

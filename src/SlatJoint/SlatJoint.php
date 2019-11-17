@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Form\SlatJoint;
+namespace Plaisio\Form\SlatJoint;
 
-use SetBased\Abc\Form\Control\Control;
-use SetBased\Abc\Table\TableColumn\BaseTableColumn;
+use Plaisio\Form\Control\Control;
+use Plaisio\Table\TableColumn\BaseTableColumn;
 
 /**
  * Abstract parent class for slat joints.
