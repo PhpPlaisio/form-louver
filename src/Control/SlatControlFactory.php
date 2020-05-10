@@ -116,8 +116,8 @@ abstract class SlatControlFactory
   {
     if (OverviewTable::$responsiveMediaQuery===null) return;
 
-    Nub::$assets->cssAppendLine(OverviewTable::$responsiveMediaQuery);
-    Nub::$assets->cssAppendLine('{');
+    Nub::$nub->assets->cssAppendLine(OverviewTable::$responsiveMediaQuery);
+    Nub::$nub->assets->cssAppendLine('{');
     $format = '#%s tr.%s > td:nth-of-type(%d):before {content: %s;}';
     $index  = 1;
     foreach ($this->slatJoints as $factory)
@@ -125,14 +125,14 @@ abstract class SlatControlFactory
       $text = $factory->getHeaderText();
       for ($i = 0; $i<$factory->getColSpan(); $i++)
       {
-        Nub::$assets->cssAppendLine(sprintf($format, $id, OverviewTable::$class, $index, Css::txt2CssString($text)));
+        Nub::$nub->assets->cssAppendLine(sprintf($format, $id, OverviewTable::$class, $index, Css::txt2CssString($text)));
         $index++;
       }
     }
 
-    Nub::$assets->cssAppendLine(sprintf($format, $id, OverviewTable::$class, $index, Css::txt2CssString('error')));
+    Nub::$nub->assets->cssAppendLine(sprintf($format, $id, OverviewTable::$class, $index, Css::txt2CssString('error')));
 
-    Nub::$assets->cssAppendLine('}');
+    Nub::$nub->assets->cssAppendLine('}');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
