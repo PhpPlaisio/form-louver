@@ -110,11 +110,11 @@ abstract class SlatControlFactory
   /**
    * Generates CSS for responsive tables.
    *
-   * @param string $id The ID of the table.
+   * @param string|null $id The ID of the table.
    */
-  public function generateResponsiveCss(string $id): void
+  public function generateResponsiveCss(?string $id): void
   {
-    if (OverviewTable::$responsiveMediaQuery===null) return;
+    if (OverviewTable::$responsiveMediaQuery===null || $id===null) return;
 
     Nub::$nub->assets->cssAppendLine(OverviewTable::$responsiveMediaQuery);
     Nub::$nub->assets->cssAppendLine('{');
