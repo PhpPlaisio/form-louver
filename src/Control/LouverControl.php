@@ -5,6 +5,7 @@ namespace Plaisio\Form\Control;
 
 use Plaisio\Helper\Html;
 use Plaisio\Table\OverviewTable;
+use SetBased\Helper\Cast;
 
 /**
  * A pseudo form control for generating (pseudo) form controls in a table format.
@@ -127,7 +128,7 @@ class LouverControl extends ComplexControl
                                           array &$whiteListValues,
                                           array &$changedInputs): void
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode($this->name) : $this->name;
+    $submitName = ($this->obfuscator) ? $this->obfuscator->encode(Cast::toOptInt($this->name)) : $this->name;
 
     if (!empty($this->templateData))
     {
