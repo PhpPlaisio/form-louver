@@ -81,12 +81,11 @@ abstract class SlatControlFactory
   /**
    * Creates the form controls of a slat in a louver control.
    *
-   * @param LouverControl $louverControl The louver control.
-   * @param array         $data          An array from the nested arrays as set in LouverControl::setData.
+   * @param array $data An array from the nested arrays as set in LouverControl::setData.
    *
    * @return SlatControl
    */
-  abstract public function createRow(LouverControl $louverControl, array $data): SlatControl;
+  abstract public function createRow(array $data): SlatControl;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

@@ -14,6 +14,13 @@ class LouverControl extends ComplexControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Form control for the body of the table.
+   *
+   * @var ComplexControl
+   */
+  protected $bodyControl;
+
+  /**
    * The data on which the table row form controls must be created.
    *
    * @var array[]
@@ -76,7 +83,7 @@ class LouverControl extends ComplexControl
       // If required add template row to this louver control. This row will be used by JS for adding dynamically
       // additional rows to the louver control.
       $this->templateData[$this->templateKey] = 0;
-      $row                                    = $this->rowFactory->createRow($this, $this->templateData);
+      $row                                    = $this->rowFactory->createRow($this->templateData);
       $row->addClass('slat_template');
       $row->setAttrStyle('visibility: collapse');
       $row->prepare($this->submitName);
@@ -95,21 +102,24 @@ class LouverControl extends ComplexControl
     $ret .= $this->getHtmlHeader();
     $ret .= '</thead>';
 
-    if ($this->footerControl)
+    $ret .= Html::generateTag('tbody', ['class' => OverviewTable::$class]);
+    $ret .= $this->getHtmlBody();
+    $ret .= '</tbody>';
+
+    if ($this->footerControl!==null)
     {
-      $ret .= Html::generateTag('tfoot', ['class' => OverviewTable::$class]);
+      $ret .= Html::generateTag('tfoot', ['class' => [OverviewTable::$class, 'button-group']]);
       $ret .= '<tr>';
-      $ret .= Html::generateTag('td', ['colspan' => $this->rowFactory->getNumberOfColumns()]);
+      $ret .= Html::generateTag('td', ['colspan' => $this->rowFactory->getNumberOfColumns(),
+                                       'class'   => 'button-group']);
+      $ret .= '<div class="button-group">';
       $ret .= $this->footerControl->getHtml();
+      $ret .= '</div>';
       $ret .= '</td>';
       $ret .= '<td class="error"></td>';
       $ret .= '</tr>';
       $ret .= '</tfoot>';
     }
-
-    $ret .= Html::generateTag('tbody', ['class' => OverviewTable::$class]);
-    $ret .= $this->getHtmlBody();
-    $ret .= '</tbody>';
 
     $ret .= '</table>';
 
@@ -139,7 +149,7 @@ class LouverControl extends ComplexControl
         if (is_numeric($key) && $key<0)
         {
           $this->templateData[$this->templateKey] = $key;
-          $row                                    = $this->rowFactory->createRow($this, $this->templateData);
+          $row                                    = $this->rowFactory->createRow($this->templateData);
           $row->prepare($this->submitName);
         }
       }
@@ -156,9 +166,12 @@ class LouverControl extends ComplexControl
    */
   public function populate(): void
   {
+    $this->bodyControl = new ComplexControl('data');
+    $this->addFormControl($this->bodyControl);
+
     foreach ($this->data as $data)
     {
-      $this->rowFactory->createRow($this, $data);
+      $this->bodyControl->addFormControl($this->rowFactory->createRow($data));
     }
   }
 
@@ -219,21 +232,19 @@ class LouverControl extends ComplexControl
   {
     $ret = '';
     $i   = 0;
-    foreach ($this->controls as $control)
+    foreach ($this->bodyControl->controls as $control)
     {
-      if ($control!==$this->footerControl)
-      {
-        $control->addClass(OverviewTable::$class);
-        $control->addClass(($i % 2==0) ? 'even' : 'odd');
+      $control->addClass(OverviewTable::$class);
+      $control->addClass(($i % 2==0) ? 'even' : 'odd');
 
-        $ret .= $control->getHtml();
+      $ret .= $control->getHtml();
 
-        $i++;
-      }
+      $i++;
     }
 
     return $ret;
   }
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the inner HTML code of the thead element (e.g. column headers and filters) of this table form control.
