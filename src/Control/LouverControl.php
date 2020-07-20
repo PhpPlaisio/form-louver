@@ -5,7 +5,6 @@ namespace Plaisio\Form\Control;
 
 use Plaisio\Helper\Html;
 use Plaisio\Table\OverviewTable;
-use SetBased\Helper\Cast;
 
 /**
  * A pseudo form control for generating (pseudo) form controls in a table format.
@@ -18,28 +17,35 @@ class LouverControl extends ComplexControl
    *
    * @var ComplexControl
    */
-  protected $bodyControl;
+  private $bodyControl;
+
+  /**
+   * The name of the form control for the body of the table.
+   *
+   * @var string
+   */
+  private $bodyName = '';
 
   /**
    * The data on which the table row form controls must be created.
    *
    * @var array[]
    */
-  protected $data = [];
+  private $data = [];
 
   /**
    * Form control for the footer of the table.
    *
    * @var Control|null
    */
-  protected $footerControl;
+  private $footerControl;
 
   /**
    * Object for creating table row form controls.
    *
    * @var SlatControlFactory
    */
-  protected $rowFactory;
+  private $rowFactory;
 
   /**
    * The data for initializing the template row(s).
@@ -78,7 +84,7 @@ class LouverControl extends ComplexControl
 
     if (!empty($this->templateData))
     {
-      $this->setAttrData('slat-name', $this->submitName);
+      $this->setAttrData('slat-name', $this->bodyControl->submitName);
 
       // If required add template row to this louver control. This row will be used by JS for adding dynamically
       // additional rows to the louver control.
@@ -86,7 +92,8 @@ class LouverControl extends ComplexControl
       $row                                    = $this->rowFactory->createRow($this->templateData);
       $row->addClass('slat_template');
       $row->setAttrStyle('visibility: collapse');
-      $row->prepare($this->submitName);
+      $row->prepare($this->bodyControl->submitName);
+      $this->bodyControl->addFormControl($row);
     }
 
     $ret = $this->prefix;
@@ -138,19 +145,20 @@ class LouverControl extends ComplexControl
                                           array &$whiteListValues,
                                           array &$changedInputs): void
   {
-    $submitName = ($this->obfuscator) ? $this->obfuscator->encode(Cast::toOptInt($this->name)) : $this->name;
-
     if (!empty($this->templateData))
     {
+      $tmp = ($this->bodyControl->name!=='') ? $submittedValues[$this->bodyControl->name] : $submittedValues;
+
       $children       = $this->controls;
       $this->controls = [];
-      foreach ($submittedValues[$submitName] as $key => $row)
+      foreach ($tmp as $key => $row)
       {
         if (is_numeric($key) && $key<0)
         {
           $this->templateData[$this->templateKey] = $key;
           $row                                    = $this->rowFactory->createRow($this->templateData);
-          $row->prepare($this->submitName);
+          $row->prepare($this->bodyControl->name);
+          $this->bodyControl->addFormControl($row);
         }
       }
 
@@ -166,7 +174,7 @@ class LouverControl extends ComplexControl
    */
   public function populate(): void
   {
-    $this->bodyControl = new ComplexControl('data');
+    $this->bodyControl = new ComplexControl($this->bodyName);
     $this->addFormControl($this->bodyControl);
 
     foreach ($this->data as $data)
@@ -177,13 +185,32 @@ class LouverControl extends ComplexControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Sets the name of the form control for the body of the table.
+   *
+   * @param string $bodyName The name of the form control for the body of the table.
+   *
+   * @return self
+   */
+  public function setBodyName(string $bodyName): self
+  {
+    $this->bodyName = $bodyName;
+
+    return $this;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Sets the data for which this table form control must be generated.
    *
    * @param array[] $data
+   *
+   * @return self
    */
-  public function setData(array $data): void
+  public function setData(array $data): self
   {
     $this->data = $data;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -191,11 +218,15 @@ class LouverControl extends ComplexControl
    * Sets the footer form control of this table form control.
    *
    * @param Control $control
+   *
+   * @return self
    */
-  public function setFooterControl(Control $control): void
+  public function setFooterControl(Control $control): self
   {
     $this->footerControl = $control;
     $this->addFormControl($control);
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -203,10 +234,14 @@ class LouverControl extends ComplexControl
    * Sets the row factory for this table form control.
    *
    * @param SlatControlFactory $rowFactory
+   *
+   * @return self
    */
-  public function setRowFactory(SlatControlFactory $rowFactory): void
+  public function setRowFactory(SlatControlFactory $rowFactory): self
   {
     $this->rowFactory = $rowFactory;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -215,11 +250,15 @@ class LouverControl extends ComplexControl
    *
    * @param array  $data The data for initializing template row(s).
    * @param string $key  The key of the key in the template row.
+   *
+   * @return self
    */
-  public function setTemplate(array $data, string $key): void
+  public function setTemplate(array $data, string $key): self
   {
     $this->templateData = $data;
     $this->templateKey  = $key;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
