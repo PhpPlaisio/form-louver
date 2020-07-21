@@ -21,6 +21,13 @@ class LouverForm extends Form
   public static $maxTextSize = 80;
 
   /**
+   * The name of the louver form control.
+   *
+   * @var string
+   */
+  protected $bodyName = 'data';
+
+  /**
    * The data set.
    *
    * @var array[]|null
@@ -110,7 +117,7 @@ class LouverForm extends Form
     }
 
     $louver = $this->louverFieldSet->getLouverControl();
-    $louver->setBodyName('data')
+    $louver->setBodyName($this->bodyName)
            ->setRowFactory($this->factory)
            ->setData($this->data)
            ->populate();
@@ -119,6 +126,21 @@ class LouverForm extends Form
     {
       $this->factory->enableFilter();
     }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Sets the name of louver form control.
+   *
+   * @param string $bodyName The name.
+   *
+   * @return LouverForm
+   */
+  public function setBodyName(string $bodyName): self
+  {
+    $this->bodyName = $bodyName;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
