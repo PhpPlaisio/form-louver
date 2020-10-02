@@ -1,7 +1,5 @@
 /.idea/
-/bin/phing
-/bin/phpunit
+/bin/
 /composer.lock
 /doc/
 /vendor/
-
