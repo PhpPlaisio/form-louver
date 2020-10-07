@@ -2,4 +2,8 @@
 /bin/
 /composer.lock
 /doc/
+/node_modules
+/package-lock.json
 /vendor/
+/www/js/**/*.js
+/www/js/**/*.js.map

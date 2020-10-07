@@ -3,7 +3,14 @@
 
     <!-- Run composer update and executes various other updates -->
     <target name="update">
-        <exec command="composer update" checkreturn="true" passthru="true"/>
+        <exec executable="composer" checkreturn="true" passthru="true">
+            <arg value="--ansi"/>
+            <arg value="update"/>
+        </exec>
+        <exec executable="npm" checkreturn="true" passthru="true">
+            <arg value="--ansi"/>
+            <arg value="update"/>
+        </exec>
         <phing phingfile="build.xml" target="kernel" haltonfailure="true"/>
     </target>
 

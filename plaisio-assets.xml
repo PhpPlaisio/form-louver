@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assets>
+    <asset type="js">
+        <fileset dir="www/js">
+            <include name="**/*.ts"/>
+        </fileset>
+    </asset>
+    <root>www</root>
+</assets>
