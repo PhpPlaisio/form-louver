@@ -15,7 +15,7 @@ class ButtonSlatJoint extends SlatJoint
   /**
    * Object constructor.
    *
-   * @param string|int|null $header The header of this table column.
+   * @param string|int|null $header       The header of this table column.
    * @param bool            $headerIsHtml If and only if true the header is HTML code.
    */
   public function __construct($header, bool $headerIsHtml = false)
