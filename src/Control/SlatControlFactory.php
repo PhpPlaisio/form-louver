@@ -121,7 +121,7 @@ abstract class SlatControlFactory
     $index  = 1;
     foreach ($this->slatJoints as $factory)
     {
-      $text = $factory->getHeaderText();
+      $text = $factory->getHeader();
       for ($i = 0; $i<$factory->getColSpan(); $i++)
       {
         Nub::$nub->assets->cssAppendLine(sprintf($format, $id, OverviewTable::$class, $index, Css::txt2CssString($text)));

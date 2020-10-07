@@ -15,11 +15,12 @@ class ButtonSlatJoint extends SlatJoint
   /**
    * Object constructor.
    *
-   * @param string|int|null $headerText The header text of this table column.
+   * @param string|int|null $header The header of this table column.
+   * @param bool            $headerIsHtml If and only if true the header is HTML code.
    */
-  public function __construct($headerText)
+  public function __construct($header, bool $headerIsHtml = false)
   {
-    parent::__construct('control-button', $headerText);
+    parent::__construct('control-button', $header, $headerIsHtml);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
