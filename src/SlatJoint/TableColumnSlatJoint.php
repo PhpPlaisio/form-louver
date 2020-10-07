@@ -15,7 +15,7 @@ class TableColumnSlatJoint extends SlatJoint
    *
    * @var TableColumn
    */
-  private $tableColumn;
+  private TableColumn $tableColumn;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

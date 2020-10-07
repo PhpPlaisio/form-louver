@@ -21,21 +21,21 @@ abstract class SlatControlFactory
    *
    * @var bool
    */
-  protected $filter = false;
+  protected bool $filter = false;
 
   /**
    * The slat joints for the louver control of this slat control factory.
    *
    * @var SlatJoint[]
    */
-  protected $slatJoints;
+  protected array $slatJoints = [];
 
   /**
    * The number of columns in the under lying table of the slat form control.
    *
    * @var int
    */
-  private $numberOfColumns = 0;
+  private int $numberOfColumns = 0;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

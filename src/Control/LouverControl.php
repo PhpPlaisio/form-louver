@@ -17,49 +17,49 @@ class LouverControl extends ComplexControl
    *
    * @var ComplexControl
    */
-  private $bodyControl;
+  private ComplexControl $bodyControl;
 
   /**
    * The name of the form control for the body of the table.
    *
    * @var string
    */
-  private $bodyName = '';
+  private string $bodyName = '';
 
   /**
    * The data on which the table row form controls must be created.
    *
    * @var array[]
    */
-  private $data = [];
+  private array $data = [];
 
   /**
    * Form control for the footer of the table.
    *
    * @var Control|null
    */
-  private $footerControl;
+  private ?Control $footerControl = null;
 
   /**
    * Object for creating table row form controls.
    *
    * @var SlatControlFactory
    */
-  private $rowFactory;
+  private SlatControlFactory $rowFactory;
 
   /**
    * The data for initializing the template row(s).
    *
    * @var array|null
    */
-  private $templateData;
+  private ?array $templateData = null;
 
   /**
    * The key of the key in the template row.
    *
    * @var string|null
    */
-  private $templateKey;
+  private ?string $templateKey = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

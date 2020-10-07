@@ -18,38 +18,37 @@ class LouverForm extends Form
    *
    * @var int
    */
-  public static $maxTextSize = 80;
+  public static int $maxTextSize = 80;
 
   /**
    * The name of the louver form control.
    *
    * @var string
    */
-  protected $bodyName = 'data';
+  protected string $bodyName = 'data';
 
   /**
    * The data set.
    *
    * @var array[]|null
    */
-  protected $data = null;
+  protected ?array $data = null;
 
   /**
    * The slat control factory.
    *
    * @var SlatControlFactory|null
    */
-  protected $factory = null;
+  protected ?SlatControlFactory $factory = null;
 
   /**
    * The fieldset with visible form control.
    *
    * @var LouverFieldSet
    */
-  protected $louverFieldSet;
+  protected LouverFieldSet $louverFieldSet;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    *

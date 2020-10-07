@@ -16,21 +16,21 @@ class LouverFieldSet extends FieldSet
    *
    * @var string|null
    */
-  public static $class = 'louver';
+  public static ?string $class = 'louver';
 
   /**
    * The complex form control holding the buttons of this fieldset.
    *
    * @var ComplexControl|null
    */
-  private $buttonGroupControl = null;
+  private ?ComplexControl $buttonGroupControl = null;
 
   /**
    * The louver control of this fieldset.
    *
    * @var LouverControl
    */
-  private $louverControl;
+  private LouverControl $louverControl;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

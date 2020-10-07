@@ -12,9 +12,9 @@ class SlatControl extends ComplexControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @var Control;
+   * @var Control|null
    */
-  private $deleteControl;
+  private ?Control $deleteControl = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -54,7 +54,7 @@ class SlatControl extends ComplexControl
   {
     $valid = true;
 
-    if ($this->deleteControl)
+    if ($this->deleteControl!==null)
     {
       if (!$this->deleteControl->validateBase($invalidFormControls))
       {

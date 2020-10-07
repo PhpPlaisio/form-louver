@@ -16,12 +16,12 @@ class TableColumnControl extends Control
   /**
    * @var array
    */
-  protected $row;
+  protected array $row;
 
   /**
    * @var TableColumn
    */
-  protected $tableColumn;
+  protected TableColumn $tableColumn;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
