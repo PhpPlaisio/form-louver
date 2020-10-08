@@ -35,9 +35,10 @@ class CheckboxSlatJoint extends SlatJoint
   public function addMasterCheckbox(bool $checked): void
   {
     $id                 = Html::getAutoId();
-    $this->header       = Html::generateVoidElement('input', ['type'  => 'checkbox',
-                                                              'class' => [OverviewTable::$class, 'master-checkbox'],
-                                                              'id'    => $id]);
+    $this->header       = Html::generateVoidElement('input',
+                                                    ['type'  => 'checkbox',
+                                                     'class' => [OverviewTable::$class, 'master-checkbox', 'no-sort'],
+                                                     'id'    => $id]);
     $this->headerIsHtml = true;
 
     Nub::$nub->assets->jsAdmFunctionCall(__CLASS__, 'addMasterCheckbox', [$id, 'checked' => $checked]);
