@@ -94,10 +94,19 @@ export class CheckboxSlatJoint
     {
       if (row.style.display === '')
       {
-        const current = $(row).children().eq(this.index).find('input:checkbox').prop('checked');
-        if (current !== checked)
+        const $checkbox = $(row).children().eq(this.index).find('input:checkbox');
+        if (!$checkbox.prop('disabled'))
         {
-          $(row).children().eq(this.index).find('input:checkbox').prop('checked', checked).trigger('change');
+          const current = $checkbox.prop('checked');
+          if (current !== checked)
+          {
+            $(row).children()
+                  .eq(this.index)
+                  .find('input:checkbox')
+                  .prop('checked', checked)
+                  .prop('disabled', false)
+                  .trigger('change');
+          }
         }
       }
     }
@@ -115,14 +124,18 @@ export class CheckboxSlatJoint
     const rows = this.$master.closest('table').find('tbody').first().children('tr').get();
     for (const row of rows)
     {
-      const checked = $(row).children().eq(this.index).find('input:checkbox').prop('checked');
-      if (checked)
+      const $checkbox = $(row).children().eq(this.index).find('input:checkbox');
+      if (!$checkbox.prop('disabled'))
       {
-        count1++;
-      }
-      else
-      {
-        count0++;
+        const checked = $checkbox.prop('checked');
+        if (checked)
+        {
+          count1++;
+        }
+        else
+        {
+          count0++;
+        }
       }
     }
 
