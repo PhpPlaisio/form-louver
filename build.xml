@@ -12,6 +12,13 @@
             <arg value="update"/>
         </exec>
         <phing phingfile="build.xml" target="kernel" haltonfailure="true"/>
+
+        <!-- Show outdated packages -->
+        <exec executable="composer" checkreturn="true" passthru="true">
+            <arg value="--ansi"/>
+            <arg value="outdated"/>
+            <arg value="--direct"/>
+        </exec>
     </target>
 
     <target name="kernel">
