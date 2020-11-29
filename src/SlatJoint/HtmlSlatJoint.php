@@ -4,12 +4,12 @@ declare(strict_types=1);
 namespace Plaisio\Form\SlatJoint;
 
 use Plaisio\Form\Control\Control;
-use Plaisio\Form\Control\DivControl;
+use Plaisio\Form\Control\HtmlControl;
 
 /**
- * Slat joint for table columns witch table cells with a div element.
+ * Slat joint for table columns with table cells with arbitrary HTML text.
  */
-class DivSlatJoint extends SlatJoint
+class HtmlSlatJoint extends SlatJoint
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -20,20 +20,20 @@ class DivSlatJoint extends SlatJoint
    */
   public function __construct($header, bool $headerIsHtml = false)
   {
-    parent::__construct('control-div', $header, $headerIsHtml);
+    parent::__construct('control-html', $header, $headerIsHtml);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Creates and returns a div form control.
+   * Creates and returns an HTML form control.
    *
-   * @param string $name The local name of the div form control.
+   * @param string $name The local name of the text form control.
    *
    * @return Control
    */
   public function createControl(string $name): Control
   {
-    return new DivControl($name);
+    return new HtmlControl($name);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
