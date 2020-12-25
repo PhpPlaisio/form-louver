@@ -16,7 +16,7 @@ class TextSlatJoint extends SlatJoint
    * Object constructor.
    *
    * @param string|int|null $header       The header text of this table column.
-   * @param bool            $headerIsHtml If and only if true the header is HTML code.
+   * @param bool            $headerIsHtml Whether the header is HTML code.
    */
   public function __construct($header, bool $headerIsHtml = false)
   {
@@ -27,7 +27,7 @@ class TextSlatJoint extends SlatJoint
   /**
    * Creates and returns a text form control.
    *
-   * @param string $name The local name of the text form control.
+   * @param string $name The name of the text form control.
    *
    * @return Control
    */

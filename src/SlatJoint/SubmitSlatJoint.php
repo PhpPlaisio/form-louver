@@ -7,7 +7,7 @@ use Plaisio\Form\Control\Control;
 use Plaisio\Form\Control\SubmitControl;
 
 /**
- * Slat joint for table columns witch table cells with a input:submit form control.
+ * Slat joint for table columns with table cells with a input:submit form control.
  */
 class SubmitSlatJoint extends SlatJoint
 {
@@ -16,18 +16,18 @@ class SubmitSlatJoint extends SlatJoint
    * Object constructor.
    *
    * @param string|int|null $header       The header text of this table column.
-   * @param bool            $headerIsHtml If and only if true the header is HTML code.
+   * @param bool            $headerIsHtml Whether the header is HTML code.
    */
   public function __construct($header, bool $headerIsHtml = false)
   {
-    parent::__construct('control-reset', $header, $headerIsHtml);
+    parent::__construct('control-submit', $header, $headerIsHtml);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Creates and returns a reset form control.
    *
-   * @param string $name The local name of the submit form control.
+   * @param string $name The name of the submit form control.
    *
    * @return Control
    */

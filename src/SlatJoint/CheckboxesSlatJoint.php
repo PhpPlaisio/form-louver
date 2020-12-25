@@ -7,7 +7,7 @@ use Plaisio\Form\Control\CheckboxesControl;
 use Plaisio\Form\Control\Control;
 
 /**
- * Slat joint for table columns witch table cells with a checkboxes form control.
+ * Slat joint for table columns with table cells with a checkboxes form control.
  */
 class CheckboxesSlatJoint extends SlatJoint
 {
@@ -16,7 +16,7 @@ class CheckboxesSlatJoint extends SlatJoint
    * Object constructor.
    *
    * @param string|int|null $header       The header text of this table column.
-   * @param bool            $headerIsHtml If and only if true the header is HTML code.
+   * @param bool            $headerIsHtml Whether the header is HTML code.
    */
   public function __construct($header, bool $headerIsHtml = false)
   {
@@ -27,7 +27,7 @@ class CheckboxesSlatJoint extends SlatJoint
   /**
    * Creates and returns a checkboxes form control.
    *
-   * @param string $name The local name of the checkboxes form control.
+   * @param string $name The name of the checkboxes form control.
    *
    * @return Control
    */

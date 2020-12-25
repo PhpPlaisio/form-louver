@@ -34,7 +34,7 @@ class TableColumnSlatJoint extends SlatJoint
   /**
    * Creates and returns a button form control.
    *
-   * @param string $name The local name of the button form control.
+   * @param string $name The name of the button form control.
    *
    * @return Control
    */

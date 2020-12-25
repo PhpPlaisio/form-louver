@@ -3,48 +3,37 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\SlatJoint;
 
-use Plaisio\Form\Control\ButtonControl;
 use Plaisio\Form\Control\Control;
+use Plaisio\Form\Control\IntegerControl;
 
 /**
- * Slat joint for table columns with table cells with a button form control.
+ * Slat joint for table columns with table cells with an integer form control.
  */
-class ButtonSlatJoint extends SlatJoint
+class IntegerSlatJoint extends SlatJoint
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
-   * @param string|int|null $header       The header of this table column.
+   * @param string|int|null $header       The header text of this table column.
    * @param bool            $headerIsHtml Whether the header is HTML code.
    */
   public function __construct($header, bool $headerIsHtml = false)
   {
-    parent::__construct('control-button', $header, $headerIsHtml);
+    parent::__construct('control-integer', $header, $headerIsHtml);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Creates and returns a button form control.
+   * Creates and returns an integer form control.
    *
-   * @param string $name The name of the button form control.
+   * @param string $name The name of the integer form control.
    *
    * @return Control
    */
   public function createControl(string $name): Control
   {
-    return new ButtonControl($name);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns HTML code (including opening and closing th tags) for the table filter cell.
-   *
-   * @return string
-   */
-  public function getHtmlColumnFilter(): string
-  {
-    return '';
+    return new IntegerControl($name);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

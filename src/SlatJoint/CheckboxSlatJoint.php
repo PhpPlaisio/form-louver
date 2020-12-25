@@ -10,7 +10,7 @@ use Plaisio\Kernel\Nub;
 use Plaisio\Table\OverviewTable;
 
 /**
- * Slat joint for table columns witch table cells with a (single) checkbox form control.
+ * Slat joint for table columns with table cells with a (single) checkbox form control.
  */
 class CheckboxSlatJoint extends SlatJoint
 {
@@ -19,7 +19,7 @@ class CheckboxSlatJoint extends SlatJoint
    * Object constructor.
    *
    * @param string|int|null $header       The header text of this table column.
-   * @param bool            $headerIsHtml If and only if true the header is HTML code.
+   * @param bool            $headerIsHtml Whether the header is HTML code.
    */
   public function __construct($header, bool $headerIsHtml = false)
   {
@@ -48,7 +48,7 @@ class CheckboxSlatJoint extends SlatJoint
   /**
    * Creates and returns a checkbox form control.
    *
-   * @param string $name The local name of the checkbox form control.
+   * @param string $name The name of the checkbox form control.
    *
    * @return Control
    */

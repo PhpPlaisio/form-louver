@@ -7,7 +7,7 @@ use Plaisio\Form\Control\Control;
 use Plaisio\Form\Control\PasswordControl;
 
 /**
- * Slat joint for table columns witch table cells with a input:password form control.
+ * Slat joint for table columns with table cells with a input:password form control.
  */
 class PasswordSlatJoint extends SlatJoint
 {
@@ -16,7 +16,7 @@ class PasswordSlatJoint extends SlatJoint
    * Object constructor.
    *
    * @param string|int|null $header       The header text of this table column.
-   * @param bool            $headerIsHtml If and only if true the header is HTML code.
+   * @param bool            $headerIsHtml Whether the header is HTML code.
    */
   public function __construct($header, bool $headerIsHtml = false)
   {
@@ -27,7 +27,7 @@ class PasswordSlatJoint extends SlatJoint
   /**
    * Creates and returns a password form control.
    *
-   * @param string $name The local name of the password form control.
+   * @param string $name The name of the password form control.
    *
    * @return Control
    */

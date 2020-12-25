@@ -7,7 +7,7 @@ use Plaisio\Form\Control\ConstantControl;
 use Plaisio\Form\Control\Control;
 
 /**
- * Slat joint for table columns witch table cells with a constant form controls.
+ * Slat joint for table columns with table cells with a constant form controls.
  */
 class ConstantSlatJoint extends SlatJoint
 {
@@ -24,7 +24,7 @@ class ConstantSlatJoint extends SlatJoint
   /**
    * Creates and returns a constant form control.
    *
-   * @param string $name The local name of the constant form control.
+   * @param string $name The name of the constant form control.
    *
    * @return Control
    */

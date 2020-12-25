@@ -7,7 +7,7 @@ use Plaisio\Form\Control\Control;
 use Plaisio\Form\Control\FileControl;
 
 /**
- * Slat joint for table columns witch table cells with a input:file form control.
+ * Slat joint for table columns with table cells with a input:file form control.
  */
 class FileSlatJoint extends SlatJoint
 {
@@ -16,7 +16,7 @@ class FileSlatJoint extends SlatJoint
    * Object constructor.
    *
    * @param string|int|null $header       The header text of this table column.
-   * @param bool            $headerIsHtml If and only if true the header is HTML code.
+   * @param bool            $headerIsHtml Whether the header is HTML code.
    */
   public function __construct($header, bool $headerIsHtml = false)
   {
@@ -27,7 +27,7 @@ class FileSlatJoint extends SlatJoint
   /**
    * Creates and returns a file form control.
    *
-   * @param string $name The local name of the file form control.
+   * @param string $name The name of the file form control.
    *
    * @return Control
    */

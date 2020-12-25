@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
+use Plaisio\Form\Walker\LoadWalker;
 use Plaisio\Helper\Html;
 use Plaisio\Table\OverviewTable;
 
@@ -141,13 +142,11 @@ class LouverControl extends ComplexControl
   /**
    * @inheritdoc
    */
-  public function loadSubmittedValuesBase(array $submittedValues,
-                                          array &$whiteListValues,
-                                          array &$changedInputs): void
+  public function loadSubmittedValuesBase(LoadWalker $walker): void
   {
     if (!empty($this->templateData))
     {
-      $tmp = ($this->bodyControl->name!=='') ? $submittedValues[$this->bodyControl->name] : $submittedValues;
+      $tmp = $walker->getSubmittedValue($this->bodyControl->name);
 
       $children       = $this->controls;
       $this->controls = [];
@@ -165,7 +164,7 @@ class LouverControl extends ComplexControl
       $this->controls = array_merge($this->controls, $children);
     }
 
-    parent::loadSubmittedValuesBase($submittedValues, $whiteListValues, $changedInputs);
+    parent::loadSubmittedValuesBase($walker);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

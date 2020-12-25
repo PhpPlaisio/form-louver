@@ -7,7 +7,7 @@ use Plaisio\Form\Control\Control;
 use Plaisio\Form\Control\InvisibleControl;
 
 /**
- * Slat joint for table columns witch table cells with a (pseudo) invisible form controls.
+ * Slat joint for table columns with table cells with a (pseudo) invisible form controls.
  */
 class InvisibleSlatJoint extends SlatJoint
 {
@@ -24,7 +24,7 @@ class InvisibleSlatJoint extends SlatJoint
   /**
    * Creates and returns a invisible form control.
    *
-   * @param string $name The local name of the invisible form control.
+   * @param string $name The name of the invisible form control.
    *
    * @return Control
    */

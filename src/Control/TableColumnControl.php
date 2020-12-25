@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
+use Plaisio\Form\Walker\LoadWalker;
 use Plaisio\Table\TableColumn\TableColumn;
 
 /**
@@ -24,6 +25,7 @@ class TableColumnControl extends Control
   protected TableColumn $tableColumn;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * @inheritdoc
    */
@@ -43,6 +45,15 @@ class TableColumnControl extends Control
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * @inheritdoc
+   */
+  public function getSetValuesBase(array &$values): void
+  {
+    // Nothing to do.
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns null.
    *
    * @return null
@@ -50,6 +61,15 @@ class TableColumnControl extends Control
   public function getSubmittedValue()
   {
     return null;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritdoc
+   */
+  public function mergeValuesBase(array $values): void
+  {
+    // Nothing to do.
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -87,9 +107,7 @@ class TableColumnControl extends Control
   /**
    * @inheritdoc
    */
-  protected function loadSubmittedValuesBase(array $submittedValues,
-                                             array &$whiteListValues,
-                                             array &$changedInputs): void
+  protected function loadSubmittedValuesBase(LoadWalker $walker): void
   {
     // Nothing to do.
   }

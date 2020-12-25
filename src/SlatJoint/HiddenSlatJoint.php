@@ -7,7 +7,7 @@ use Plaisio\Form\Control\Control;
 use Plaisio\Form\Control\HiddenControl;
 
 /**
- * Slat joint for table columns witch table cells with a input:hidden form control.
+ * Slat joint for table columns with table cells with a input:hidden form control.
  */
 class HiddenSlatJoint extends SlatJoint
 {
@@ -24,7 +24,7 @@ class HiddenSlatJoint extends SlatJoint
   /**
    * Creates and returns a hidden form control.
    *
-   * @param string $name The local name of the hidden form control.
+   * @param string $name The name of the hidden form control.
    *
    * @return Control
    */
