@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
+use Plaisio\Form\Walker\PrepareWalker;
 use Plaisio\Kernel\Nub;
 
 /**
@@ -44,8 +45,6 @@ class LouverFieldSet extends FieldSet
 
     $this->louverControl = new LouverControl();
     $this->addFormControl($this->louverControl);
-
-    $this->addClass('louver');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -105,14 +104,14 @@ class LouverFieldSet extends FieldSet
   /**
    * @inheritDoc
    */
-  public function prepare(string $parentSubmitName): void
+  public function prepare(PrepareWalker $walker): void
   {
     if ($this->buttonGroupControl!==null)
     {
       $this->louverControl->setFooterControl($this->buttonGroupControl);
     }
 
-    parent::prepare($parentSubmitName);
+    parent::prepare($walker);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

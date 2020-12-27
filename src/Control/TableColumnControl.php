@@ -25,20 +25,10 @@ class TableColumnControl extends Control
   protected TableColumn $tableColumn;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * @inheritdoc
    */
   public function getHtml(): string
-  {
-    return '';
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritdoc
-   */
-  public function getHtmlTableCell(): string
   {
     return $this->tableColumn->getHtmlCell($this->row);
   }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Walker\LoadWalker;
+use Plaisio\Form\Walker\PrepareWalker;
 use Plaisio\Helper\Html;
 use Plaisio\Table\OverviewTable;
 
@@ -40,6 +41,13 @@ class LouverControl extends ComplexControl
    * @var Control|null
    */
   private ?Control $footerControl = null;
+
+  /**
+   * The CSS module class of form elements.
+   *
+   * @var string
+   */
+  private string $moduleClass;
 
   /**
    * Object for creating table row form controls.
@@ -85,16 +93,18 @@ class LouverControl extends ComplexControl
 
     if (!empty($this->templateData))
     {
-      $this->setAttrData('slat-name', $this->bodyControl->submitName);
+      $walker = new PrepareWalker($this->submitName, $this->moduleClass);
 
       // If required add template row to this louver control. This row will be used by JS for adding dynamically
       // additional rows to the louver control.
       $this->templateData[$this->templateKey] = 0;
       $row                                    = $this->rowFactory->createRow($this->templateData);
-      $row->addClass('slat_template');
+      $row->addClass('slat-template');
       $row->setAttrStyle('visibility: collapse');
-      $row->prepare($this->bodyControl->submitName);
+      $row->prepare($walker);
       $this->bodyControl->addFormControl($row);
+
+      $this->setAttrData('slat-name', $this->bodyControl->submitName);
     }
 
     $ret = $this->prefix;
@@ -119,8 +129,8 @@ class LouverControl extends ComplexControl
       $ret .= Html::generateTag('tfoot', ['class' => [OverviewTable::$class, 'button-group']]);
       $ret .= '<tr>';
       $ret .= Html::generateTag('td', ['colspan' => $this->rowFactory->getNumberOfColumns(),
-                                       'class'   => 'button-group']);
-      $ret .= '<div class="button-group">';
+                                       'class'   => [OverviewTable::$class, 'button-group']]);
+      $ret .= Html::generateTag('div', ['class' => [OverviewTable::$class, 'button-group']]);
       $ret .= $this->footerControl->getHtml();
       $ret .= '</div>';
       $ret .= '</td>';
@@ -146,7 +156,8 @@ class LouverControl extends ComplexControl
   {
     if (!empty($this->templateData))
     {
-      $tmp = $walker->getSubmittedValue($this->bodyControl->name);
+      $tmp           = $walker->getSubmittedValue($this->bodyControl->name);
+      $prepareWalker = new PrepareWalker($this->submitName, $this->moduleClass);
 
       $children       = $this->controls;
       $this->controls = [];
@@ -156,7 +167,7 @@ class LouverControl extends ComplexControl
         {
           $this->templateData[$this->templateKey] = $key;
           $row                                    = $this->rowFactory->createRow($this->templateData);
-          $row->prepare($this->bodyControl->name);
+          $row->prepare($prepareWalker);
           $this->bodyControl->addFormControl($row);
         }
       }
@@ -180,6 +191,19 @@ class LouverControl extends ComplexControl
     {
       $this->bodyControl->addFormControl($this->rowFactory->createRow($data));
     }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritdoc
+   */
+  public function prepare(PrepareWalker $walker): void
+  {
+    parent::prepare($walker);
+
+    $this->moduleClass = $walker->getModuleClass();
+    $this->addClass($this->moduleClass);
+    $this->addClass($this->moduleClass.'-louver');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

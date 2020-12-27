@@ -59,7 +59,8 @@ class LouverForm extends Form
     parent::__construct($name);
 
     $this->louverFieldSet = new LouverFieldSet();
-    $this->addFieldSet($this->louverFieldSet);
+    $this->addFieldSet($this->louverFieldSet)
+         ->setModuleClass('input-table');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

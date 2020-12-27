@@ -22,13 +22,42 @@ class SlatControl extends ComplexControl
    */
   public function getHtml(): string
   {
+    $childAttributes  = ['class' => LouverFieldSet::$class];
+    $errorAttributes  = ['class' => [LouverFieldSet::$class, LouverFieldSet::$class.'-error']];
+    $errorsAttributes = ['class' => [LouverFieldSet::$class, LouverFieldSet::$class.'-errors']];
+
     // Create start tag of table row.
     $ret = Html::generateTag('tr', $this->attributes);
 
     // Create table cells.
     foreach ($this->controls as $control)
     {
-      $ret .= $control->getHtmlTableCell();
+      $errors = $control->getErrorMessages();
+
+      if (!$control->isHidden())
+      {
+        if (is_a($control, TableColumnControl::class))
+        {
+          $ret .= $control->getHtml();
+        }
+        else
+        {
+          $ret .= Html::generateTag('td', $childAttributes);
+          $ret .= $control->getHtml();
+          if (!empty($errors))
+          {
+            $ret .= Html::generateTag('div', $errorsAttributes);
+            foreach ($errors as $error)
+            {
+              $ret .= Html::generateTag('span', $errorAttributes);
+              $ret .= Html::txt2Html($error);
+              $ret .= '</span>';
+            }
+            $ret .= '</div>';
+          }
+          $ret .= '</td>';
+        }
+      }
     }
 
     // Create table cell with error message, if any.
@@ -112,22 +141,25 @@ class SlatControl extends ComplexControl
 
     if (!$this->isValid())
     {
-      $error_messages = $this->getErrorMessages(true);
+      $errorAttributes  = ['class' => [LouverFieldSet::$class, LouverFieldSet::$class.'-error']];
 
-      $ret .= '<td class="error">';
-      if (!empty($error_messages))
+      $errors = $this->getErrorMessages();
+
+      $ret .= '<td class="overview-table overview-table-error">';
+      if (!empty($errors))
       {
-        foreach ($error_messages as $message)
+        foreach ($errors as $error)
         {
-          $ret .= Html::txt2Html($message);
-          $ret .= '<br/>';
+          $ret .= Html::generateTag('span', $errorAttributes);
+          $ret .= Html::txt2Html($error);
+          $ret .= '</span>';
         }
       }
       $ret .= '</td>';
     }
     else
     {
-      $ret .= '<td class="error"></td>';
+      $ret .= '<td class="overview-table overview-table-error"></td>';
     }
 
     return $ret;
