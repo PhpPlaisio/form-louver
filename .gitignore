@@ -8,6 +8,7 @@
 /vendor/
 /www/js/**/*.js
 /www/js/**/*.js.map
-/www/js/Plaisio/Form
+/www/js/Plaisio/Form/Form.ts
+/www/js/Plaisio/Form/FormPackage.ts
 /www/js/Plaisio/Helper
 /www/js/Plaisio/Table
