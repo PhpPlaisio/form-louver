@@ -4,8 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form;
 
 use Plaisio\Form\Control\LouverFieldSet;
-use Plaisio\Form\Control\SlatControlFactory;
-use SetBased\Exception\LogicException;
+use Plaisio\Form\SlatJointFactory\SlatControlFactory;
 
 /**
  * Form with a LouverFieldSet fieldset.
@@ -21,34 +20,14 @@ class LouverForm extends Form
   public static int $maxTextSize = 80;
 
   /**
-   * The name of the louver form control.
-   *
-   * @var string
-   */
-  protected string $bodyName = 'data';
-
-  /**
-   * The data set.
-   *
-   * @var array[]|null
-   */
-  protected ?array $data = null;
-
-  /**
-   * The slat control factory.
-   *
-   * @var SlatControlFactory|null
-   */
-  protected ?SlatControlFactory $factory = null;
-
-  /**
-   * The fieldset with visible form control.
+   * The fieldset with visible form controls.
    *
    * @var LouverFieldSet
    */
   protected LouverFieldSet $louverFieldSet;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    *
@@ -59,8 +38,7 @@ class LouverForm extends Form
     parent::__construct($name);
 
     $this->louverFieldSet = new LouverFieldSet();
-    $this->addFieldSet($this->louverFieldSet)
-         ->setModuleClass('input-table');
+    $this->addFieldSet($this->louverFieldSet);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -100,33 +78,24 @@ class LouverForm extends Form
   {
     return $this->louverFieldSet;
   }
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Populates the form.
+   * Populates this table form control with table row form controls (based on the data set with setData).
+   *
+   * @param array $rows The data shown in the louver fieldset.
+   *
+   * @return $this
    */
-  public function populate(): void
+  public function populate(array $rows): self
   {
-    if ($this->factory===null)
+    $this->louverFieldSet->populate($rows);
+
+    if (count($rows)>3)
     {
-      throw new LogicException('Factory is not set');
+      $this->louverFieldSet->getTable()->enableFilter();
     }
 
-    if ($this->data===null)
-    {
-      throw new LogicException('Data set is not set');
-    }
-
-    $louver = $this->louverFieldSet->getLouverControl();
-    $louver->setBodyName($this->bodyName)
-           ->setRowFactory($this->factory)
-           ->setData($this->data)
-           ->populate();
-
-    if (count($this->data)>=3)
-    {
-      $this->factory->enableFilter();
-    }
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -135,26 +104,11 @@ class LouverForm extends Form
    *
    * @param string $bodyName The name.
    *
-   * @return LouverForm
+   * @return $this
    */
   public function setBodyName(string $bodyName): self
   {
-    $this->bodyName = $bodyName;
-
-    return $this;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Sets the data set.
-   *
-   * @param array[]|null $data The data set.
-   *
-   * @return LouverForm
-   */
-  public function setData(?array $data): self
-  {
-    $this->data = $data;
+    $this->louverFieldSet->setBodyName($bodyName);
 
     return $this;
   }
@@ -165,11 +119,11 @@ class LouverForm extends Form
    *
    * @param SlatControlFactory|null $factory The slat control factory.
    *
-   * @return LouverForm
+   * @return $this
    */
-  public function setFactory(SlatControlFactory $factory): self
+  public function setRowFactory(SlatControlFactory $factory): self
   {
-    $this->factory = $factory;
+    $this->louverFieldSet->setRowFactory($factory);
 
     return $this;
   }
@@ -181,11 +135,11 @@ class LouverForm extends Form
    * @param array  $data The data for initializing template row(s).
    * @param string $key  The key of the key in the template row.
    *
-   * @return LouverForm
+   * @return $this
    */
   public function setTemplate(array $data, string $key): self
   {
-    $this->louverFieldSet->getLouverControl()->setTemplate($data, $key);
+    $this->louverFieldSet->setTemplate($data, $key);
 
     return $this;
   }

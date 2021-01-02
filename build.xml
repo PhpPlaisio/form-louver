@@ -11,6 +11,11 @@
             <arg value="--ansi"/>
             <arg value="update"/>
         </exec>
+        <exec executable="bin/plaisio" checkreturn="true" passthru="true">
+            <arg value="--ansi"/>
+            <arg value="plaisio:assets"/>
+        </exec>
+        <phing phingfile="build.xml" target="code-generation" haltonfailure="true"/>
         <phing phingfile="build.xml" target="kernel" haltonfailure="true"/>
 
         <!-- Show outdated packages -->
@@ -18,6 +23,18 @@
             <arg value="--ansi"/>
             <arg value="outdated"/>
             <arg value="--direct"/>
+        </exec>
+        <exec executable="npm" checkreturn="true" passthru="true">
+            <arg value="--ansi"/>
+            <arg value="outdated"/>
+        </exec>
+    </target>
+
+    <target name="code-generation">
+        <exec executable="bin/plaisio" checkreturn="true" passthru="true">
+            <arg value="--ansi"/>
+            <arg value="plaisio:type-script-automator"/>
+            <arg value="--once"/>
         </exec>
     </target>
 

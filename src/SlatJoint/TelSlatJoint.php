@@ -5,22 +5,25 @@ namespace Plaisio\Form\SlatJoint;
 
 use Plaisio\Form\Control\Control;
 use Plaisio\Form\Control\TelControl;
+use Plaisio\Helper\Html;
+use Plaisio\Table\Walker\RenderWalker;
 
 /**
  * Slat joint for table columns with table cells with a input:tel form control for phone numbers.
  */
-class TelSlatJoint extends SlatJoint
+class TelSlatJoint extends UniSlatJoint
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
+   * @param string          $name         The name of this slat joint.
    * @param string|int|null $header       The header text of this table column.
    * @param bool            $headerIsHtml Whether the header is HTML code.
    */
-  public function __construct($header, bool $headerIsHtml = false)
+  public function __construct(string $name, $header, bool $headerIsHtml = false)
   {
-    parent::__construct('control-url', $header, $headerIsHtml);
+    parent::__construct($name, 'control-tel', $header, $headerIsHtml);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -34,6 +37,17 @@ class TelSlatJoint extends SlatJoint
   public function createControl(string $name): Control
   {
     return new TelControl($name);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritdoc
+   */
+  public function getHtmlCell(RenderWalker $walker, array $row): string
+  {
+    $inner = $this->getInnerHtml($row);
+
+    return Html::generateElement('td', ['class' => $walker->getClasses('control-tel')], $inner, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

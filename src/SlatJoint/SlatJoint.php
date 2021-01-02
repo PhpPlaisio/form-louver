@@ -4,12 +4,12 @@ declare(strict_types=1);
 namespace Plaisio\Form\SlatJoint;
 
 use Plaisio\Form\Control\Control;
-use Plaisio\Table\TableColumn\BaseTableColumn;
+use Plaisio\Table\TableColumn\TableColumn;
 
 /**
  * Abstract parent class for slat joints.
  */
-abstract class SlatJoint extends BaseTableColumn
+interface SlatJoint extends TableColumn
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -19,7 +19,15 @@ abstract class SlatJoint extends BaseTableColumn
    *
    * @return Control
    */
-  abstract public function createControl(string $name): Control;
+  public function createControl(string $name): Control;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the name of this slat joint.
+   *
+   * @return string
+   */
+  public function getName(): string;
 
   //--------------------------------------------------------------------------------------------------------------------
 }

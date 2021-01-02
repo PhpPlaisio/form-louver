@@ -5,22 +5,25 @@ namespace Plaisio\Form\SlatJoint;
 
 use Plaisio\Form\Control\Control;
 use Plaisio\Form\Control\SubmitControl;
+use Plaisio\Helper\Html;
+use Plaisio\Table\Walker\RenderWalker;
 
 /**
  * Slat joint for table columns with table cells with a input:submit form control.
  */
-class SubmitSlatJoint extends SlatJoint
+class SubmitSlatJoint extends UniSlatJoint
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
+   * @param string          $name         The name of this slat joint.
    * @param string|int|null $header       The header text of this table column.
    * @param bool            $headerIsHtml Whether the header is HTML code.
    */
-  public function __construct($header, bool $headerIsHtml = false)
+  public function __construct(string $name, $header, bool $headerIsHtml = false)
   {
-    parent::__construct('control-submit', $header, $headerIsHtml);
+    parent::__construct($name, 'control-submit', $header, $headerIsHtml);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -38,13 +41,13 @@ class SubmitSlatJoint extends SlatJoint
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns HTML code (including opening and closing th tags) for the table filter cell.
-   *
-   * @return string
+   * @inheritdoc
    */
-  public function getHtmlColumnFilter(): string
+  public function getHtmlCell(RenderWalker $walker, array $row): string
   {
-    return '<td></td>';
+    $inner = $this->getInnerHtml($row);
+
+    return Html::generateElement('td', ['class' => $walker->getClasses('control-submit')], $inner, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

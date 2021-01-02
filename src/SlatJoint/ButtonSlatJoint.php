@@ -5,22 +5,25 @@ namespace Plaisio\Form\SlatJoint;
 
 use Plaisio\Form\Control\ButtonControl;
 use Plaisio\Form\Control\Control;
+use Plaisio\Helper\Html;
+use Plaisio\Table\Walker\RenderWalker;
 
 /**
  * Slat joint for table columns with table cells with a button form control.
  */
-class ButtonSlatJoint extends SlatJoint
+class ButtonSlatJoint extends UniSlatJoint
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
+   * @param string          $name         The name of this slat joint.
    * @param string|int|null $header       The header of this table column.
    * @param bool            $headerIsHtml Whether the header is HTML code.
    */
-  public function __construct($header, bool $headerIsHtml = false)
+  public function __construct(string $name, $header, bool $headerIsHtml = false)
   {
-    parent::__construct('control-button', $header, $headerIsHtml);
+    parent::__construct($name, 'control-button', $header, $headerIsHtml);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -38,13 +41,16 @@ class ButtonSlatJoint extends SlatJoint
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns HTML code (including opening and closing th tags) for the table filter cell.
+   * @param RenderWalker $walker
+   * @param array        $row
    *
    * @return string
    */
-  public function getHtmlColumnFilter(): string
+  public function getHtmlCell(RenderWalker $walker, array $row): string
   {
-    return '';
+    $inner = $this->getInnerHtml($row);
+
+    return Html::generateElement('td', ['class' => $walker->getClasses('control-button')], $inner, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

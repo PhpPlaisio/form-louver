@@ -5,22 +5,25 @@ namespace Plaisio\Form\SlatJoint;
 
 use Plaisio\Form\Control\ComplexControl;
 use Plaisio\Form\Control\Control;
+use Plaisio\Helper\Html;
+use Plaisio\Table\Walker\RenderWalker;
 
 /**
  * Slat joint for table columns with table cells with a complex form control.
  */
-class ComplexSlatJoint extends SlatJoint
+class ComplexSlatJoint extends UniSlatJoint
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
+   * @param string          $name         The name of this slat joint.
    * @param string|int|null $header       The header text of this table column.
    * @param bool            $headerIsHtml Whether the header is HTML code.
    */
-  public function __construct($header, bool $headerIsHtml = false)
+  public function __construct(string $name, $header, bool $headerIsHtml = false)
   {
-    parent::__construct('control-complex', $header, $headerIsHtml);
+    parent::__construct($name, 'control-complex', $header, $headerIsHtml);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -34,6 +37,17 @@ class ComplexSlatJoint extends SlatJoint
   public function createControl(string $name): Control
   {
     return new ComplexControl($name);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritdoc
+   */
+  public function getHtmlCell(RenderWalker $walker, array $row): string
+  {
+    $inner = $this->getInnerHtml($row);
+
+    return Html::generateElement('td', ['class' => $walker->getClasses('control-complex')], $inner, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

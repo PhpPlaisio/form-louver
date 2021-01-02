@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
-use Plaisio\Helper\Html;
-
 /**
  * A pseudo form control for generating table rows in a Louver control.
  */
@@ -17,56 +15,21 @@ class SlatControl extends ComplexControl
   private ?Control $deleteControl = null;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
-   * @inheritdoc
+   * Returns the all controls of this slat joint.
+   *
+   * @return array
    */
-  public function getHtml(): string
+  public function getRow(): array
   {
-    $childAttributes  = ['class' => LouverFieldSet::$class];
-    $errorAttributes  = ['class' => [LouverFieldSet::$class, LouverFieldSet::$class.'-error']];
-    $errorsAttributes = ['class' => [LouverFieldSet::$class, LouverFieldSet::$class.'-errors']];
-
-    // Create start tag of table row.
-    $ret = Html::generateTag('tr', $this->attributes);
-
-    // Create table cells.
+    $row = [];
     foreach ($this->controls as $control)
     {
-      $errors = $control->getErrorMessages();
-
-      if (!$control->isHidden())
-      {
-        if (is_a($control, TableColumnControl::class))
-        {
-          $ret .= $control->getHtml();
-        }
-        else
-        {
-          $ret .= Html::generateTag('td', $childAttributes);
-          $ret .= $control->getHtml();
-          if (!empty($errors))
-          {
-            $ret .= Html::generateTag('div', $errorsAttributes);
-            foreach ($errors as $error)
-            {
-              $ret .= Html::generateTag('span', $errorAttributes);
-              $ret .= Html::txt2Html($error);
-              $ret .= '</span>';
-            }
-            $ret .= '</div>';
-          }
-          $ret .= '</td>';
-        }
-      }
+      $row[$control->getName()] = $control;
     }
 
-    // Create table cell with error message, if any.
-    $ret .= $this->getHtmlErrorCell();
-
-    // Create end tag of table row.
-    $ret .= '</tr>';
-
-    return $ret;
+    return $row;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -127,42 +90,6 @@ class SlatControl extends ComplexControl
     }
 
     return $valid;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns a table cell with the errors messages of all form controls at this row.
-   *
-   * @return string
-   */
-  protected function getHtmlErrorCell(): string
-  {
-    $ret = '';
-
-    if (!$this->isValid())
-    {
-      $errorAttributes  = ['class' => [LouverFieldSet::$class, LouverFieldSet::$class.'-error']];
-
-      $errors = $this->getErrorMessages();
-
-      $ret .= '<td class="overview-table overview-table-error">';
-      if (!empty($errors))
-      {
-        foreach ($errors as $error)
-        {
-          $ret .= Html::generateTag('span', $errorAttributes);
-          $ret .= Html::txt2Html($error);
-          $ret .= '</span>';
-        }
-      }
-      $ret .= '</td>';
-    }
-    else
-    {
-      $ret .= '<td class="overview-table overview-table-error"></td>';
-    }
-
-    return $ret;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

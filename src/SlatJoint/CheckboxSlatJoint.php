@@ -7,23 +7,24 @@ use Plaisio\Form\Control\CheckboxControl;
 use Plaisio\Form\Control\Control;
 use Plaisio\Helper\Html;
 use Plaisio\Kernel\Nub;
-use Plaisio\Table\OverviewTable;
+use Plaisio\Table\Walker\RenderWalker;
 
 /**
  * Slat joint for table columns with table cells with a (single) checkbox form control.
  */
-class CheckboxSlatJoint extends SlatJoint
+class CheckboxSlatJoint extends UniSlatJoint
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
+   * @param string          $name         The name of this slat joint.
    * @param string|int|null $header       The header text of this table column.
    * @param bool            $headerIsHtml Whether the header is HTML code.
    */
-  public function __construct($header, bool $headerIsHtml = false)
+  public function __construct(string $name, $header, bool $headerIsHtml = false)
   {
-    parent::__construct('control-checkbox', $header, $headerIsHtml);
+    parent::__construct($name, 'control-checkbox', $header, $headerIsHtml);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -37,7 +38,7 @@ class CheckboxSlatJoint extends SlatJoint
     $id                 = Html::getAutoId();
     $this->header       = Html::generateVoidElement('input',
                                                     ['type'  => 'checkbox',
-                                                     'class' => [OverviewTable::$class, 'master-checkbox', 'no-sort'],
+                                                     'class' => ['xxx', 'master-checkbox'],
                                                      'id'    => $id]);
     $this->headerIsHtml = true;
 
@@ -55,6 +56,17 @@ class CheckboxSlatJoint extends SlatJoint
   public function createControl(string $name): Control
   {
     return new CheckboxControl($name);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritdoc
+   */
+  public function getHtmlCell(RenderWalker $walker, array $row): string
+  {
+    $inner = $this->getInnerHtml($row);
+
+    return Html::generateElement('td', ['class' => $walker->getClasses('control-checkbox')], $inner, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
