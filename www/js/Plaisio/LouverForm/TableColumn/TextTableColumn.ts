@@ -1,4 +1,5 @@
-import {Cast} from '../../../../../../form/www/js/Plaisio/Helper/Cast';
+
+import {Cast} from '../../Helper/Cast';
 import {OverviewTable} from '../../Table/OverviewTable';
 import {TextTableColumn as BaseTextTableColumn} from '../../Table/TableColumn/TextTableColumn';
 

@@ -1,4 +1,3 @@
-
 import {OverviewTable} from '../../Table/OverviewTable';
 import {TextTableColumn} from './TextTableColumn';
 
