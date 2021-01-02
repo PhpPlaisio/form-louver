@@ -140,7 +140,7 @@ class LouverFieldSet extends FieldSet
 
     if (!empty($this->templateData))
     {
-      $walker = new PrepareWalker($this->submitName);
+      $myWalker = new PrepareWalker($this->submitName);
 
       // If required add template row to this louver control. This row will be used by JS for adding dynamically
       // additional rows to the louver control.
@@ -148,7 +148,7 @@ class LouverFieldSet extends FieldSet
       $row                                    = $this->rowFactory->createRow($this->templateData);
       $row->addClass('slat-template');
       $row->setAttrStyle('visibility: collapse');
-      $row->prepare($walker);
+      $row->prepare($myWalker);
       $this->bodyControl->addFormControl($row);
 
       $this->setAttrData('slat-name', $this->bodyControl->submitName);
