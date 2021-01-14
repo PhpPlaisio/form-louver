@@ -19,7 +19,6 @@ abstract class NonSlatJoint extends NonTableColumn implements SlatJoint
   private string $name;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    *

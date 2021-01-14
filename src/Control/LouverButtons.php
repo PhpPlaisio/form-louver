@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
-use Plaisio\Form\Walker\RenderWalker;
 use Plaisio\Helper\Html;
+use Plaisio\Helper\RenderWalker;
 
 /**
  * Form control for buttons of a louver fieldset.

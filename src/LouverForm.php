@@ -27,7 +27,6 @@ class LouverForm extends Form
   protected LouverFieldSet $louverFieldSet;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    *
@@ -78,6 +77,7 @@ class LouverForm extends Form
   {
     return $this->louverFieldSet;
   }
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Populates this table form control with table row form controls (based on the data set with setData).

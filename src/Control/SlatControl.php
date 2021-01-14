@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 /**
- * A pseudo form control for generating table rows in a Louver control.
+ * A pseudo form control for generating slats (rows) in a Louver control.
  */
 class SlatControl extends ComplexControl
 {
@@ -15,7 +15,6 @@ class SlatControl extends ComplexControl
   private ?Control $deleteControl = null;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Returns the all controls of this slat joint.
    *
@@ -33,9 +32,19 @@ class SlatControl extends ComplexControl
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  public function setDeleteControl($control)
+  /**
+   * Set the control for deleting a whole slat (row). When a whole is being deleted the other form control of the slat
+   * will not be validated.
+   *
+   * @param Control $control The form control for deleting the whole slat (row).
+   *
+   * @return $this
+   */
+  public function setDeleteControl(Control $control): self
   {
     $this->deleteControl = $control;
+
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -44,52 +53,14 @@ class SlatControl extends ComplexControl
    */
   public function validateBase(array &$invalidFormControls): bool
   {
-    $valid = true;
-
-    if ($this->deleteControl!==null)
+    if ($this->deleteControl!==null &&
+      $this->deleteControl->validateBase($invalidFormControls) &&
+      $this->deleteControl->getSubmittedValue())
     {
-      if (!$this->deleteControl->validateBase($invalidFormControls))
-      {
-        $this->invalidControls[] = $this->deleteControl;
-        $valid                   = false;
-      }
-      else
-      {
-        if ($this->deleteControl->getSubmittedValue())
-        {
-          return $valid;
-        }
-      }
+      return true;
     }
 
-    // First, validate all child form controls.
-    foreach ($this->controls as $control)
-    {
-      if ($control!==$this->deleteControl)
-      {
-        if (!$control->validateBase($invalidFormControls))
-        {
-          $this->invalidControls[] = $control;
-          $valid                   = false;
-        }
-      }
-    }
-
-    if ($valid)
-    {
-      // All the child form controls are valid. Validate this complex form control.
-      foreach ($this->validators as $validator)
-      {
-        $valid = $validator->validate($this);
-        if ($valid!==true)
-        {
-          $invalidFormControls[] = $this;
-          break;
-        }
-      }
-    }
-
-    return $valid;
+    return parent::validateBase($invalidFormControls);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

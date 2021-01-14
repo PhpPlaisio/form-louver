@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace Plaisio\Form\Table;
 
 use Plaisio\Form\Control\LouverButtons;
-use Plaisio\Form\Walker\RenderWalker;
+use Plaisio\Helper\RenderWalker;
 use Plaisio\Table\OverviewTable;
 
 /**
- *
+ * Class for louver tables. A louver table is an overview table where the rows are slats.
  */
 class LouverTable extends OverviewTable
 {
@@ -28,7 +28,6 @@ class LouverTable extends OverviewTable
   private ?RenderWalker $walker = null;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Returns the footer with buttons.
    *
@@ -41,8 +40,7 @@ class LouverTable extends OverviewTable
       return '';
     }
 
-    $this->buttonsControl->setColspan($this->getNumberOfColumns())
-                         ->setModuleClass($this->moduleClass);
+    $this->buttonsControl->setColspan($this->getNumberOfColumns());
 
     return $this->buttonsControl->getHtml($this->walker);
   }

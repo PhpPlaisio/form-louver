@@ -8,8 +8,8 @@ use Plaisio\Form\Table\ErrorTableColumn;
 use Plaisio\Form\Table\LouverTable;
 use Plaisio\Form\Walker\LoadWalker;
 use Plaisio\Form\Walker\PrepareWalker;
-use Plaisio\Form\Walker\RenderWalker;
 use Plaisio\Helper\Html;
+use Plaisio\Helper\RenderWalker;
 use Plaisio\Kernel\Nub;
 use Plaisio\Table\OverviewTable;
 
@@ -83,7 +83,6 @@ class LouverFieldSet extends FieldSet
   private ?string $templateKey = null;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Adds a submit button to this fieldset.
    *
@@ -146,8 +145,6 @@ class LouverFieldSet extends FieldSet
       // additional rows to the louver control.
       $this->templateData[$this->templateKey] = 0;
       $row                                    = $this->rowFactory->createRow($this->templateData);
-      $row->addClass('slat-template');
-      $row->setAttrStyle('visibility: collapse');
       $row->prepare($myWalker);
       $this->bodyControl->addFormControl($row);
 

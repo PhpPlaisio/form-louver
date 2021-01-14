@@ -6,8 +6,8 @@ namespace Plaisio\Form\SlatJoint;
 use Plaisio\Form\Control\CheckboxControl;
 use Plaisio\Form\Control\Control;
 use Plaisio\Helper\Html;
+use Plaisio\Helper\RenderWalker;
 use Plaisio\Kernel\Nub;
-use Plaisio\Table\Walker\RenderWalker;
 
 /**
  * Slat joint for table columns with table cells with a (single) checkbox form control.

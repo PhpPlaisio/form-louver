@@ -6,7 +6,7 @@ namespace Plaisio\Form\SlatJoint;
 use Plaisio\Form\Control\ComplexControl;
 use Plaisio\Form\Control\Control;
 use Plaisio\Helper\Html;
-use Plaisio\Table\Walker\RenderWalker;
+use Plaisio\Helper\RenderWalker;
 
 /**
  * Slat joint for table columns with table cells with a complex form control.

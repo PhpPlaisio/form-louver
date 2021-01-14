@@ -5,7 +5,7 @@ namespace Plaisio\Form\SlatJoint;
 
 use Plaisio\Form\Control\Control;
 use Plaisio\Form\Control\LouverFieldSet;
-use Plaisio\Form\Walker\RenderWalker;
+use Plaisio\Helper\RenderWalker;
 use Plaisio\Table\TableColumn\UniTableColumn;
 
 /**
@@ -22,7 +22,6 @@ abstract class UniSlatJoint extends UniTableColumn implements SlatJoint
   private string $name;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    *

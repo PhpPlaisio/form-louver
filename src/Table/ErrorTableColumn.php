@@ -6,8 +6,8 @@ namespace Plaisio\Form\Table;
 use Plaisio\Form\Control\LouverFieldSet;
 use Plaisio\Form\Control\SlatControl;
 use Plaisio\Helper\Html;
+use Plaisio\Helper\RenderWalker;
 use Plaisio\Table\TableColumn\UniTableColumn;
-use Plaisio\Table\Walker\RenderWalker;
 
 /**
  * Table column for error messages at slat (i.e. row) level.

@@ -32,7 +32,6 @@ abstract class SlatControlFactory
   private LouverTable $table;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * SlatControlFactory constructor.
    */
