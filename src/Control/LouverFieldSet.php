@@ -4,110 +4,78 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Form\SlatJointFactory\SlatControlFactory;
-use Plaisio\Form\Table\ErrorTableColumn;
-use Plaisio\Form\Table\LouverTable;
-use Plaisio\Form\Walker\LoadWalker;
-use Plaisio\Form\Walker\PrepareWalker;
-use Plaisio\Helper\Html;
 use Plaisio\Helper\RenderWalker;
 use Plaisio\Kernel\Nub;
-use Plaisio\Table\OverviewTable;
 
 /**
- * Field set for louver controls.
+ * Fieldset with a LouverControl and submit buttons.
  */
 class LouverFieldSet extends FieldSet
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The key for extending the data rows with data for louver table columns.
-   *
-   * @var string
-   */
-  public static string $louverKey = '__louver';
-
-  /**
-   * Form control for the body of the table.
-   *
-   * @var ComplexControl
-   */
-  private ComplexControl $bodyControl;
-
-  /**
-   * The name of the form control for the body of the table.
-   *
-   * @var string
-   */
-  private string $bodyName = '';
-
-  /**
    * The complex form control holding the buttons of this fieldset.
    *
-   * @var LouverButtons|null
+   * @var ComplexControl|null
    */
-  private ?LouverButtons $buttonsControl = null;
+  private ?ComplexControl $louverButtons = null;
 
   /**
-   * The CSS module class of form elements.
+   * The louver control.
    *
-   * @var string
+   * @var LouverControl
    */
-  private string $moduleClass = 'frm';
-
-  /**
-   * Object for creating table row form controls.
-   *
-   * @var SlatControlFactory
-   */
-  private SlatControlFactory $rowFactory;
-
-  /**
-   * The enhanced data shown in the louver fieldset.
-   *
-   * @var array
-   */
-  private array $rows;
-
-  /**
-   * The data for initializing the template row(s).
-   *
-   * @var array|null
-   */
-  private ?array $templateData = null;
-
-  /**
-   * The key of the key in the template row.
-   *
-   * @var string|null
-   */
-  private ?string $templateKey = null;
+  private LouverControl $louverControl;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Adds a submit button to this fieldset.
+   * Object constructor.
    *
-   * @param int|string $wrdId Depending on the type:
-   *                          <ul>
-   *                          <li>int: The ID of the word of the button text.
-   *                          <li>string: The text of the button.
-   *                          </ul>
-   * @param string     $name  The name of the submit button.
-   *
-   * @return PushControl
+   * @param string|null $name The name of this form control.
    */
-  public function addSubmitButton($wrdId, string $name = 'submit'): PushControl
+  public function __construct(?string $name = '')
   {
-    if ($this->buttonsControl===null)
+    parent::__construct($name);
+
+    $this->louverControl = new LouverControl();
+    $this->addFormControl($this->louverControl);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Adds a submit button to this form.
+   *
+   * @param int|string  $wrdId  Depending on the type:
+   *                            <ul>
+   *                            <li>int:    The ID of the word of the button text.
+   *                            <li>string: The text of the button.
+   *                            </ul>
+   * @param string      $method The name of method for handling the form submit.
+   * @param string      $name   The name of the submit button.
+   * @param string|null $class  The class(es) of the submit button.
+   *
+   * @return $this
+   */
+  public function addSubmitButton($wrdId,
+                                  string $method,
+                                  string $name = 'submit',
+                                  ?string $class = 'btn btn-success'): self
+  {
+    if ($this->louverButtons===null)
     {
-      $this->buttonsControl = new LouverButtons();
-      $this->addFormControl($this->buttonsControl);
+      $this->louverButtons = new LouverButtons();
+      $this->addFormControl($this->louverButtons);
+
+      $this->louverControl->getTable()->setButtons($this->louverButtons);
     }
 
     $input = new SubmitControl($name);
-    $input->setValue((is_int($wrdId)) ? Nub::$nub->babel->getWord($wrdId) : $wrdId);
-    $this->buttonsControl->addFormControl($input);
+    $input->setValue((is_int($wrdId)) ? Nub::$nub->babel->getWord($wrdId) : $wrdId)
+          ->setMethod($method)
+          ->addClass($class);
+    $this->louverButtons->addFormControl($input);
 
-    return $input;
+    return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -116,144 +84,54 @@ class LouverFieldSet extends FieldSet
    */
   public function getHtml(RenderWalker $walker): string
   {
-    $html = $this->prefix;
-    $html .= $this->getHtmlStartTag();
-    $html .= $this->getHtmlLouverTable($walker);
-    $html .= $this->getHtmlEndTag();
-    $html .= $this->postfix;
+    $ret = $this->getHtmlStartTag();
+    $ret .= $this->getHtmlLegend();
+    $ret .= $this->louverControl->getHtml($walker);
+    $ret .= $this->getHtmlEndTag();
 
-    return $html;
+    return $ret;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the HTML code of displaying the form controls of this complex form control in a table.
+   * Returns the louver control of this louver fieldset.
    *
-   * @param RenderWalker $walker The object for walking the form control tree.
-   *
-   * @return string
+   * @return LouverControl
    */
-  public function getHtmlLouverTable(RenderWalker $walker): string
+  public function getLouverControl(): LouverControl
   {
-    $this->prepareOverviewTable();
-
-    if (!empty($this->templateData))
-    {
-      $myWalker = new PrepareWalker($this->submitName);
-
-      // If required add template row to this louver control. This row will be used by JS for adding dynamically
-      // additional rows to the louver control.
-      $this->templateData[$this->templateKey] = 0;
-      $row                                    = $this->rowFactory->createRow($this->templateData);
-      $row->prepare($myWalker);
-      $this->bodyControl->addFormControl($row);
-
-      $this->setAttrData('slat-name', $this->bodyControl->submitName);
-    }
-
-    return $this->getHtmlTable($walker);
+    return $this->louverControl;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the underlying overview table.
+   * Populates the louver control with data.
    *
-   * @return LouverTable
-   */
-  public function getTable(): LouverTable
-  {
-    return $this->rowFactory->getTable();
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritdoc
-   */
-  public function loadSubmittedValuesBase(LoadWalker $walker): void
-  {
-    if (!empty($this->templateData))
-    {
-      $tmp           = $walker->getSubmittedValue($this->bodyControl->name);
-      $prepareWalker = new PrepareWalker($this->submitName);
-
-      $children       = $this->controls;
-      $this->controls = [];
-      foreach ($tmp as $key => $row)
-      {
-        if (is_numeric($key) && $key<0)
-        {
-          $this->templateData[$this->templateKey] = $key;
-          $row                                    = $this->rowFactory->createRow($this->templateData);
-          $row->prepare($prepareWalker);
-          $this->bodyControl->addFormControl($row);
-        }
-      }
-
-      $this->controls = array_merge($this->controls, $children);
-    }
-
-    parent::loadSubmittedValuesBase($walker);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Populates this table form control with table row form controls (based on the data set with setData).
-   *
-   * @param array $rows The data shown in the louver fieldset.
+   * @param array $rows The data shown in the louver control.
    */
   public function populate(array $rows): void
   {
-    $this->bodyControl = new ComplexControl($this->bodyName);
-    $this->addFormControl($this->bodyControl);
-
-    $walker     = new RenderWalker($this->moduleClass);
-    $this->rows = [];
-    foreach ($rows as $row)
-    {
-      $slatControl = $this->rowFactory->createRow($row);
-      $this->bodyControl->addFormControl($slatControl);
-
-      $row[self::$louverKey] = ['row'    => $slatControl->getRow(),
-                                'walker' => $walker,
-                                'slat'   => $slatControl];
-
-      $this->rows[] = $row;
-    }
+    $this->louverControl->populate($rows);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the name of the form control for the body of the table.
+   * Sets the name the louver control.
    *
-   * @param string $bodyName The name of the form control for the body of the table.
+   * @param string $bodyName The name of the the louver control.
    *
    * @return self
    */
   public function setBodyName(string $bodyName): self
   {
-    $this->bodyName = $bodyName;
+    $this->louverControl->setBodyName($bodyName);
 
     return $this;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the CSS module class.
-   *
-   * @param string $moduleClass The CSS module class.
-   *
-   * @return $this
-   */
-  public function setModuleClass(string $moduleClass): self
-  {
-    $this->moduleClass = $moduleClass;
-
-    return $this;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Sets the row factory for this table form control.
+   * Sets the row factory of the louver control.
    *
    * @param SlatControlFactory $rowFactory
    *
@@ -261,7 +139,7 @@ class LouverFieldSet extends FieldSet
    */
   public function setRowFactory(SlatControlFactory $rowFactory): self
   {
-    $this->rowFactory = $rowFactory;
+    $this->louverControl->setRowFactory($rowFactory);
 
     return $this;
   }
@@ -277,49 +155,9 @@ class LouverFieldSet extends FieldSet
    */
   public function setTemplate(array $data, string $key): self
   {
-    $this->templateData = $data;
-    $this->templateKey  = $key;
+    $this->louverControl->setTemplate($data, $key);
 
     return $this;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the HTML code of this table
-   *
-   * @param RenderWalker $walker The object for walking the form control tree.
-   *
-   * @return string
-   */
-  private function getHtmlTable(RenderWalker $walker): string
-  {
-    $table = $this->rowFactory->getTable();
-    $table->setButtons($this->buttonsControl)
-          ->setWalker($walker);
-
-    $ret = $this->prefix;
-    $ret .= $table->getHtmlTable($this->rows);
-    $ret .= $this->postfix;
-
-    return $ret;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Prepares the Overview table part for generation HTML code.
-   */
-  private function prepareOverviewTable(): void
-  {
-    if (OverviewTable::$responsiveMediaQuery!==null && $this->getAttribute('id')===null)
-    {
-      $this->setAttrId(Html::getAutoId());
-    }
-
-    if (!$this->isValid())
-    {
-      $table = $this->rowFactory->getTable();
-      $table->addColumn(new ErrorTableColumn());
-    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

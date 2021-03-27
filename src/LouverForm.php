@@ -20,11 +20,11 @@ class LouverForm extends Form
   public static int $maxTextSize = 80;
 
   /**
-   * The fieldset with visible form controls.
+   * The fieldset with the louver control.
    *
    * @var LouverFieldSet
    */
-  protected LouverFieldSet $louverFieldSet;
+  private LouverFieldSet $louverFieldSet;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -53,16 +53,14 @@ class LouverForm extends Form
    * @param string      $name   The name of the submit button.
    * @param string|null $class  The class(es) of the submit button.
    *
-   * @return self
+   * @return $this
    */
   public function addSubmitButton($wrdId,
                                   string $method,
                                   string $name = 'submit',
                                   ?string $class = 'btn btn-success'): self
   {
-    $control = $this->louverFieldSet->addSubmitButton($wrdId, $name);
-    $control->setMethod($method);
-    $control->addClass($class);
+    $this->louverFieldSet->addSubmitButton($wrdId, $method, $name, $class);
 
     return $this;
   }
@@ -80,7 +78,7 @@ class LouverForm extends Form
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Populates this table form control with table row form controls (based on the data set with setData).
+   * Populates this table form control with table row form controls.
    *
    * @param array $rows The data shown in the louver fieldset.
    *
@@ -88,11 +86,11 @@ class LouverForm extends Form
    */
   public function populate(array $rows): self
   {
-    $this->louverFieldSet->populate($rows);
+    $this->louverFieldSet->getLouverControl()->populate($rows);
 
     if (count($rows)>3)
     {
-      $this->louverFieldSet->getTable()->enableFilter();
+      $this->louverFieldSet->getLouverControl()->getTable()->enableFilter();
     }
 
     return $this;
@@ -108,7 +106,7 @@ class LouverForm extends Form
    */
   public function setBodyName(string $bodyName): self
   {
-    $this->louverFieldSet->setBodyName($bodyName);
+    $this->louverFieldSet->getLouverControl()->setBodyName($bodyName);
 
     return $this;
   }
@@ -123,7 +121,7 @@ class LouverForm extends Form
    */
   public function setRowFactory(SlatControlFactory $factory): self
   {
-    $this->louverFieldSet->setRowFactory($factory);
+    $this->louverFieldSet->getLouverControl()->setRowFactory($factory);
 
     return $this;
   }
@@ -139,7 +137,7 @@ class LouverForm extends Form
    */
   public function setTemplate(array $data, string $key): self
   {
-    $this->louverFieldSet->setTemplate($data, $key);
+    $this->louverFieldSet->getLouverControl()->setTemplate($data, $key);
 
     return $this;
   }

@@ -176,24 +176,6 @@ abstract class SlatControlFactory
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Sets the attribute [id](http://www.w3schools.com/tags/att_global_id.asp).
-   *
-   * @param string|null $value The attribute value.
-   *
-   * @return $this
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function setAttrId(?string $value): self
-  {
-    $this->table->setAttrId($value);
-
-    return $this;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
 }
 
 //----------------------------------------------------------------------------------------------------------------------

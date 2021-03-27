@@ -1,6 +1,8 @@
 /**
  * Class for table columns with checkboxes.
  */
+import {OverviewTable} from '../../Table/OverviewTable';
+
 export class CheckboxSlatJoint
 {
   //--------------------------------------------------------------------------------------------------------------------
@@ -25,7 +27,9 @@ export class CheckboxSlatJoint
     this.$master = $('#' + $.escapeSelector(id));
     this.index   = this.deriveColumn(id);
 
-    this.installEventHandlers();
+    this.installObservers();
+
+    this.setMasterStatus();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -54,69 +58,57 @@ export class CheckboxSlatJoint
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Installs the event handlers for the checkbox for checking or unchecking all checkboxes and all checkboxes in the
+   * Installs the observer for the checkbox for checking or unchecking all checkboxes and all checkboxes in the
    * column.
    */
-  private installEventHandlers(): void
+  private installObservers(): void
+  {
+    this.installSlavesObserver();
+    this.installMasterStatusObservers();
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Installs the slave observer.
+   */
+  private installSlavesObserver(): void
   {
     const that = this;
 
-    this.$master.on('change', function ()
+    this.$master.on('input', function ()
     {
-      that.toggleMaster();
+      that.toggleSlaves();
     });
-
-    const rows = this.$master.closest('table').find('tbody').first().children('tr').get();
-    for (const row of rows)
-    {
-      if (row.style.display === '')
-      {
-        $(row).children().eq(this.index).find('input:checkbox').on('change', function ()
-        {
-          that.toggleSlave();
-        });
-      }
-    }
-
-    this.toggleSlave();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Checks or unchecks all slave checkboxes.
+   * Installs the master status observer.
    */
-  private toggleMaster(): void
+  private installMasterStatusObservers(): void
   {
-    const checked = this.$master.prop('checked');
+    const that = this;
 
     const rows = this.$master.closest('table').find('tbody').first().children('tr').get();
     for (const row of rows)
     {
-      if (row.style.display === '')
+      $(row).children().eq(this.index).find('input:checkbox').on('input', function ()
       {
-        const $checkbox = $(row).children().eq(this.index).find('input:checkbox');
-        if (!$checkbox.prop('disabled'))
-        {
-          const current = $checkbox.prop('checked');
-          if (current !== checked)
-          {
-            $(row).children()
-                  .eq(this.index)
-                  .find('input:checkbox')
-                  .prop('checked', checked)
-                  .prop('disabled', false)
-                  .trigger('change');
-          }
-        }
-      }
+        that.setMasterStatus();
+      });
     }
+
+    this.$master.closest('table').on(OverviewTable.FILTERING_ENDED, function()
+    {
+      that.setMasterStatus();
+    })
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Checks or unchecks all slave checkboxes.
+   * Sets the status of the master checkbox.
    */
-  private toggleSlave(): void
+  private setMasterStatus(): void
   {
     let count0 = 0;
     let count1 = 0;
@@ -152,7 +144,37 @@ export class CheckboxSlatJoint
   }
 
   //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Checks or unchecks all slave checkboxes.
+   */
+  private toggleSlaves(): void
+  {
+    const checked = this.$master.prop('checked');
+
+    const rows = this.$master.closest('table').find('tbody').first().children('tr').get();
+    for (const row of rows)
+    {
+      if (row.style.display === '')
+      {
+        const $checkbox = $(row).children().eq(this.index).find('input:checkbox');
+        if (!$checkbox.prop('disabled'))
+        {
+          const current = $checkbox.prop('checked');
+          if (current !== checked)
+          {
+            $(row).children()
+                  .eq(this.index)
+                  .find('input:checkbox')
+                  .prop('checked', checked)
+                  .trigger('input');
+          }
+        }
+      }
+    }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: e9384e316dccfaedd400599d4f5ed244
+// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: fe31dd3174838375b34483162e5833e0

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Table;
 
-use Plaisio\Form\Control\LouverFieldSet;
+use Plaisio\Form\Control\LouverControl;
 use Plaisio\Form\Control\SlatControl;
 use Plaisio\Helper\Html;
 use Plaisio\Helper\RenderWalker;
@@ -30,7 +30,7 @@ class ErrorTableColumn extends UniTableColumn
   public function getHtmlCell(RenderWalker $walker, array $row): string
   {
     /** @var SlatControl $slatJoint */
-    $slatJoint        = $row[LouverFieldSet::$louverKey]['slat'];
+    $slatJoint        = $row[LouverControl::$louverKey]['slat'];
     $errorAttributes  = ['class' => $walker->getClasses('error')];
     $errorsAttributes = ['class' => $walker->getClasses('errors')];
 

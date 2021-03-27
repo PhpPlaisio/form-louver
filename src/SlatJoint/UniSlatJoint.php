@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\SlatJoint;
 
 use Plaisio\Form\Control\Control;
-use Plaisio\Form\Control\LouverFieldSet;
+use Plaisio\Form\Control\LouverControl;
 use Plaisio\Helper\RenderWalker;
 use Plaisio\Table\TableColumn\UniTableColumn;
 
@@ -58,8 +58,8 @@ abstract class UniSlatJoint extends UniTableColumn implements SlatJoint
   {
     /** @var Control $control */
     /** @var RenderWalker $walker */
-    $control = $row[LouverFieldSet::$louverKey]['row'][$this->name];
-    $walker  = $row[LouverFieldSet::$louverKey]['walker'];
+    $control = $row[LouverControl::$louverKey]['row'][$this->name];
+    $walker  = $row[LouverControl::$louverKey]['walker'];
 
     return $control->getHtml($walker);
   }
