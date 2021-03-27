@@ -32,12 +32,13 @@ export class TextTableColumn extends BaseTextTableColumn
 //----------------------------------------------------------------------------------------------------------------------
 OverviewTable.registerTableColumn('control-button', TextTableColumn);
 OverviewTable.registerTableColumn('control-date', TextTableColumn);
+OverviewTable.registerTableColumn('control-html', TextTableColumn);
 OverviewTable.registerTableColumn('control-integer', TextTableColumn);
 OverviewTable.registerTableColumn('control-number', TextTableColumn);
 OverviewTable.registerTableColumn('control-submit', TextTableColumn);
 OverviewTable.registerTableColumn('control-tel', TextTableColumn);
 OverviewTable.registerTableColumn('control-text', TextTableColumn);
 OverviewTable.registerTableColumn('control-url', TextTableColumn);
-OverviewTable.registerTableColumn('control-html', TextTableColumn);
+OverviewTable.registerTableColumn('control-weight', TextTableColumn);
 
-// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: 426a746bbd2bf9781cfe8ff25c97b879
+// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: f9475fb020a64790aa5b8fb343cdcdc1

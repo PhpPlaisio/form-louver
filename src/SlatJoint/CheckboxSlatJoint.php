@@ -38,7 +38,7 @@ class CheckboxSlatJoint extends UniSlatJoint
     $id                 = Html::getAutoId();
     $this->header       = Html::generateVoidElement('input',
                                                     ['type'  => 'checkbox',
-                                                     'class' => ['xxx', 'master-checkbox'],
+                                                     'class' => 'master-checkbox',
                                                      'id'    => $id]);
     $this->headerIsHtml = true;
 
