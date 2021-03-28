@@ -135,23 +135,26 @@ class LouverControl extends ComplexControl
   {
     if (!empty($this->templateData))
     {
-      $tmp           = $walker->getSubmittedValue($this->bodyControl->name);
       $prepareWalker = new PrepareWalker($this->submitName);
 
-      $children       = $this->controls;
-      $this->controls = [];
-      foreach ($tmp as $key => $row)
+      $rows = $walker->getSubmittedValue($this->bodyControl->name);
+      if (is_array($rows))
       {
-        if (is_numeric($key) && $key<0)
+        $children       = $this->controls;
+        $this->controls = [];
+        foreach ($rows as $key => $row)
         {
-          $this->templateData[$this->templateKey] = $key;
-          $row                                    = $this->rowFactory->createRow($this->templateData);
-          $row->prepare($prepareWalker);
-          $this->bodyControl->addFormControl($row);
+          if (is_numeric($key) && $key<0)
+          {
+            $this->templateData[$this->templateKey] = $key;
+            $row                                    = $this->rowFactory->createRow($this->templateData);
+            $row->prepare($prepareWalker);
+            $this->bodyControl->addFormControl($row);
+          }
         }
-      }
 
-      $this->controls = array_merge($this->controls, $children);
+        $this->controls = array_merge($this->controls, $children);
+      }
     }
 
     parent::loadSubmittedValuesBase($walker);
