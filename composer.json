@@ -10,7 +10,7 @@
   "require": {
     "php": ">=7.4",
     "plaisio/form": "^0.50.2",
-    "plaisio/helper-html": "^2.0.0",
+    "plaisio/helper-html": "^2.1.0",
     "plaisio/kernel": "^3.1.1",
     "plaisio/table-overview": "^5.1.2",
     "plaisio/web-assets": "^2.0.0",
