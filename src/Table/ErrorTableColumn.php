@@ -30,18 +30,17 @@ class ErrorTableColumn extends UniTableColumn
   public function getHtmlCell(RenderWalker $walker, array $row): string
   {
     /** @var SlatControl $slatJoint */
-    $slatJoint        = $row[LouverControl::$louverKey]['slat'];
-    $errorAttributes  = ['class' => $walker->getClasses('error')];
-    $errorsAttributes = ['class' => $walker->getClasses('errors')];
-
-    $errors = $slatJoint->getErrorMessages();
+    $slatJoint = $row[LouverControl::$louverKey]['slat'];
+    $errors    = $slatJoint->getErrorMessages();
     if ($errors===null)
     {
       $inner = null;
     }
     else
     {
-      $inner = Html::generateTag('div', $errorsAttributes);
+      $errorAttributes = ['class' => $walker->getClasses('slat-error-message')];
+
+      $inner = Html::generateTag('div', ['class' => $walker->getClasses('slat-error-messages')]);
       foreach ($errors as $error)
       {
         $inner .= Html::generateTag('span', $errorAttributes);
@@ -60,7 +59,7 @@ class ErrorTableColumn extends UniTableColumn
    */
   public function getHtmlColumnFilter(RenderWalker $walker): string
   {
-    return Html::generateElement('td', ['class' => $walker->getClasses(['filter', 'filter-error'])]);
+    return Html::generateElement('td', ['class' => $walker->getClasses(['filter', 'filter-slat-error'])]);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
