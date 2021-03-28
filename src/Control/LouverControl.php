@@ -19,7 +19,7 @@ class LouverControl extends ComplexControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   *   * The key for extending the data rows with data for louver table columns.
+   * The key for extending the data rows with data for louver table columns.
    *
    * @var string
    */
@@ -89,7 +89,7 @@ class LouverControl extends ComplexControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the HTML code of displaying the form controls of this complex form control in a table.
+   * Returns the HTML code displaying the form controls of this complex form control in a table.
    *
    * @param RenderWalker $walker The object for walking the form control tree.
    *
@@ -188,7 +188,7 @@ class LouverControl extends ComplexControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the name of the form control for the body of the table.
+   * Sets the name of the form control for the body of the table. The default is 'data'.
    *
    * @param string $bodyName The name of the form control for the body of the table.
    *

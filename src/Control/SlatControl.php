@@ -16,7 +16,7 @@ class SlatControl extends ComplexControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the all controls of this slat joint.
+   * Returns all controls of this slat joint.
    *
    * @return array
    */
@@ -33,8 +33,8 @@ class SlatControl extends ComplexControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Set the control for deleting a whole slat (row). When a whole is being deleted the other form control of the slat
-   * will not be validated.
+   * Sets the control for deleting a whole slat (row). When a whole slat (row) is being deleted the form controls
+   * of the slat (row) will not be validated.
    *
    * @param Control $control The form control for deleting the whole slat (row).
    *
