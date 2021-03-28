@@ -14,6 +14,8 @@ use Plaisio\Table\OverviewTable;
 
 /**
  * Complex control for louver controls.
+ *
+ * @property-read RenderWalker $renderWalker The render walker for the form controls (not for table elements).
  */
 class LouverControl extends ComplexControl
 {
@@ -38,13 +40,6 @@ class LouverControl extends ComplexControl
    * @var string
    */
   private string $bodyName = 'data';
-
-  /**
-   * The CSS module class of form elements.
-   *
-   * @var string
-   */
-  private string $moduleClass = 'frm';
 
   /**
    * Object for creating table row form controls.
@@ -73,6 +68,19 @@ class LouverControl extends ComplexControl
    * @var string|null
    */
   private ?string $templateKey = null;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Object constructor.
+   *
+   * @param string|null $name The name of this form control.
+   */
+  public function __construct(?string $name = '')
+  {
+    parent::__construct($name);
+
+    $this->renderWalker = new RenderWalker('frm');
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -171,7 +179,6 @@ class LouverControl extends ComplexControl
     $this->bodyControl = new ComplexControl($this->bodyName);
     $this->addFormControl($this->bodyControl);
 
-    $walker     = new RenderWalker($this->moduleClass);
     $this->rows = [];
     foreach ($rows as $row)
     {
@@ -179,7 +186,7 @@ class LouverControl extends ComplexControl
       $this->bodyControl->addFormControl($slatControl);
 
       $row[self::$louverKey] = ['row'    => $slatControl->getRow(),
-                                'walker' => $walker,
+                                'walker' => $this->renderWalker,
                                 'slat'   => $slatControl];
 
       $this->rows[] = $row;
@@ -197,21 +204,6 @@ class LouverControl extends ComplexControl
   public function setBodyName(string $bodyName): self
   {
     $this->bodyName = $bodyName;
-
-    return $this;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Sets the CSS module class.
-   *
-   * @param string $moduleClass The CSS module class.
-   *
-   * @return $this
-   */
-  public function setModuleClass(string $moduleClass): self
-  {
-    $this->moduleClass = $moduleClass;
 
     return $this;
   }
