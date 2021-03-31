@@ -8,6 +8,7 @@ use Plaisio\Form\Control\Control;
 use Plaisio\Form\Control\SlatControl;
 use Plaisio\Form\SlatJoint\SlatJoint;
 use Plaisio\Form\Table\LouverTable;
+use Plaisio\Form\Table\LouverTableRow;
 use Plaisio\Table\TableColumn\TableColumn;
 use SetBased\Exception\LogicException;
 
@@ -38,6 +39,7 @@ abstract class SlatControlFactory
   public function __construct()
   {
     $this->table = new LouverTable();
+    $this->table->setTableRow(new LouverTableRow());
   }
 
   //--------------------------------------------------------------------------------------------------------------------

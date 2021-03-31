@@ -3,11 +3,16 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
+use Plaisio\Helper\HtmlElement;
+
 /**
  * A pseudo form control for generating slats (rows) in a Louver control.
  */
 class SlatControl extends ComplexControl
 {
+  //--------------------------------------------------------------------------------------------------------------------
+  use HtmlElement;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @var Control|null

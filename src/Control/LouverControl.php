@@ -186,6 +186,7 @@ class LouverControl extends ComplexControl
       $this->bodyControl->addFormControl($slatControl);
 
       $row[self::$louverKey] = ['row'    => $slatControl->getRow(),
+                                'attr'   => $slatControl->getAttributes(),
                                 'walker' => $this->renderWalker,
                                 'slat'   => $slatControl];
 
