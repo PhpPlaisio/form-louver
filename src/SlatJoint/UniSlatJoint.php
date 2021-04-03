@@ -5,6 +5,7 @@ namespace Plaisio\Form\SlatJoint;
 
 use Plaisio\Form\Control\Control;
 use Plaisio\Form\Control\LouverControl;
+use Plaisio\Helper\Html;
 use Plaisio\Helper\RenderWalker;
 use Plaisio\Table\TableColumn\UniTableColumn;
 
@@ -61,7 +62,30 @@ abstract class UniSlatJoint extends UniTableColumn implements SlatJoint
     $control = $row[LouverControl::$louverKey]['row'][$this->name];
     $walker  = $row[LouverControl::$louverKey]['walker'];
 
-    return $control->getHtml($walker);
+    $errors = $control->getErrorMessages();
+    if (is_array($errors))
+    {
+      $inner = [];
+      foreach ($errors as $error)
+      {
+        $inner[] = ['tag'  => 'span',
+                    'attr' => ['class' => $walker->getClasses('error-message')],
+                    'text' => $error];
+      }
+
+      $struct = [['html' => $control->getHtml($walker)],
+                 ['tag'   => 'div',
+                  'attr'  => ['class' => $walker->getClasses('error-messages')],
+                  'inner' => $inner]];
+
+      $ret = Html::generateNested($struct);
+    }
+    else
+    {
+      $ret = $control->getHtml($walker);
+    }
+
+    return $ret;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
