@@ -263,6 +263,27 @@ class LouverControl extends ComplexControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns whether one or more rows has one or more error messages.
+   *
+   * @return bool
+   */
+  private function hasRowErrorMessages(): bool
+  {
+    $hasErrorMessages = false;
+    foreach ($this->bodyControl->controls as $control)
+    {
+      if (!empty($control->getErrorMessages()))
+      {
+        $hasErrorMessages = true;
+        break;
+      }
+    }
+
+    return $hasErrorMessages;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Prepares the Overview table part for generation HTML code.
    */
   private function prepareOverviewTable(): void
@@ -272,7 +293,7 @@ class LouverControl extends ComplexControl
       $this->rowFactory->getTable()->setAttrId(Html::getAutoId());
     }
 
-    if (!$this->isValid())
+    if ($this->hasRowErrorMessages())
     {
       $table = $this->rowFactory->getTable();
       $table->addColumn(new ErrorTableColumn());
