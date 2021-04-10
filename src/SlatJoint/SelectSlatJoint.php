@@ -47,7 +47,7 @@ class SelectSlatJoint extends UniSlatJoint
   {
     $inner = $this->getInnerHtml($row);
 
-    return Html::generateElement('td', ['class' => $walker->getClasses('control-select')], $inner, true);
+    return Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'control-select'])], $inner, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

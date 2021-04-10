@@ -47,7 +47,7 @@ class NumberSlatJoint extends UniSlatJoint
   {
     $inner = $this->getInnerHtml($row);
 
-    return Html::generateElement('td', ['class' => $walker->getClasses('control-number')], $inner, true);
+    return Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'control-number'])], $inner, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

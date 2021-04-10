@@ -47,7 +47,7 @@ class TelSlatJoint extends UniSlatJoint
   {
     $inner = $this->getInnerHtml($row);
 
-    return Html::generateElement('td', ['class' => $walker->getClasses('control-tel')], $inner, true);
+    return Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'control-tel'])], $inner, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

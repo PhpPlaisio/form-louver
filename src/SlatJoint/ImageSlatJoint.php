@@ -47,7 +47,7 @@ class ImageSlatJoint extends UniSlatJoint
   {
     $inner = $this->getInnerHtml($row);
 
-    return Html::generateElement('td', ['class' => $walker->getClasses('control-image')], $inner, true);
+    return Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'control-image'])], $inner, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

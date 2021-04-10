@@ -47,7 +47,7 @@ class WeightSlatJoint extends UniSlatJoint
   {
     $inner = $this->getInnerHtml($row);
 
-    return Html::generateElement('td', ['class' => $walker->getClasses('control-weight')], $inner, true);
+    return Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'control-weight'])], $inner, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

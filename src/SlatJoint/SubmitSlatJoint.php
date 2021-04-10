@@ -47,7 +47,7 @@ class SubmitSlatJoint extends UniSlatJoint
   {
     $inner = $this->getInnerHtml($row);
 
-    return Html::generateElement('td', ['class' => $walker->getClasses('control-submit')], $inner, true);
+    return Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'control-submit'])], $inner, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

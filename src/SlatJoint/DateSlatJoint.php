@@ -47,7 +47,7 @@ class DateSlatJoint extends UniSlatJoint
   {
     $inner = $this->getInnerHtml($row);
 
-    return Html::generateElement('td', ['class' => $walker->getClasses('control-date')], $inner, true);
+    return Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'control-date'])], $inner, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

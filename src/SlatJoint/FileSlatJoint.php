@@ -47,7 +47,7 @@ class FileSlatJoint extends UniSlatJoint
   {
     $inner = $this->getInnerHtml($row);
 
-    return Html::generateElement('td', ['class' => $walker->getClasses('control-file')], $inner, true);
+    return Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'control-file'])], $inner, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

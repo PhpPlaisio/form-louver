@@ -47,7 +47,7 @@ class ComplexSlatJoint extends UniSlatJoint
   {
     $inner = $this->getInnerHtml($row);
 
-    return Html::generateElement('td', ['class' => $walker->getClasses('control-complex')], $inner, true);
+    return Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'control-complex'])], $inner, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

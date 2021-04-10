@@ -50,7 +50,7 @@ class ButtonSlatJoint extends UniSlatJoint
   {
     $inner = $this->getInnerHtml($row);
 
-    return Html::generateElement('td', ['class' => $walker->getClasses('control-button')], $inner, true);
+    return Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'control-button'])], $inner, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

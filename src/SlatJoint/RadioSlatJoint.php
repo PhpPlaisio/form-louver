@@ -47,7 +47,7 @@ class RadioSlatJoint extends UniSlatJoint
   {
     $inner = $this->getInnerHtml($row);
 
-    return Html::generateElement('td', ['class' => $walker->getClasses('control-radio')], $inner, true);
+    return Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'control-radio'])], $inner, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

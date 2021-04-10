@@ -47,7 +47,7 @@ class UrlSlatJoint extends UniSlatJoint
   {
     $inner = $this->getInnerHtml($row);
 
-    return Html::generateElement('td', ['class' => $walker->getClasses('control-url')], $inner, true);
+    return Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'control-url'])], $inner, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

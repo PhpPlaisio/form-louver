@@ -47,7 +47,7 @@ class CheckboxesSlatJoint extends UniSlatJoint
   {
     $inner = $this->getInnerHtml($row);
 
-    return Html::generateElement('td', ['class' => $walker->getClasses('control-checkboxes')], $inner, true);
+    return Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'control-checkboxes'])], $inner, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
