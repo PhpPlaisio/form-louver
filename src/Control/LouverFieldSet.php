@@ -85,7 +85,7 @@ class LouverFieldSet extends FieldSet
   public function getHtml(RenderWalker $walker): string
   {
     $ret = $this->getHtmlStartTag();
-    $ret .= $this->getHtmlLegend();
+    $ret .= $this->getHtmlLegend($walker);
     $ret .= $this->louverControl->getHtml($walker);
     $ret .= $this->getHtmlEndTag();
 
@@ -118,7 +118,7 @@ class LouverFieldSet extends FieldSet
   /**
    * Sets the name the louver control.
    *
-   * @param string $bodyName The name of the the louver control.
+   * @param string $bodyName The name of the louver control.
    *
    * @return self
    */
