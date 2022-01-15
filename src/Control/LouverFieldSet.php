@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Form\Control;
 
 use Plaisio\Form\SlatJointFactory\SlatControlFactory;
+use Plaisio\Helper\Html;
 use Plaisio\Helper\RenderWalker;
 use Plaisio\Kernel\Nub;
 
@@ -80,20 +81,6 @@ class LouverFieldSet extends FieldSet
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @inheritdoc
-   */
-  public function getHtml(RenderWalker $walker): string
-  {
-    $ret = $this->getHtmlStartTag();
-    $ret .= $this->getHtmlLegend($walker);
-    $ret .= $this->louverControl->getHtml($walker);
-    $ret .= $this->getHtmlEndTag();
-
-    return $ret;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns the louver control of this louver fieldset.
    *
    * @return LouverControl
@@ -101,6 +88,20 @@ class LouverFieldSet extends FieldSet
   public function getLouverControl(): LouverControl
   {
     return $this->louverControl;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritdoc
+   */
+  public function htmlControl(RenderWalker $walker): string
+  {
+    $struct = ['tag'   => 'form',
+               'attr'  => ['class' => $this->attributes],
+               'inner' => [['html' => $this->htmlLegend($walker)],
+                           ['html' => $this->louverControl->htmlControl($walker)]]];
+
+    return Html::htmlNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

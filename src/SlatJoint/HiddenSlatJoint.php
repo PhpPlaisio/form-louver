@@ -8,7 +8,7 @@ use Plaisio\Form\Control\HiddenControl;
 use Plaisio\Table\TableColumn\NonTableColumn;
 
 /**
- * Slat joint for table columns with table cells with a input:hidden form control.
+ * Slat joint for table columns with table cells with an input:hidden form control.
  */
 class HiddenSlatJoint extends NonTableColumn
 {

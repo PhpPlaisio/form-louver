@@ -9,7 +9,7 @@ use Plaisio\Helper\Html;
 use Plaisio\Helper\RenderWalker;
 
 /**
- * Slat joint for table columns with table cells with a input:image form control.
+ * Slat joint for table columns with table cells with an input:image form control.
  */
 class ImageSlatJoint extends UniSlatJoint
 {
@@ -28,7 +28,7 @@ class ImageSlatJoint extends UniSlatJoint
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Creates and returns a image form control.
+   * Creates and returns an image form control.
    *
    * @param string $name The name of the image form control.
    *
@@ -43,11 +43,13 @@ class ImageSlatJoint extends UniSlatJoint
   /**
    * @inheritdoc
    */
-  public function getHtmlCell(RenderWalker $walker, array $row): string
+  public function htmlCell(RenderWalker $walker, array $row): string
   {
-    $inner = $this->getInnerHtml($row);
+    $struct = ['tag'  => 'td',
+               'attr' => ['class' => $walker->getClasses(['cell', 'control-image'])],
+               'html' => $this->htmlInner($row)];
 
-    return Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'control-image'])], $inner, true);
+    return Html::htmlNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

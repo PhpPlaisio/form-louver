@@ -33,7 +33,7 @@ class LouverTable extends OverviewTable
    *
    * @return string
    */
-  public function getHtmlFooter(): string
+  public function htmlFooter(): string
   {
     if ($this->buttonsControl===null)
     {
@@ -42,7 +42,7 @@ class LouverTable extends OverviewTable
 
     $this->buttonsControl->setColspan($this->getNumberOfColumns());
 
-    return $this->buttonsControl->getHtml($this->walker);
+    return $this->buttonsControl->htmlControl($this->walker);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

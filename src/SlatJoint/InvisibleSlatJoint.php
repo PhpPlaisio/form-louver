@@ -13,7 +13,7 @@ class InvisibleSlatJoint extends NonSlatJoint
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Creates and returns a invisible form control.
+   * Creates and returns an invisible form control.
    *
    * @param string $name The name of the invisible form control.
    *

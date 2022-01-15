@@ -43,11 +43,13 @@ class HtmlSlatJoint extends UniSlatJoint
   /**
    * @inheritdoc
    */
-  public function getHtmlCell(RenderWalker $walker, array $row): string
+  public function htmlCell(RenderWalker $walker, array $row): string
   {
-    $inner = $this->getInnerHtml($row);
+    $struct = ['tag'  => 'td',
+               'attr' => ['class' => $walker->getClasses(['cell', 'control-html'])],
+               'html' => $this->htmlInner($row)];
 
-    return Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'control-html'])], $inner, true);
+    return Html::htmlNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

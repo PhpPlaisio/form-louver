@@ -27,39 +27,47 @@ class ErrorTableColumn extends UniTableColumn
   /**
    * @inheritdoc
    */
-  public function getHtmlCell(RenderWalker $walker, array $row): string
+  public function htmlCell(RenderWalker $walker, array $row): string
   {
     /** @var SlatControl $slatJoint */
     $slatJoint = $row[LouverControl::$louverKey]['slat'];
     $errors    = $slatJoint->getErrorMessages();
     if ($errors===null)
     {
-      $inner = null;
+      $list = null;
     }
     else
     {
-      $errorAttributes = ['class' => $walker->getClasses('slat-error-message')];
-
-      $inner = Html::generateTag('div', ['class' => $walker->getClasses('slat-error-messages')]);
+      $items = [];
       foreach ($errors as $error)
       {
-        $inner .= Html::generateTag('span', $errorAttributes);
-        $inner .= Html::txt2Html($error);
-        $inner .= '</span>';
+        $items[] = ['tag'  => 'li',
+                    'attr' => ['class' => $walker->getClasses('slat-error-message')],
+                    'text' => $error];
       }
-      $inner .= '</div>';
+      $list = ['tag'   => 'ul',
+               'attr'  => ['class' => $walker->getClasses('slat-error-messages')],
+               'inner' => $items];
     }
 
-    return Html::generateElement('td', ['class' => $walker->getClasses('slat-error')], $inner, true);
+    $struct = ['tag'   => 'td',
+               'attr'  => ['class' => $walker->getClasses('slat-error')],
+               'inner' => $list];
+
+    return Html::htmlNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * @inheritdoc
    */
-  public function getHtmlColumnFilter(RenderWalker $walker): string
+  public function htmlColumnFilter(RenderWalker $walker): string
   {
-    return Html::generateElement('td', ['class' => $walker->getClasses(['filter', 'filter-slat-error'])]);
+    $struct = ['tag'  => 'td',
+               'attr' => ['class' => $walker->getClasses(['filter', 'filter-slat-error'])],
+               'html' => null];
+
+    return Html::htmlNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -36,10 +36,10 @@ class CheckboxSlatJoint extends UniSlatJoint
   public function addMasterCheckbox(bool $checked): void
   {
     $id                 = Html::getAutoId();
-    $this->header       = Html::generateVoidElement('input',
-                                                    ['type'  => 'checkbox',
-                                                     'class' => 'master-checkbox',
-                                                     'id'    => $id]);
+    $this->header       = Html::htmlNested(['tag'  => 'input',
+                                            'attr' => ['type'  => 'checkbox',
+                                                       'class' => 'master-checkbox',
+                                                       'id'    => $id]]);
     $this->headerIsHtml = true;
 
     Nub::$nub->assets->jsAdmFunctionCall(__CLASS__, 'addMasterCheckbox', [$id, 'checked' => $checked]);
@@ -62,11 +62,13 @@ class CheckboxSlatJoint extends UniSlatJoint
   /**
    * @inheritdoc
    */
-  public function getHtmlCell(RenderWalker $walker, array $row): string
+  public function htmlCell(RenderWalker $walker, array $row): string
   {
-    $inner = $this->getInnerHtml($row);
+    $struct = ['tag'  => 'td',
+               'attr' => ['class' => $walker->getClasses(['cell', 'control-checkbox'])],
+               'html' => $this->htmlInner($row)];
 
-    return Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'control-checkbox'])], $inner, true);
+    return Html::htmlNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

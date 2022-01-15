@@ -55,7 +55,7 @@ abstract class UniSlatJoint extends UniTableColumn implements SlatJoint
    *
    * @return string
    */
-  protected function getInnerHtml(array $row): string
+  protected function htmlInner(array $row): string
   {
     /** @var Control $control */
     /** @var RenderWalker $walker */
@@ -73,19 +73,19 @@ abstract class UniSlatJoint extends UniTableColumn implements SlatJoint
                     'text' => $error];
       }
 
-      $struct = [['html' => $control->getHtml($walker)],
+      $struct = [['html' => $control->htmlControl($walker)],
                  ['tag'   => 'div',
                   'attr'  => ['class' => $walker->getClasses('error-messages')],
                   'inner' => $inner]];
 
-      $ret = Html::generateNested($struct);
+      $html = Html::htmlNested($struct);
     }
     else
     {
-      $ret = $control->getHtml($walker);
+      $html = $control->htmlControl($walker);
     }
 
-    return $ret;
+    return $html;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

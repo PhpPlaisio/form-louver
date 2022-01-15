@@ -7,7 +7,7 @@ use Plaisio\Helper\Html;
 use Plaisio\Helper\RenderWalker;
 
 /**
- * Form control for buttons of a louver fieldset.
+ * The form control for buttons of a louver fieldset.
  */
 class LouverButtons extends ComplexControl
 {
@@ -23,22 +23,20 @@ class LouverButtons extends ComplexControl
   /**
    * @inheritdoc
    */
-  public function getHtml(RenderWalker $walker): string
+  public function htmlControl(RenderWalker $walker): string
   {
-    $buttonAttributes  = ['class' => $walker->getClasses('button')];
-    $buttonAttributes2 = ['class' => $walker->getClasses('button'), 'colspan' => $this->colspan];
+    $struct = ['tag'   => 'tfoot',
+               'attr'  => ['class' => $walker->getClasses('buttons-foot')],
+               'inner' => ['tag'   => 'tr',
+                           'attr'  => ['class' => $walker->getClasses('buttons-row')],
+                           'inner' => ['tag'   => 'td',
+                                       'attr'  => ['class'   => $walker->getClasses('buttons-cell'),
+                                                   'colspan' => $this->colspan],
+                                       'inner' => ['tag'  => 'div',
+                                                   'attr' => ['class' => $walker->getClasses('buttons-cell-wrapper')],
+                                                   'html' => parent::htmlControl($walker)]]]];
 
-    $ret = Html::generateTag('tfoot', $buttonAttributes);
-    $ret .= Html::generateTag('tr', $buttonAttributes);
-    $ret .= Html::generateTag('td', $buttonAttributes2);
-    $ret .= Html::generateTag('div', $buttonAttributes);
-    $ret .= parent::getHtml($walker);
-    $ret .= '</div>';
-    $ret .= '</td>';
-    $ret .= '</tr>';
-    $ret .= '</tfoot>';
-
-    return $ret;
+    return Html::htmlNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -28,7 +28,7 @@ class LouverControl extends ComplexControl
   public static string $louverKey = '__louver';
 
   /**
-   * Form control for the body of the table.
+   * The form control for the body of the table.
    *
    * @var ComplexControl
    */
@@ -84,12 +84,23 @@ class LouverControl extends ComplexControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns the underlying overview table.
+   *
+   * @return LouverTable
+   */
+  public function getTable(): LouverTable
+  {
+    return $this->rowFactory->getTable();
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * @inheritdoc
    */
-  public function getHtml(RenderWalker $walker): string
+  public function htmlControl(RenderWalker $walker): string
   {
     $html = $this->prefix;
-    $html .= $this->getHtmlLouverTable($walker);
+    $html .= $this->htmlLouverTable($walker);
     $html .= $this->postfix;
 
     return $html;
@@ -103,7 +114,7 @@ class LouverControl extends ComplexControl
    *
    * @return string
    */
-  public function getHtmlLouverTable(RenderWalker $walker): string
+  public function htmlLouverTable(RenderWalker $walker): string
   {
     $this->prepareOverviewTable();
 
@@ -121,18 +132,7 @@ class LouverControl extends ComplexControl
       $this->rowFactory->getTable()->setAttrData('slat-name', $this->bodyControl->submitName);
     }
 
-    return $this->getHtmlTable($walker);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the underlying overview table.
-   *
-   * @return LouverTable
-   */
-  public function getTable(): LouverTable
-  {
-    return $this->rowFactory->getTable();
+    return $this->htmlTable($walker);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -249,13 +249,13 @@ class LouverControl extends ComplexControl
    *
    * @return string
    */
-  protected function getHtmlTable(RenderWalker $walker): string
+  protected function htmlTable(RenderWalker $walker): string
   {
     $table = $this->rowFactory->getTable();
     $table->setWalker($walker);
 
     $ret = $this->prefix;
-    $ret .= $table->getHtmlTable($this->rows);
+    $ret .= $table->htmlTable($this->rows);
     $ret .= $this->postfix;
 
     return $ret;

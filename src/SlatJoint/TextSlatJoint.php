@@ -9,7 +9,7 @@ use Plaisio\Helper\Html;
 use Plaisio\Helper\RenderWalker;
 
 /**
- * Slat joint for table columns with table cells with a input:text form control.
+ * Slat joint for table columns with table cells with an input:text form control.
  */
 class TextSlatJoint extends UniSlatJoint
 {
@@ -43,11 +43,13 @@ class TextSlatJoint extends UniSlatJoint
   /**
    * @inheritdoc
    */
-  public function getHtmlCell(RenderWalker $walker, array $row): string
+  public function htmlCell(RenderWalker $walker, array $row): string
   {
-    $inner = $this->getInnerHtml($row);
+    $struct = ['tag'  => 'td',
+               'attr' => ['class' => $walker->getClasses(['cell', 'control-text'])],
+               'html' => $this->htmlInner($row)];
 
-    return Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'control-text'])], $inner, true);
+    return Html::htmlNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
