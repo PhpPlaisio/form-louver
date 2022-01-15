@@ -26,14 +26,14 @@ class LouverButtons extends ComplexControl
   public function htmlControl(RenderWalker $walker): string
   {
     $struct = ['tag'   => 'tfoot',
-               'attr'  => ['class' => $walker->getClasses('buttons-foot')],
+               'attr'  => ['class' => $walker->getClasses('button-foot')],
                'inner' => ['tag'   => 'tr',
-                           'attr'  => ['class' => $walker->getClasses('buttons-row')],
+                           'attr'  => ['class' => $walker->getClasses('button-row')],
                            'inner' => ['tag'   => 'td',
-                                       'attr'  => ['class'   => $walker->getClasses('buttons-cell'),
+                                       'attr'  => ['class'   => $walker->getClasses('button-cell'),
                                                    'colspan' => $this->colspan],
                                        'inner' => ['tag'  => 'div',
-                                                   'attr' => ['class' => $walker->getClasses('buttons-cell-wrapper')],
+                                                   'attr' => ['class' => $walker->getClasses('button-cell-wrapper')],
                                                    'html' => parent::htmlControl($walker)]]]];
 
     return Html::htmlNested($struct);
