@@ -96,8 +96,8 @@ class LouverFieldSet extends FieldSet
    */
   public function htmlControl(RenderWalker $walker): string
   {
-    $struct = ['tag'   => 'form',
-               'attr'  => ['class' => $this->attributes],
+    $struct = ['tag'   => 'fieldset',
+               'attr'  => $this->attributes,
                'inner' => [['html' => $this->htmlLegend($walker)],
                            ['html' => $this->louverControl->htmlControl($walker)]]];
 
