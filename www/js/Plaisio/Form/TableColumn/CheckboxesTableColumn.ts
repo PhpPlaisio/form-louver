@@ -1,5 +1,5 @@
-import {OverviewTable} from '../../Table/OverviewTable';
-import {TextTableColumn} from './TextTableColumn';
+import {TextTableColumn} from 'Plaisio/Form/TableColumn/TextTableColumn';
+import {OverviewTable} from 'Plaisio/Table/OverviewTable';
 
 /**
  * Table column with cells with checkboxes.
@@ -21,7 +21,7 @@ export class CheckboxesTableColumn extends TextTableColumn
   /**
    * @inheritDoc
    */
-  public getSortKey(tableCell:HTMLTableCellElement): string
+  public getSortKey(tableCell: HTMLTableCellElement): string
   {
     const id = $(tableCell).find('input[type="checkbox"]:checked').prop('id');
 
@@ -34,4 +34,4 @@ export class CheckboxesTableColumn extends TextTableColumn
 //----------------------------------------------------------------------------------------------------------------------
 OverviewTable.registerTableColumn('control-checkboxes', CheckboxesTableColumn);
 
-// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: cdb255eb04b229414e121122ba446e04
+// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: 948634e5d27557769510454fe1f71d14

@@ -1,5 +1,5 @@
-import {OverviewTable} from '../../Table/OverviewTable';
-import {TextTableColumn} from './TextTableColumn';
+import {TextTableColumn} from 'Plaisio/Form/TableColumn/TextTableColumn';
+import {OverviewTable} from 'Plaisio/Table/OverviewTable';
 
 /**
  * Table column with HTML elements.
@@ -30,4 +30,4 @@ export class HtmlTableColumn extends TextTableColumn
 //----------------------------------------------------------------------------------------------------------------------
 OverviewTable.registerTableColumn('control-html', HtmlTableColumn);
 
-// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: 6680c127a9190b27cf491c351ad452e9
+// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: 84178dc8a8eabc6654b6d1f312e50c80

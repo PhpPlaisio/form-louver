@@ -1,5 +1,5 @@
-import {OverviewTable} from '../../Table/OverviewTable';
-import {TextTableColumn} from './TextTableColumn';
+import {TextTableColumn} from 'Plaisio/Form/TableColumn/TextTableColumn';
+import {OverviewTable} from 'Plaisio/Table/OverviewTable';
 
 /**
  * Table column with cells with radio buttons.
@@ -21,7 +21,7 @@ export class RadiosTableColumn extends TextTableColumn
   /**
    * @inheritDoc
    */
-  public getSortKey(tableCell:HTMLTableCellElement): string
+  public getSortKey(tableCell: HTMLTableCellElement): string
   {
     const id = $(tableCell).find('input[type="radio"]:checked').prop('id');
 
@@ -34,4 +34,4 @@ export class RadiosTableColumn extends TextTableColumn
 //----------------------------------------------------------------------------------------------------------------------
 OverviewTable.registerTableColumn('control-radios', RadiosTableColumn);
 
-// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: a732ae191216c8973a3071bd176274dd
+// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: f51e2479faaf46a6d2c57f68193389b9

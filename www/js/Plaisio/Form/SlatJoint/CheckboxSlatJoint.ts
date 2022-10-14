@@ -1,8 +1,8 @@
+import {OverviewTable} from 'Plaisio/Table/OverviewTable';
+
 /**
  * Class for table columns with checkboxes.
  */
-import {OverviewTable} from '../../Table/OverviewTable';
-
 export class CheckboxSlatJoint
 {
   //--------------------------------------------------------------------------------------------------------------------
@@ -58,6 +58,29 @@ export class CheckboxSlatJoint
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Installs the master status observer.
+   */
+  private installMasterStatusObservers(): void
+  {
+    const that = this;
+
+    const rows = this.$master.closest('table').find('tbody').first().children('tr').get();
+    for (const row of rows)
+    {
+      $(row).children().eq(this.index).find('input:checkbox').on('input', function ()
+      {
+        that.setMasterStatus();
+      });
+    }
+
+    this.$master.closest('table').on(OverviewTable.FILTERING_ENDED, function ()
+    {
+      that.setMasterStatus();
+    });
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Installs the observer for the checkbox for checking or unchecking all checkboxes and all checkboxes in the
    * column.
    */
@@ -79,29 +102,6 @@ export class CheckboxSlatJoint
     {
       that.toggleSlaves();
     });
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Installs the master status observer.
-   */
-  private installMasterStatusObservers(): void
-  {
-    const that = this;
-
-    const rows = this.$master.closest('table').find('tbody').first().children('tr').get();
-    for (const row of rows)
-    {
-      $(row).children().eq(this.index).find('input:checkbox').on('input', function ()
-      {
-        that.setMasterStatus();
-      });
-    }
-
-    this.$master.closest('table').on(OverviewTable.FILTERING_ENDED, function()
-    {
-      that.setMasterStatus();
-    })
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -177,4 +177,4 @@ export class CheckboxSlatJoint
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: fe31dd3174838375b34483162e5833e0
+// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: a70644e0e519e42a4c12a4b36af41506

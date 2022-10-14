@@ -1,7 +1,6 @@
-
-import {Cast} from '../../Helper/Cast';
-import {OverviewTable} from '../../Table/OverviewTable';
-import {TextTableColumn as BaseTextTableColumn} from '../../Table/TableColumn/TextTableColumn';
+import {Cast} from 'Plaisio/Helper/Cast';
+import {OverviewTable} from 'Plaisio/Table/OverviewTable';
+import {TextTableColumn as BaseTextTableColumn} from 'Plaisio/Table/TableColumn/TextTableColumn';
 
 /**
  * Table column with cell with input:text form control.
@@ -41,4 +40,4 @@ OverviewTable.registerTableColumn('control-text', TextTableColumn);
 OverviewTable.registerTableColumn('control-url', TextTableColumn);
 OverviewTable.registerTableColumn('control-weight', TextTableColumn);
 
-// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: f9475fb020a64790aa5b8fb343cdcdc1
+// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: 4aa03792b25e33b1422b030ad2b31def

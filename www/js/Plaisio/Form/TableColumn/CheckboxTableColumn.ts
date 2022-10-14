@@ -1,5 +1,5 @@
-import {OverviewTable} from "../../Table/OverviewTable";
-import {TextTableColumn} from "../../Table/TableColumn/TextTableColumn";
+import {OverviewTable} from 'Plaisio/Table/OverviewTable';
+import {TextTableColumn} from 'Plaisio/Table/TableColumn/TextTableColumn';
 
 /**
  * Table column with cells with a checkbox.
@@ -40,4 +40,4 @@ export class CheckboxTableColumn extends TextTableColumn
 //----------------------------------------------------------------------------------------------------------------------
 OverviewTable.registerTableColumn('control-checkbox', CheckboxTableColumn);
 
-// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: 2bcf2c8129c44faf655bff0a0b6656e4
+// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: fd86bba910b84f0830e0a69cdeaab07b

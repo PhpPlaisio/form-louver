@@ -1,5 +1,5 @@
-import {OverviewTable} from '../../Table/OverviewTable';
-import {TextTableColumn} from './TextTableColumn';
+import {TextTableColumn} from 'Plaisio/Form/TableColumn/TextTableColumn';
+import {OverviewTable} from 'Plaisio/Table/OverviewTable';
 
 /**
  * Table column with cells with select boxes.
@@ -34,4 +34,4 @@ export class SelectTableColumn extends TextTableColumn
 //----------------------------------------------------------------------------------------------------------------------
 OverviewTable.registerTableColumn('control-select', SelectTableColumn);
 
-// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: 48836a885f0c2b2ca3ccf30cde486566
+// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: 70af211cb724931e345aeb308ecb7abc

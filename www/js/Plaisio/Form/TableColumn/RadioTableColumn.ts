@@ -1,8 +1,8 @@
-import {OverviewTable} from '../../Table/OverviewTable';
-import {TextTableColumn} from './TextTableColumn';
+import {TextTableColumn} from 'Plaisio/Form/TableColumn/TextTableColumn';
+import {OverviewTable} from 'Plaisio/Table/OverviewTable';
 
 /**
- * Table column with with cells with a radio button.
+ * Table column with cells with a radio button.
  */
 export class RadioTableColumn extends TextTableColumn
 {
@@ -40,4 +40,4 @@ export class RadioTableColumn extends TextTableColumn
 //----------------------------------------------------------------------------------------------------------------------
 OverviewTable.registerTableColumn('control-radio', RadioTableColumn);
 
-// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: 193db744760d550577a91949dc267bdc
+// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: 94fce282a6a3b89c7182e7199f750a20

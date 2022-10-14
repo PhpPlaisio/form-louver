@@ -1,15 +1,15 @@
-import './TableColumn/CheckboxTableColumn';
-import './TableColumn/CheckboxesTableColumn';
-import './TableColumn/HtmlTableColumn';
-import './TableColumn/RadioTableColumn';
-import './TableColumn/RadiosTableColumn';
-import './TableColumn/SelectTableColumn';
-import './TableColumn/TextAreaTableColumn';
-import './TableColumn/TextTableColumn';
+import 'Plaisio/Form/TableColumn/CheckboxesTableColumn';
+import 'Plaisio/Form/TableColumn/CheckboxTableColumn';
+import 'Plaisio/Form/TableColumn/HtmlTableColumn';
+import 'Plaisio/Form/TableColumn/RadiosTableColumn';
+import 'Plaisio/Form/TableColumn/RadioTableColumn';
+import 'Plaisio/Form/TableColumn/SelectTableColumn';
+import 'Plaisio/Form/TableColumn/TextAreaTableColumn';
+import 'Plaisio/Form/TableColumn/TextTableColumn';
 
 export class LouverFormPackage
 {
   // Nothing to implement.
 }
 
-// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: a38051885a736402df92b4a8445eae95
+// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: ba1adfa1796a0f6433e8e78421cdd4f0
