@@ -10,5 +10,6 @@
 /www/js/**/*.js.map
 /www/js/Plaisio/Form/Form.ts
 /www/js/Plaisio/Form/FormPackage.ts
-/www/js/Plaisio/Helper
-/www/js/Plaisio/Table
+/www/js/Plaisio/Helper/
+/www/js/Plaisio/Kernel/
+/www/js/Plaisio/Table/

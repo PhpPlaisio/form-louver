@@ -5,5 +5,5 @@
             <include name="**/*.ts"/>
         </fileset>
     </asset>
-    <root>www</root>
+    <root type="js">www</root>
 </assets>
