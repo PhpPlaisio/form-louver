@@ -17,17 +17,7 @@
         </exec>
         <phing phingfile="build.xml" target="code-generation" haltonfailure="true"/>
         <phing phingfile="build.xml" target="kernel" haltonfailure="true"/>
-
-        <!-- Show outdated packages -->
-        <exec executable="composer" checkreturn="true" passthru="true">
-            <arg value="--ansi"/>
-            <arg value="outdated"/>
-            <arg value="--direct"/>
-        </exec>
-        <exec executable="npm" checkreturn="true" passthru="true">
-            <arg value="--ansi"/>
-            <arg value="outdated"/>
-        </exec>
+        <phing phingfile="build.xml" target="outdated" haltonfailure="true"/>
     </target>
 
     <target name="code-generation">
@@ -42,6 +32,19 @@
         <exec executable="bin/plaisio" checkreturn="true" passthru="true">
             <arg value="--ansi"/>
             <arg value="plaisio:kernel-properties"/>
+        </exec>
+    </target>
+
+    <!-- Show outdated packages -->
+    <target name="outdated">
+        <exec executable="composer" checkreturn="false" passthru="true">
+            <arg value="--ansi"/>
+            <arg value="outdated"/>
+            <arg value="--direct"/>
+        </exec>
+        <exec executable="npm" checkreturn="false" passthru="true">
+            <arg value="--ansi"/>
+            <arg value="outdated"/>
         </exec>
     </target>
 

@@ -9,16 +9,16 @@
   "license": "MIT",
   "require": {
     "php": ">=7.4",
-    "plaisio/form": "^0.53.0",
+    "plaisio/form": "^0.53.1",
     "plaisio/helper-html": "^4.0.0",
     "plaisio/kernel": "^3.1.1",
-    "plaisio/table-overview": "^7.0.0",
+    "plaisio/table-overview": "^7.3.0",
     "plaisio/web-assets": "^3.0.0",
     "setbased/exception": "^2.2.0"
   },
   "require-dev": {
     "phing/phing": "^2.17.4",
-    "plaisio/console": "^2.7.1"
+    "plaisio/console": "^2.8.0"
   },
   "autoload": {
     "psr-4": {

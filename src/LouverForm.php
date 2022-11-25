@@ -100,13 +100,13 @@ class LouverForm extends Form
   /**
    * Sets the name of louver form control.
    *
-   * @param string $bodyName The name.
+   * @param string $name The name.
    *
    * @return $this
    */
-  public function setBodyName(string $bodyName): self
+  public function setName(string $name): self
   {
-    $this->louverFieldSet->getLouverControl()->setBodyName($bodyName);
+    $this->louverFieldSet->getLouverControl()->setName($name);
 
     return $this;
   }
@@ -132,12 +132,13 @@ class LouverForm extends Form
    *
    * @param array  $data The data for initializing template row(s).
    * @param string $key  The key of the key in the template row.
+   * @param string $id   The ID of the HTML element when clicked a new row must be added to the louver form.
    *
    * @return $this
    */
-  public function setTemplate(array $data, string $key): self
+  public function setTemplate(array $data, string $key, string $id): self
   {
-    $this->louverFieldSet->getLouverControl()->setTemplate($data, $key);
+    $this->louverFieldSet->getLouverControl()->setTemplate($data, $key, $id);
 
     return $this;
   }

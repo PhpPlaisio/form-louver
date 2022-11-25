@@ -117,21 +117,6 @@ class LouverFieldSet extends FieldSet
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the name the louver control.
-   *
-   * @param string $bodyName The name of the louver control.
-   *
-   * @return self
-   */
-  public function setBodyName(string $bodyName): self
-  {
-    $this->louverControl->setBodyName($bodyName);
-
-    return $this;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Sets the row factory of the louver control.
    *
    * @param SlatControlFactory $rowFactory
@@ -151,12 +136,13 @@ class LouverFieldSet extends FieldSet
    *
    * @param array  $data The data for initializing template row(s).
    * @param string $key  The key of the key in the template row.
+   * @param string $id   The ID of the HTML element when clicked a new row must be added to the louver form.
    *
    * @return self
    */
-  public function setTemplate(array $data, string $key): self
+  public function setTemplate(array $data, string $key, string $id): self
   {
-    $this->louverControl->setTemplate($data, $key);
+    $this->louverControl->setTemplate($data, $key, $id);
 
     return $this;
   }

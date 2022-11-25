@@ -28,18 +28,11 @@ class LouverControl extends ComplexControl
   public static string $louverKey = '__louver';
 
   /**
-   * The form control for the body of the table.
+   * The ID of the HTML element when clicked a new row must be added to the louver form.
    *
-   * @var ComplexControl
+   * @var string|null
    */
-  private ComplexControl $bodyControl;
-
-  /**
-   * The name of the form control for the body of the table.
-   *
-   * @var string
-   */
-  private string $bodyName = 'data';
+  private ?string $id = null;
 
   /**
    * Object for creating table row form controls.
@@ -56,11 +49,11 @@ class LouverControl extends ComplexControl
   private array $rows;
 
   /**
-   * The data for initializing the template row(s).
+   * The data for initializing template row(s).
    *
-   * @var array|null
+   * @var array
    */
-  private ?array $templateData = null;
+  private array $templateData;
 
   /**
    * The key of the key in the template row.
@@ -120,16 +113,17 @@ class LouverControl extends ComplexControl
 
     if (!empty($this->templateData))
     {
-      $myWalker = new PrepareWalker($this->submitName);
-
-      // If required add template row to this louver control. This row will be used by JS for adding dynamically
-      // additional rows to the louver control.
+      $prepareWalker                          = new PrepareWalker($this->submitName);
       $this->templateData[$this->templateKey] = 0;
-      $row                                    = $this->rowFactory->createRow($this->templateData);
-      $row->prepare($myWalker);
-      $this->bodyControl->addFormControl($row);
+      $slatControl                            = $this->rowFactory->createRow($this->templateData);
+      $slatControl->prepare($prepareWalker);
 
-      $this->rowFactory->getTable()->setAttrData('slat-name', $this->bodyControl->submitName);
+      $templateRow = $this->rowFactory->getTable()->htmlTemplateRow($slatControl, $this->templateData);
+
+      $this->rowFactory->getTable()->setAttrData('louver-id', $this->id);
+      $this->rowFactory->getTable()->setAttrData('louver-slat-name', $this->submitName);
+      $this->rowFactory->getTable()->setAttrData('louver-template', $templateRow);
+      $this->rowFactory->getTable()->setAttrData('louver', 'louver');
     }
 
     return $this->htmlTable($walker);
@@ -145,23 +139,30 @@ class LouverControl extends ComplexControl
     {
       $prepareWalker = new PrepareWalker($this->submitName);
 
-      $rows = $walker->getSubmittedValue($this->bodyControl->name);
-      if (is_array($rows))
+      $values = $walker->getSubmittedValue($this->name);
+      if (is_array($values))
       {
-        $children       = $this->controls;
-        $this->controls = [];
-        foreach ($rows as $key => $row)
+        $children = [];
+        foreach ($values as $key => $row)
         {
           if (is_numeric($key) && $key<0)
           {
             $this->templateData[$this->templateKey] = $key;
-            $row                                    = $this->rowFactory->createRow($this->templateData);
-            $row->prepare($prepareWalker);
-            $this->bodyControl->addFormControl($row);
+            $slatControl                            = $this->rowFactory->createRow($this->templateData);
+            $slatControl->prepare($prepareWalker);
+            $children[] = $slatControl;
+          }
+          else
+          {
+            $slatControl = array_shift($this->controls);
+            if ($slatControl!==null)
+            {
+              $children[] = $slatControl;
+            }
           }
         }
 
-        $this->controls = array_merge($this->controls, $children);
+        $this->controls = $children;
       }
     }
 
@@ -176,14 +177,11 @@ class LouverControl extends ComplexControl
    */
   public function populate(array $rows): void
   {
-    $this->bodyControl = new ComplexControl($this->bodyName);
-    $this->addFormControl($this->bodyControl);
-
     $this->rows = [];
     foreach ($rows as $row)
     {
       $slatControl = $this->rowFactory->createRow($row);
-      $this->bodyControl->addFormControl($slatControl);
+      $this->addFormControl($slatControl);
 
       $row[self::$louverKey] = ['row'    => $slatControl->getRow(),
                                 'attr'   => $slatControl->getAttributes(),
@@ -196,15 +194,15 @@ class LouverControl extends ComplexControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets the name of the form control for the body of the table. The default is 'data'.
+   * Sets the name the louver control.
    *
-   * @param string $bodyName The name of the form control for the body of the table.
+   * @param string $name The name of the louver control.
    *
    * @return self
    */
-  public function setBodyName(string $bodyName): self
+  public function setName(string $name): self
   {
-    $this->bodyName = $bodyName;
+    $this->name = $name;
 
     return $this;
   }
@@ -230,13 +228,15 @@ class LouverControl extends ComplexControl
    *
    * @param array  $data The data for initializing template row(s).
    * @param string $key  The key of the key in the template row.
+   * @param string $id   The ID of the HTML element when clicked a new row must be added to the louver form.
    *
    * @return self
    */
-  public function setTemplate(array $data, string $key): self
+  public function setTemplate(array $data, string $key, string $id): self
   {
     $this->templateData = $data;
     $this->templateKey  = $key;
+    $this->id           = $id;
 
     return $this;
   }
@@ -270,7 +270,7 @@ class LouverControl extends ComplexControl
   private function hasRowErrorMessages(): bool
   {
     $hasErrorMessages = false;
-    foreach ($this->bodyControl->controls as $control)
+    foreach ($this->controls as $control)
     {
       if (!empty($control->getErrorMessages()))
       {

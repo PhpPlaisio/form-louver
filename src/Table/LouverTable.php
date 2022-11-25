@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace Plaisio\Form\Table;
 
 use Plaisio\Form\Control\LouverButtons;
+use Plaisio\Form\Control\LouverControl;
+use Plaisio\Form\Control\SlatControl;
 use Plaisio\Helper\RenderWalker;
 use Plaisio\Table\OverviewTable;
 
@@ -43,6 +45,17 @@ class LouverTable extends OverviewTable
     $this->buttonsControl->setColspan($this->getNumberOfColumns());
 
     return $this->buttonsControl->htmlControl($this->walker);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  public function htmlTemplateRow(SlatControl $slatControl, array $row): string
+  {
+    $row[LouverControl::$louverKey] = ['row'    => $slatControl->getRow(),
+                                       'attr'   => $slatControl->getAttributes(),
+                                       'walker' => $this->renderWalker,
+                                       'slat'   => $slatControl];
+
+    return $this->htmlRow(0, $row);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
