@@ -17,6 +17,7 @@ use Plaisio\Table\OverviewTable;
  *
  * @property-read RenderWalker $renderWalker The render walker for the form controls (not for table elements).
  */
+#[\AllowDynamicProperties]
 class LouverControl extends ComplexControl
 {
   //--------------------------------------------------------------------------------------------------------------------
