@@ -40,5 +40,4 @@ OverviewTable.registerTableColumn('control-text', TextTableColumn);
 OverviewTable.registerTableColumn('control-url', TextTableColumn);
 OverviewTable.registerTableColumn('control-weight', TextTableColumn);
 
-// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: 4aa03792b25e33b1422b030ad2b31def
-// Plaisio\Console\TypeScript\Helper\MarkHelper::md5: a6a6ed13a5bfc730f2bf4741892a849a
+// Plaisio\Console\TypeScript\Helper\MarkHelper::md5: 4aa03792b25e33b1422b030ad2b31def

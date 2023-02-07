@@ -40,5 +40,4 @@ export class RadioTableColumn extends TextTableColumn
 //----------------------------------------------------------------------------------------------------------------------
 OverviewTable.registerTableColumn('control-radio', RadioTableColumn);
 
-// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: 94fce282a6a3b89c7182e7199f750a20
-// Plaisio\Console\TypeScript\Helper\MarkHelper::md5: 344ff6f08644d4ee30566edb22c163d4
+// Plaisio\Console\TypeScript\Helper\MarkHelper::md5: 94fce282a6a3b89c7182e7199f750a20

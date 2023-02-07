@@ -40,5 +40,4 @@ export class CheckboxTableColumn extends TextTableColumn
 //----------------------------------------------------------------------------------------------------------------------
 OverviewTable.registerTableColumn('control-checkbox', CheckboxTableColumn);
 
-// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: fd86bba910b84f0830e0a69cdeaab07b
-// Plaisio\Console\TypeScript\Helper\MarkHelper::md5: f232368fa625aa3c5a48fc00a2b10d14
+// Plaisio\Console\TypeScript\Helper\MarkHelper::md5: fd86bba910b84f0830e0a69cdeaab07b
