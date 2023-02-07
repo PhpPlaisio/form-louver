@@ -28,10 +28,10 @@ abstract class UniSlatJoint extends UniTableColumn implements SlatJoint
    *
    * @param string          $name         The name of this slat joint.
    * @param string          $dataType     The data type of this table column.
-   * @param string|int|null $header       The header text of this table column.
+   * @param int|string|null $header       The header text of this table column.
    * @param bool            $headerIsHtml Whether the header is HTML code.
    */
-  public function __construct(string $name, string $dataType, $header, bool $headerIsHtml = false)
+  public function __construct(string $name, string $dataType, int|string|null $header, bool $headerIsHtml = false)
   {
     parent::__construct($dataType, $header, $headerIsHtml);
 

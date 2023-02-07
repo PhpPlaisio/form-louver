@@ -18,7 +18,7 @@ class SelectSlatJoint extends UniSlatJoint
    * Object constructor.
    *
    * @param string          $name         The name of this slat joint.
-   * @param string|int|null $header       The header text of this table column.
+   * @param int|string|null $header       The header text of this table column.
    * @param bool            $headerIsHtml Whether the header is HTML code.
    */
   public function __construct(string $name, $header, bool $headerIsHtml = false)

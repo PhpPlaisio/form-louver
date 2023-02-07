@@ -32,3 +32,4 @@ export class TextAreaTableColumn extends TextTableColumn
 OverviewTable.registerTableColumn('control-text-area', TextAreaTableColumn);
 
 // Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: d82c1381b1e76e1ab0e88b6a25e2cd63
+// Plaisio\Console\TypeScript\Helper\MarkHelper::md5: a061038275aa6cbad6c4d5d483a8fd65

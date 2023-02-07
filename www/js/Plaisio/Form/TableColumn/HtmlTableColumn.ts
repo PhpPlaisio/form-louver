@@ -31,3 +31,4 @@ export class HtmlTableColumn extends TextTableColumn
 OverviewTable.registerTableColumn('control-html', HtmlTableColumn);
 
 // Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: 84178dc8a8eabc6654b6d1f312e50c80
+// Plaisio\Console\TypeScript\Helper\MarkHelper::md5: 667b04a60d786f821b2031c267be631a

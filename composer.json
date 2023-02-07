@@ -8,19 +8,22 @@
   ],
   "license": "MIT",
   "require": {
-    "php": ">=7.4",
+    "php": ">=8.1",
     "plaisio-ts/helper-cast": "^2.0.0",
-    "plaisio-ts/kernel": "^2.0.0",
-    "plaisio/form": "^0.53.1",
-    "plaisio/helper-html": "^4.0.0",
-    "plaisio/kernel": "^3.1.1",
-    "plaisio/table-overview": "^7.4.0",
-    "plaisio/web-assets": "^3.0.0",
-    "setbased/exception": "^2.2.0"
+    "plaisio-ts/kernel": "^2.1.0",
+    "plaisio/form": "^0.54.0",
+    "plaisio/helper-html": "^4.1.0",
+    "plaisio/kernel": "^3.2.1",
+    "plaisio/table-overview": "^8.0.0",
+    "plaisio/web-assets": "^3.1.0",
+    "setbased/exception": "^2.3.0"
   },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "require-dev": {
-    "phing/phing": "^2.17.4",
-    "plaisio/console": "^2.8.0"
+    "phing/phing": "^3.0.0-RC4",
+    "plaisio/console-kernel": "^1.0.1",
+    "plaisio/console-type-script": "^1.0.0"
   },
   "autoload": {
     "psr-4": {
@@ -29,6 +32,9 @@
   },
   "config": {
     "bin-dir": "bin/",
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "phing/phing-composer-configurator": true
+    }
   }
 }

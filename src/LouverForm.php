@@ -55,10 +55,10 @@ class LouverForm extends Form
    *
    * @return $this
    */
-  public function addSubmitButton($wrdId,
-                                  string $method,
-                                  string $name = 'submit',
-                                  ?string $class = 'btn btn-success'): self
+  public function addSubmitButton(int|string $wrdId,
+                                  string     $method,
+                                  string     $name = 'submit',
+                                  ?string    $class = 'btn btn-success'): self
   {
     $this->louverFieldSet->addSubmitButton($wrdId, $method, $name, $class);
 
@@ -115,7 +115,7 @@ class LouverForm extends Form
   /**
    * Sets the slat control factory.
    *
-   * @param SlatControlFactory|null $factory The slat control factory.
+   * @param SlatControlFactory $factory The slat control factory.
    *
    * @return $this
    */

@@ -57,10 +57,10 @@ class LouverFieldSet extends FieldSet
    *
    * @return $this
    */
-  public function addSubmitButton($wrdId,
-                                  string $method,
-                                  string $name = 'submit',
-                                  ?string $class = 'btn btn-success'): self
+  public function addSubmitButton(int|string $wrdId,
+                                  string     $method,
+                                  string     $name = 'submit',
+                                  ?string    $class = 'btn btn-success'): self
   {
     if ($this->louverButtons===null)
     {

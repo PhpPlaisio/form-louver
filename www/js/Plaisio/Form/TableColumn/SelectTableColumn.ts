@@ -35,3 +35,4 @@ export class SelectTableColumn extends TextTableColumn
 OverviewTable.registerTableColumn('control-select', SelectTableColumn);
 
 // Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: 70af211cb724931e345aeb308ecb7abc
+// Plaisio\Console\TypeScript\Helper\MarkHelper::md5: a439034d9d6a40000cbe2d384eb56c50
