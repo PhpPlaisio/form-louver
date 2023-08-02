@@ -16,7 +16,8 @@
     "plaisio/kernel": "^3.2.1",
     "plaisio/table-overview": "^8.0.0",
     "plaisio/web-assets": "^3.1.0",
-    "setbased/exception": "^2.3.0"
+    "setbased/exception": "^2.3.0",
+    "setbased/helper-cast": "^3.0"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,

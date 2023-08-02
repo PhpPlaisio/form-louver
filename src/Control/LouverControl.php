@@ -11,6 +11,7 @@ use Plaisio\Form\Walker\PrepareWalker;
 use Plaisio\Helper\Html;
 use Plaisio\Helper\RenderWalker;
 use Plaisio\Table\OverviewTable;
+use SetBased\Helper\Cast;
 
 /**
  * Complex control for louver controls.
@@ -64,6 +65,7 @@ class LouverControl extends ComplexControl
   private ?string $templateKey = null;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    *
@@ -143,15 +145,20 @@ class LouverControl extends ComplexControl
       $values = $walker->getSubmittedValue($this->name);
       if (is_array($values))
       {
-        $children = [];
-        foreach ($values as $key => $row)
+        $children     = [];
+        $rows         = [];
+        $templateData = $this->templateData;
+        foreach ($values as $key => $value)
         {
-          if (is_numeric($key) && $key<0)
+          if (Cast::isOptInt($key) && $key<0)
           {
-            $this->templateData[$this->templateKey] = $key;
-            $slatControl                            = $this->rowFactory->createRow($this->templateData);
+            $templateData[$this->templateKey] = $key;
+            $slatControl                      = $this->rowFactory->createRow($templateData);
             $slatControl->prepare($prepareWalker);
+
+            $this->enhanceRow($templateData, $slatControl);
             $children[] = $slatControl;
+            $rows[]     = $templateData;
           }
           else
           {
@@ -160,10 +167,16 @@ class LouverControl extends ComplexControl
             {
               $children[] = $slatControl;
             }
+            $row = array_shift($this->rows);
+            if ($row!==null)
+            {
+              $rows[] = $row;
+            }
           }
         }
 
         $this->controls = $children;
+        $this->rows     = $rows;
       }
     }
 
@@ -183,11 +196,7 @@ class LouverControl extends ComplexControl
     {
       $slatControl = $this->rowFactory->createRow($row);
       $this->addFormControl($slatControl);
-
-      $row[self::$louverKey] = ['row'    => $slatControl->getRow(),
-                                'attr'   => $slatControl->getAttributes(),
-                                'walker' => $this->renderWalker,
-                                'slat'   => $slatControl];
+      $this->enhanceRow($row, $slatControl);
 
       $this->rows[] = $row;
     }
@@ -260,6 +269,21 @@ class LouverControl extends ComplexControl
     $ret .= $this->postfix;
 
     return $ret;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Enhance a data row with attributes required by other parts of this package.
+   *
+   * @param mixed       $row         The row to be enhanced.
+   * @param SlatControl $slatControl The related slat control of the data row.
+   */
+  private function enhanceRow(array &$row, SlatControl $slatControl,): void
+  {
+    $row[self::$louverKey] = ['row'    => $slatControl->getRow(),
+                              'attr'   => $slatControl->getAttributes(),
+                              'walker' => $this->renderWalker,
+                              'slat'   => $slatControl];
   }
 
   //--------------------------------------------------------------------------------------------------------------------

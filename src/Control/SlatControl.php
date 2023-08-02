@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace Plaisio\Form\Control;
 
+use Plaisio\Form\Walker\LoadWalker;
 use Plaisio\Helper\HtmlElement;
+use SetBased\Helper\Cast;
 
 /**
  * A pseudo form control for generating slats (rows) in a Louver control.
@@ -20,6 +22,7 @@ class SlatControl extends ComplexControl
   private ?Control $deleteControl = null;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Returns all controls of this slat joint.
    *
@@ -34,6 +37,21 @@ class SlatControl extends ComplexControl
     }
 
     return $row;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritdoc
+   */
+  public function loadSubmittedValuesBase(LoadWalker $walker): void
+  {
+    parent::loadSubmittedValuesBase($walker);
+
+    $submitKey = $this->submitKey();
+    if (Cast::isOptInt($submitKey) && $submitKey<0)
+    {
+      $walker->setChanged($this->name);
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
