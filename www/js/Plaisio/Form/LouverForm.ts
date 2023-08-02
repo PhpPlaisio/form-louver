@@ -27,6 +27,11 @@ export class LouverForm
     {
       that.addLouver();
     });
+
+    if ($table.find('tbody > tr').length==0)
+    {
+      this.addLouver();
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -83,4 +88,4 @@ export class LouverForm
   //--------------------------------------------------------------------------------------------------------------------
 }
 
-// Plaisio\Console\TypeScript\Helper\MarkHelper::md5: b2277e4d973a98a2a6832c8eafd1c58c
+// Plaisio\Console\TypeScript\Helper\MarkHelper::md5: cef96e7427e4ff64fd2ecc572bbe8bdc
