@@ -11,7 +11,6 @@ use Plaisio\Form\Walker\PrepareWalker;
 use Plaisio\Helper\Html;
 use Plaisio\Helper\RenderWalker;
 use Plaisio\Table\OverviewTable;
-use SetBased\Helper\Cast;
 
 /**
  * Complex control for louver controls.
@@ -51,6 +50,13 @@ class LouverControl extends ComplexControl
   private array $rows;
 
   /**
+   * The submit keys of the slat controls.
+   *
+   * @var string[]
+   */
+  private array $submitKeys = [];
+
+  /**
    * The data for initializing template row(s).
    *
    * @var array
@@ -65,7 +71,6 @@ class LouverControl extends ComplexControl
   private ?string $templateKey = null;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    *
@@ -148,13 +153,14 @@ class LouverControl extends ComplexControl
         $children     = [];
         $rows         = [];
         $templateData = $this->templateData;
-        foreach ($values as $key => $value)
+        foreach ($values as $submitKey => $value)
         {
-          if (Cast::isOptInt($key) && $key<0)
+          if (!in_array($submitKey, $this->submitKeys))
           {
-            $templateData[$this->templateKey] = $key;
+            $templateData[$this->templateKey] = $submitKey;
             $slatControl                      = $this->rowFactory->createRow($templateData);
-            $slatControl->prepare($prepareWalker);
+            $slatControl->setIsDynamical(true)
+                        ->prepare($prepareWalker);
 
             $this->enhanceRow($templateData, $slatControl);
             $children[] = $slatControl;
@@ -199,6 +205,20 @@ class LouverControl extends ComplexControl
       $this->enhanceRow($row, $slatControl);
 
       $this->rows[] = $row;
+    }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritdoc
+   */
+  public function prepare(PrepareWalker $walker): void
+  {
+    parent::prepare($walker);
+
+    foreach ($this->controls as $control)
+    {
+      $this->submitKeys[] = $control->submitKey();
     }
   }
 
@@ -278,7 +298,7 @@ class LouverControl extends ComplexControl
    * @param mixed       $row         The row to be enhanced.
    * @param SlatControl $slatControl The related slat control of the data row.
    */
-  private function enhanceRow(array &$row, SlatControl $slatControl,): void
+  private function enhanceRow(array &$row, SlatControl $slatControl): void
   {
     $row[self::$louverKey] = ['row'    => $slatControl->getRow(),
                               'attr'   => $slatControl->getAttributes(),

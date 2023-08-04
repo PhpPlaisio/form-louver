@@ -5,7 +5,6 @@ namespace Plaisio\Form\Control;
 
 use Plaisio\Form\Walker\LoadWalker;
 use Plaisio\Helper\HtmlElement;
-use SetBased\Helper\Cast;
 
 /**
  * A pseudo form control for generating slats (rows) in a Louver control.
@@ -21,8 +20,12 @@ class SlatControl extends ComplexControl
    */
   private ?Control $deleteControl = null;
 
-  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Whether this slat control is dynamically added in the frontend.
+   */
+  private bool $isDynamical = false;
 
+  //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns all controls of this slat joint.
    *
@@ -47,8 +50,7 @@ class SlatControl extends ComplexControl
   {
     parent::loadSubmittedValuesBase($walker);
 
-    $submitKey = $this->submitKey();
-    if (Cast::isOptInt($submitKey) && $submitKey<0)
+    if ($this->isDynamical)
     {
       $walker->setChanged($this->name);
     }
@@ -66,6 +68,21 @@ class SlatControl extends ComplexControl
   public function setDeleteControl(Control $control): self
   {
     $this->deleteControl = $control;
+
+    return $this;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Sets whether this slat control is dynamically added in the frontend.
+   *
+   * @param bool $isDynamical Whether this slat control is dynamically added in the frontend.
+   *
+   * @return $this
+   */
+  public function setIsDynamical(bool $isDynamical): self
+  {
+    $this->isDynamical = $isDynamical;
 
     return $this;
   }
