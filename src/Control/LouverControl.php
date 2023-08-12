@@ -88,6 +88,7 @@ class LouverControl extends ComplexControl
   private ?string $templateKey = null;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    *
@@ -122,38 +123,6 @@ class LouverControl extends ComplexControl
     $html .= $this->postfix;
 
     return $html;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the HTML code displaying the form controls of this complex form control in a table.
-   *
-   * @param RenderWalker $walker The object for walking the form control tree.
-   *
-   * @return string
-   */
-  public function htmlLouverTable(RenderWalker $walker): string
-  {
-    $this->prepareOverviewTable();
-
-    if (!empty($this->templateData))
-    {
-      $prepareWalker                          = new PrepareWalker($this->submitName);
-      $this->templateData[$this->templateKey] = 0;
-      $slatControl                            = $this->rowFactory->createRow($this->templateData);
-      $slatControl->prepare($prepareWalker);
-
-      $table = $this->rowFactory->getTable();
-      $table->setAttrData('louver', 'louver')
-            ->setAttrData('louver-adder-id', $this->adderId)
-            ->setAttrData('louver-new-slat-position', $this->newSlatPosition)
-            ->setAttrData('louver-slat-name', $this->submitName)
-            ->setAttrData('louver-template', $table->htmlTemplateRow($slatControl, $this->templateData))
-            ->setAttrData('louver-walker-module-class', $walker->getModuleClass())
-            ->setAttrData('louver-walker-sub-module-class', $walker->getSubModuleClass());
-    }
-
-    return $this->htmlTable($walker);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -294,26 +263,6 @@ class LouverControl extends ComplexControl
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the HTML code of this table
-   *
-   * @param RenderWalker $walker The object for walking the form control tree.
-   *
-   * @return string
-   */
-  protected function htmlTable(RenderWalker $walker): string
-  {
-    $table = $this->rowFactory->getTable();
-    $table->setWalker($walker);
-
-    $ret = $this->prefix;
-    $ret .= $table->htmlTable($this->rows);
-    $ret .= $this->postfix;
-
-    return $ret;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Enhance a data row with attributes required by other parts of this package.
    *
    * @param mixed       $row         The row to be enhanced.
@@ -346,6 +295,58 @@ class LouverControl extends ComplexControl
     }
 
     return $hasErrorMessages;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the HTML code displaying the form controls of this complex form control in a table.
+   *
+   * @param RenderWalker $walker The object for walking the form control tree.
+   *
+   * @return string
+   */
+  private function htmlLouverTable(RenderWalker $walker): string
+  {
+    $this->prepareOverviewTable();
+
+    if (!empty($this->templateData))
+    {
+      $prepareWalker                          = new PrepareWalker($this->submitName);
+      $this->templateData[$this->templateKey] = 0;
+      $slatControl                            = $this->rowFactory->createRow($this->templateData);
+      $slatControl->prepare($prepareWalker);
+
+      $table = $this->rowFactory->getTable();
+      $table->setAttrData('louver', 'louver')
+            ->setAttrData('louver-adder-id', $this->adderId)
+            ->setAttrData('louver-new-slat-position', $this->newSlatPosition)
+            ->setAttrData('louver-slat-name', $this->submitName)
+            ->setAttrData('louver-template', $table->htmlTemplateRow($slatControl, $this->templateData))
+            ->setAttrData('louver-walker-module-class', $walker->getModuleClass())
+            ->setAttrData('louver-walker-sub-module-class', $walker->getSubModuleClass());
+    }
+
+    return $this->htmlTable($walker);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the HTML code of this table
+   *
+   * @param RenderWalker $walker The object for walking the form control tree.
+   *
+   * @return string
+   */
+  private function htmlTable(RenderWalker $walker): string
+  {
+    $table = $this->rowFactory->getTable();
+    $table->setWalker($walker);
+
+    $ret = $this->prefix;
+    $ret .= $table->htmlTable($this->rows);
+    $ret .= $this->postfix;
+
+    return $ret;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
