@@ -48,14 +48,22 @@ class LouverTable extends OverviewTable
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  public function htmlTemplateRow(SlatControl $slatControl, array $row): string
+  /**
+   * Returns the HTML code of the template row for dynamically adding new rows to the louver table.
+   *
+   * @param SlatControl $slatControl  The slat control.
+   * @param array       $templateData The data to be used for the template row.
+   *
+   * @return string
+   */
+  public function htmlTemplateRow(SlatControl $slatControl, array $templateData): string
   {
-    $row[LouverControl::$louverKey] = ['row'    => $slatControl->getRow(),
-                                       'attr'   => $slatControl->getAttributes(),
-                                       'walker' => $this->renderWalker,
-                                       'slat'   => $slatControl];
+    $templateData[LouverControl::$louverKey] = ['row'    => $slatControl->getRow(),
+                                                'attr'   => $slatControl->getAttributes(),
+                                                'walker' => $this->renderWalker,
+                                                'slat'   => $slatControl];
 
-    return $this->htmlRow(0, $row);
+    return $this->htmlRow(0, $templateData);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

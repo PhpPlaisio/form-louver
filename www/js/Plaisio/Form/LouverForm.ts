@@ -22,13 +22,13 @@ export class LouverForm
   {
     const that = this;
 
-    const $id = Cast.toManString($table.attr('data-louver-id'));
+    const $id = Cast.toManString($table.attr('data-louver-adder-id'));
     $('#' + $.escapeSelector($id)).on('click', function ()
     {
       that.addLouver();
     });
 
-    if ($table.find('tbody > tr').length==0)
+    if ($table.find('tbody > tr').length == 0)
     {
       this.addLouver();
     }
@@ -40,7 +40,7 @@ export class LouverForm
    */
   public static init(): void
   {
-    Kernel.onBeefyHtmlAdded(function (event: TriggeredEvent, $html: JQuery)
+    Kernel.onBeefyHtmlAdded(function (event: TriggeredEvent, $html: JQuery): void
     {
       $html.find('table[data-louver=louver]').each(function ()
       {
@@ -63,18 +63,40 @@ export class LouverForm
     const that     = this;
     const slatName = Cast.toManString(this.$table.attr('data-louver-slat-name'));
     const $row     = $(Cast.toManString(this.$table.attr('data-louver-template')));
-    $row.find('input').each(function (index: number, input: HTMLElement)
+    $row.find('input').each(function (index: number, input: HTMLElement): void
     {
       const $input = $(input);
       const name   = Cast.toOptString($input.attr('name'));
       if (name !== null)
       {
-        $input.attr('name', slatName + '[' + that.newRowIndex + ']' + name.substring(slatName.length + 3));
+        // Replace the row index (i.e. 0) from the template with the actual row index.
+        $input.attr('name', slatName + '[' + that.newRowIndex + ']' + name.substring((slatName + '[0]').length));
       }
     });
 
-    this.$table.prepend($row);
-    Kernel.triggerBeefyHtmlAdded($row);
+    const moduleClass = Cast.toOptString(this.$table.attr('data-overview-table-module-class'));
+    if (moduleClass !== null)
+    {
+      $row.addClass(moduleClass + '-is-new-louver-row');
+      $row.children('.' + moduleClass + '-cell').addClass(moduleClass + '-is-new-louver-cell');
+    }
+
+    const newSlatPosition = Cast.toManString(this.$table.attr('data-louver-new-slat-position'));
+    switch (newSlatPosition)
+    {
+      case 'top':
+        this.$table.prepend($row);
+        Kernel.triggerBeefyHtmlAdded($row);
+        break;
+
+      case 'bottom':
+        this.$table.append($row);
+        Kernel.triggerBeefyHtmlAdded($row);
+        break;
+
+      default:
+        console.debug(`Unknown new slat position: ${newSlatPosition}`);
+    }
 
     const table = OverviewTable.getOverviewTable(this.$table);
     if (table)
@@ -88,4 +110,5 @@ export class LouverForm
   //--------------------------------------------------------------------------------------------------------------------
 }
 
-// Plaisio\Console\TypeScript\Helper\MarkHelper::md5: cef96e7427e4ff64fd2ecc572bbe8bdc
+//----------------------------------------------------------------------------------------------------------------------
+// Plaisio\Console\TypeScript\Helper\MarkHelper::md5: 53bf3bead4c9b69ae8eed2f75948ff6a

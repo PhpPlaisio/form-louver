@@ -22,6 +22,16 @@ class LouverControl extends ComplexControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Adds a new slat at the top of the louver.
+   */
+  const POSITION_TOP = 'top';
+
+  /**
+   * Adds a new slat at the bottom of the louver.
+   */
+  const POSITION_BOTTOM = 'bottom';
+
+  /**
    * The key for extending the data rows with data for louver table columns.
    *
    * @var string
@@ -33,7 +43,14 @@ class LouverControl extends ComplexControl
    *
    * @var string|null
    */
-  private ?string $id = null;
+  private ?string $adderId = null;
+
+  /**
+   * The position where to add new slats.
+   *
+   * @var string
+   */
+  private string $newSlatPosition = self::POSITION_TOP;
 
   /**
    * Object for creating table row form controls.
@@ -59,9 +76,9 @@ class LouverControl extends ComplexControl
   /**
    * The data for initializing template row(s).
    *
-   * @var array
+   * @var array|null
    */
-  private array $templateData;
+  private ?array $templateData = null;
 
   /**
    * The key of the key in the template row.
@@ -126,12 +143,14 @@ class LouverControl extends ComplexControl
       $slatControl                            = $this->rowFactory->createRow($this->templateData);
       $slatControl->prepare($prepareWalker);
 
-      $templateRow = $this->rowFactory->getTable()->htmlTemplateRow($slatControl, $this->templateData);
-
-      $this->rowFactory->getTable()->setAttrData('louver-id', $this->id);
-      $this->rowFactory->getTable()->setAttrData('louver-slat-name', $this->submitName);
-      $this->rowFactory->getTable()->setAttrData('louver-template', $templateRow);
-      $this->rowFactory->getTable()->setAttrData('louver', 'louver');
+      $table = $this->rowFactory->getTable();
+      $table->setAttrData('louver', 'louver')
+            ->setAttrData('louver-adder-id', $this->adderId)
+            ->setAttrData('louver-new-slat-position', $this->newSlatPosition)
+            ->setAttrData('louver-slat-name', $this->submitName)
+            ->setAttrData('louver-template', $table->htmlTemplateRow($slatControl, $this->templateData))
+            ->setAttrData('louver-walker-module-class', $walker->getModuleClass())
+            ->setAttrData('louver-walker-sub-module-class', $walker->getSubModuleClass());
     }
 
     return $this->htmlTable($walker);
@@ -157,6 +176,7 @@ class LouverControl extends ComplexControl
         {
           if (!in_array($submitKey, $this->submitKeys))
           {
+            // This is a (in the front end) dynamically added row.
             $templateData[$this->templateKey] = $submitKey;
             $slatControl                      = $this->rowFactory->createRow($templateData);
             $slatControl->setIsDynamical(true)
@@ -168,6 +188,7 @@ class LouverControl extends ComplexControl
           }
           else
           {
+            // This is an existing row.
             $slatControl = array_shift($this->controls);
             if ($slatControl!==null)
             {
@@ -266,7 +287,7 @@ class LouverControl extends ComplexControl
   {
     $this->templateData = $data;
     $this->templateKey  = $key;
-    $this->id           = $id;
+    $this->adderId      = $id;
 
     return $this;
   }
