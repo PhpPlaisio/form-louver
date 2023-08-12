@@ -15,6 +15,7 @@ class SlatControl extends ComplexControl
   use HtmlElement;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * @var Control|null
    */
@@ -40,6 +41,17 @@ class SlatControl extends ComplexControl
     }
 
     return $row;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns whether this slat control is dynamically created in the front end.
+   *
+   * @return bool
+   */
+  public function isDynamical(): bool
+  {
+    return $this->isDynamical;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
