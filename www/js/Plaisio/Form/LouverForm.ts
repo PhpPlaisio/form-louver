@@ -63,7 +63,7 @@ export class LouverForm
     const that     = this;
     const slatName = Cast.toManString(this.$table.attr('data-louver-slat-name'));
     const $row     = $(Cast.toManString(this.$table.attr('data-louver-template')));
-    $row.find('input').each(function (index: number, input: HTMLElement): void
+    $row.find('input,select,textarea').each(function (index: number, input: HTMLElement): void
     {
       const $input = $(input);
       const name   = Cast.toOptString($input.attr('name'));
