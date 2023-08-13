@@ -316,7 +316,9 @@ class LouverControl extends ComplexControl
             ->setAttrData('louver-adder-id', $this->adderId)
             ->setAttrData('louver-new-slat-position', $this->newSlatPosition)
             ->setAttrData('louver-slat-name', $this->submitName)
-            ->setAttrData('louver-template', $table->htmlTemplateRow($slatControl, $this->templateData))
+            ->setAttrData('louver-template', $table->htmlTemplateRow($slatControl,
+                                                                     $this->templateData,
+                                                                     $this->renderWalker))
             ->setAttrData('louver-walker-module-class', $walker->getModuleClass())
             ->setAttrData('louver-walker-sub-module-class', $walker->getSubModuleClass());
     }

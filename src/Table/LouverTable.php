@@ -30,6 +30,7 @@ class LouverTable extends OverviewTable
   private ?RenderWalker $walker = null;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Returns the footer with buttons.
    *
@@ -51,16 +52,17 @@ class LouverTable extends OverviewTable
   /**
    * Returns the HTML code of the template row for dynamically adding new rows to the louver table.
    *
-   * @param SlatControl $slatControl  The slat control.
-   * @param array       $templateData The data to be used for the template row.
+   * @param SlatControl  $slatControl  The slat control.
+   * @param array        $templateData The data to be used for the template row.
+   * @param RenderWalker $walker       The render walker for the form controls (not for table elements)
    *
    * @return string
    */
-  public function htmlTemplateRow(SlatControl $slatControl, array $templateData): string
+  public function htmlTemplateRow(SlatControl $slatControl, array $templateData, RenderWalker $walker): string
   {
     $templateData[LouverControl::$louverKey] = ['row'    => $slatControl->getRow(),
                                                 'attr'   => $slatControl->getAttributes(),
-                                                'walker' => $this->renderWalker,
+                                                'walker' => $walker,
                                                 'slat'   => $slatControl];
 
     return $this->htmlRow(0, $templateData);
