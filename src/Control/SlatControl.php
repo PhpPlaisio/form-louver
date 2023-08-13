@@ -15,7 +15,6 @@ class SlatControl extends ComplexControl
   use HtmlElement;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * @var Control|null
    */

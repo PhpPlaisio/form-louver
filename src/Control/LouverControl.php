@@ -88,7 +88,6 @@ class LouverControl extends ComplexControl
   private ?string $templateKey = null;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    *
@@ -118,11 +117,7 @@ class LouverControl extends ComplexControl
    */
   public function htmlControl(RenderWalker $walker): string
   {
-    $html = $this->prefix;
-    $html .= $this->htmlLouverTable($walker);
-    $html .= $this->postfix;
-
-    return $html;
+    return $this->htmlLouverTable($walker);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -342,11 +337,7 @@ class LouverControl extends ComplexControl
     $table = $this->rowFactory->getTable();
     $table->setWalker($walker);
 
-    $ret = $this->prefix;
-    $ret .= $table->htmlTable($this->rows);
-    $ret .= $this->postfix;
-
-    return $ret;
+    return $table->htmlTable($this->rows);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
