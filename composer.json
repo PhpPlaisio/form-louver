@@ -11,16 +11,16 @@
     "php": ">=8.3",
     "plaisio-ts/helper-cast": "^2.0.0",
     "plaisio-ts/kernel": "^2.1.0",
-    "plaisio/form": "^0.55.0",
-    "plaisio/helper-html": "^4.1.0",
-    "plaisio/kernel": "^3.2.1",
-    "plaisio/table-overview": "^8.0.0",
-    "plaisio/web-assets": "^3.1.0",
-    "setbased/exception": "^2.3.0"
+    "plaisio/form": "^0.55.5",
+    "plaisio/helper-html": "^4.2.0",
+    "plaisio/kernel": "^3.3.0",
+    "plaisio/table-overview": "^8.1.0",
+    "plaisio/web-assets": "^3.2.0",
+    "setbased/exception": "^2.6.0"
   },
   "require-dev": {
     "phing/phing": "^3.0.1",
-    "plaisio/console-kernel": "^1.0.1",
+    "plaisio/console-kernel": "^1.2.0",
     "plaisio/console-type-script": "^1.0.0"
   },
   "autoload": {
