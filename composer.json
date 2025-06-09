@@ -21,7 +21,7 @@
   "require-dev": {
     "phing/phing": "^3.0.1",
     "plaisio/console-kernel": "^1.2.0",
-    "plaisio/console-type-script": "^1.0.0"
+    "plaisio/console-type-script": "^1.2.0"
   },
   "autoload": {
     "psr-4": {
